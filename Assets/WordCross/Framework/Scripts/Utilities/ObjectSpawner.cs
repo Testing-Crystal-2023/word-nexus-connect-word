@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace dotmob
 {
-	public class ObjectSpawner : UIMonoBehaviour
+	public class ObjectSpawner : UIMonoBehaviourdotmob
 	{
 		#region Inspector Variables
 

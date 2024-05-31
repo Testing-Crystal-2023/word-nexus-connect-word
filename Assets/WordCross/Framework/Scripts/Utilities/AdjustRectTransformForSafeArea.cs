@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace dotmob
 {
-	public class AdjustRectTransformForSafeArea : UIMonoBehaviour
+	public class AdjustRectTransformForSafeArea : UIMonoBehaviourdotmob
 	{
 		#region Inspector Variables
 

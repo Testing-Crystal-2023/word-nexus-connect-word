@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace dotmob
 {
-	public class UIAnimationBehaviour : UIMonoBehaviour
+	public class UIAnimationBehaviour : UIMonoBehaviourdotmob
 	{
 		#region Inspector Variables
 

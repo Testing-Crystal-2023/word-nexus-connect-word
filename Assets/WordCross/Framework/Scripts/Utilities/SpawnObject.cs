@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace dotmob
 {
-	public class SpawnObject : UIMonoBehaviour
+	public class SpawnObject : UIMonoBehaviourdotmob
 	{
 		#region Properties
 

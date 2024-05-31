@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace dotmob
 {
-	public class Popup : UIMonoBehaviour
+	public class Popup : UIMonoBehaviourdotmob
 	{
 		#region Enums
 

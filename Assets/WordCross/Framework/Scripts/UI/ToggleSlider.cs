@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace dotmob
 {
-	public class ToggleSlider : UIMonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+	public class ToggleSlider : UIMonoBehaviourdotmob, IPointerDownHandler, IDragHandler, IPointerUpHandler
 	{
 		#region Inspector Variables
 

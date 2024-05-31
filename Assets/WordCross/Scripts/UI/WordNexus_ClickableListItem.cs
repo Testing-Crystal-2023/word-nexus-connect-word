@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace dotmob
+namespace WordCross
 {
 	[RequireComponent(typeof(Button))]
-	public class ClickableListItem : UIMonoBehaviourdotmob
+	public class WordNexus_ClickableListItem : WordNexus_UIMonoBehaviour
 	{
 		#region Member Variables
 
@@ -16,14 +16,14 @@ namespace dotmob
 
 		#region Properties
 
-		public int							Index				{ get; set; }
-		public object						Data				{ get; set; }
-		public System.Action<int, object>	OnListItemClicked	{ get; set; }
+		public int Index { get; set; }
+		public object Data { get; set; }
+		public System.Action<int, object> OnListItemClicked { get; set; }
 
 		/// <summary>
 		/// Gets the Button component attached to this GameObject
 		/// </summary>
-		private Button UIButton
+		protected Button UIButton
 		{
 			get
 			{

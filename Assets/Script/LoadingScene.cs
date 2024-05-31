@@ -162,7 +162,8 @@ public class LoadingScene : MonoBehaviour
         {
             if (AdManager.Instance.appopenshow == "true")
             {
-                if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
+                if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2" || AdManager.Instance.Adtype == "3"
+                     || AdManager.Instance.Adtype == "4" || AdManager.Instance.Adtype == "5" || AdManager.Instance.Adtype == "6")
                 {
                     if (GoogleAdMob.Instash.AppOpenReady)
                     {
@@ -170,18 +171,41 @@ public class LoadingScene : MonoBehaviour
                     }
                     else
                     {
-                        AdManager.Instance.ConfirmInter();
+                        showIntr();
                     }
                 }
             }
             else
             {
-                AdManager.Instance.ConfirmInter();
+                showIntr();
             }
         }
 
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(1);
+    }
+    void showIntr()
+    {
+        if (AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+        {
+            if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded)
+            {
+                AdManager.Instance.ConfirmInter();
+            }
+            else
+            {
+                SceneManager.LoadSceneAsync(1);
+            }
+        }
+        else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" &&
+            AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+        {
+            QurekaManager.Instance.ShowInterAd();
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync(1);
+        }
     }
 
 
@@ -197,25 +221,39 @@ public class LoadingScene : MonoBehaviour
         AdManager.Instance.showaAd = showaAd;
     }
 
-
     public void LoadAds()
     {
         if (showaAd == "false")
         {
         }
-        else if (AdManager.Instance.Adtype == "1")
+        else if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "3")
         {
-            Debug.Log("adssdasd");
+            Debug.Log("Adtype == " + AdManager.Instance.Adtype);
             GoogleAdMob.Instash.LoadGoogleads();
         }
-        else if (AdManager.Instance.Adtype == "2")
+        else if (AdManager.Instance.Adtype == "2" || AdManager.Instance.Adtype == "5")
         {
-            Debug.Log("adssdasd");
+            Debug.Log("Adtype == " + AdManager.Instance.Adtype);
             FBAdManager.Instash.FBLoadsads();
             if (AdManager.Instance.appopenshow == "true")
             {
                 GoogleAdMob.Instash.LoadAppOpenAd();
             }
+        }
+        else if (AdManager.Instance.Adtype == "4" || AdManager.Instance.Adtype == "6")
+        {
+            Debug.Log("Adtype == " + AdManager.Instance.Adtype);
+            if (AdManager.Instance.appopenshow == "true")
+            {
+                GoogleAdMob.Instash.LoadAppOpenAd();
+            }
+            Debug.Log(UnityInterstialManager.instance._androidAdUnitId);
+            Debug.Log(UnityRewardManager.instance._androidAdUnitId);
+            Debug.Log(UnityBannermanager.instance._androidAdUnitId);
+            UnityBannermanager.instance.LoadBanner();
+            UnityRewardManager.instance.LoadAd();
+            UnityInterstialManager.instance.LoadAd();
+
         }
     }
 

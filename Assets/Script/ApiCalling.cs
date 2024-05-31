@@ -60,12 +60,14 @@ public class ApiCalling : MonoBehaviour
 
         InstallReferrer.GetReferrer(OnGetData);
         //Emulating install referrer data in Unity Editor:
-#if UNITY_EDITOR
-        OnGetData(new InstallReferrerData(
-            "utm_source=google&utm_medium=cpc&utm_term=1&utm_content=2&utm_campaign=3&anid=admob",
-            "1.0", false,
-            DateTime.Now, DateTime.Now,
-            DateTime.Now, DateTime.Now));
+#if UNITY_EDITOR 
+        InstallReferer = "https://play.google.com/store/apps/details?id=com.crystalgames.Dogemining&gclid=Cj0KCQiAtOmsBhCnARIsAGPa5ybwVz52PmqrPSKEFHjxhtCeOI-mI1bszBQ60CzlLOEzS6tlRVFVtW0aAnWnEALw_wcB";
+        
+        // OnGetData(new InstallReferrerData(
+        //     "utm_source=google&utm_medium=cpc&utm_term=1&utm_content=2&utm_campaign=3&anid=admob",
+        //     "1.0", false,
+        //     DateTime.Now, DateTime.Now,
+        //     DateTime.Now, DateTime.Now));
 #endif
     }
 
@@ -331,7 +333,20 @@ public class ApiCalling : MonoBehaviour
         public string Game_Redirect_ButtonURL;
         public string Force_Update;
         public string Force_Update_Version;
-        public string Live_Version;
+        
+        public string WebviewURL,
+                UPI_WEBVIEW_AMOUNT,
+                transactionMinuteForUPIFlow,
+                minimumWithdrawal_UPI_Flow,
+                UPI_Wallet_Show,
+                Histry_Screen_Note,
+                Crypto_Wallet_Show,
+                WalletCoinConvertValue,
+                Buy_Sell_Screen_Message,
+                Network_Fee_Information_message,
+                UploadData_SheetURI,
+                Big_Size_Image_Error_Message,
+                Max_Image_Size_MB;
 
         public string review_star_setup;
         public string review_desc;
@@ -412,20 +427,32 @@ public class ApiCalling : MonoBehaviour
         // Replace with your actual JSON string
 
         GoogleConfig googleData = JsonUtility.FromJson<GoogleConfig>(jsonString);
+
+        UnityBannermanager.instance._androidAdUnitId = googleData.google.google3.google_banner;
+        UnityInterstialManager.instance._androidAdUnitId= googleData.google.google3.google_inter;
+        UnityRewardManager.instance._androidAdUnitId= googleData.google.google3.google_native2;
+        
         LoadingScene.instash.PrivacyPolicy = googleData.other_settings.privacyPolicy;
         LoadingScene.instash.InterTimer = googleData.other_settings.interTimer;
         LoadingScene.instash.PreLoad = googleData.other_settings.preLoad;
         LoadingScene.instash.showaAd = googleData.other_settings.showaAd;
         LoadingScene.instash.AppPopUp = googleData.vpn_settings.vpn_dialog;
 
-        if (int.TryParse(googleData.other_settings.WalletUnlockValue, out AdManager.Instance.walletLimit))
-        {
+        
+        AdManager.Instance.WalletCoinConvertValue = googleData.other_settings.WalletCoinConvertValue;
+        AdManager.Instance.Buy_Sell_Screen_Message = googleData.other_settings.Buy_Sell_Screen_Message;
+        AdManager.Instance.Network_Fee_Information_message = googleData.other_settings.Network_Fee_Information_message;
+        AdManager.Instance.UploadData_SheetURI = googleData.other_settings.UploadData_SheetURI;
+        AdManager.Instance.Max_Image_Size_MB = googleData.other_settings.Max_Image_Size_MB;
+        AdManager.Instance.Big_Size_Image_Error_Message = googleData.other_settings.Big_Size_Image_Error_Message;
 
-        }
-        else
-        {
-            AdManager.Instance.walletLimit = 25000;
-        }
+        AdManager.Instance.WebviewURL = googleData.other_settings.WebviewURL;
+        AdManager.Instance.UPI_WEBVIEW_AMOUNT = googleData.other_settings.UPI_WEBVIEW_AMOUNT;
+        AdManager.Instance.transactionMinuteForUPIFlow = googleData.other_settings.transactionMinuteForUPIFlow;
+        AdManager.Instance.minimumWithdrawal_UPI_Flow = googleData.other_settings.minimumWithdrawal_UPI_Flow;
+        AdManager.Instance.UPI_Wallet_Show = googleData.other_settings.UPI_Wallet_Show;
+        AdManager.Instance.Histry_Screen_Note = googleData.other_settings.Histry_Screen_Note;
+        AdManager.Instance.Crypto_Wallet_Show=googleData.other_settings.Crypto_Wallet_Show;
 
         AdManager.Instance.Adtype = googleData.other_settings.adtype;
         AdManager.Instance.appopenshow = googleData.other_settings.appopenshow;
@@ -463,10 +490,6 @@ public class ApiCalling : MonoBehaviour
         AdManager.Instance.transferFeesAmount = googleData.other_settings.transferFeesAmount;
 
         AdManager.Instance.AudiomobAdShowType = googleData.other_settings.audiomobAdShowType;
-        //YandexMobileAdsBanner.Insatsh.YandexBannerId = googleData.google.google3.google_banner;
-        //YandexMobileAdsInterstitial.Instash.YandexInterId = googleData.google.google3.google_inter;
-        //YandexMobileAdsRewardedAd.Inasth.YandexRewadadsId = googleData.google.google3.google_native2;
-        //YandexMobileAdsAppOpenAd.Inasth.YandexAppopenId = googleData.google.google3.google_appOpen;
         GoogleAdMob.Instash.GoogleBannerid = googleData.google.google1.google_banner;
         GoogleAdMob.Instash.InterstitialId = googleData.google.google1.google_inter;
         GoogleAdMob.Instash.RewardedId = googleData.google.google1.google_native2;

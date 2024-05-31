@@ -433,7 +433,7 @@ public class DOGEWalletManager : MonoBehaviour
         if (AdManager.Instance.transferFees.ToLower() == "false")
         {
 
-            // WordNexus_GameController.Instance.Coins -= picoin_decrise;
+            WordNexus_GameController.Instance.SpendCoins(picoin_decrise);
             Coin_Amount.text = WordNexus_GameController.Instance.Coins + " DOGE";
 
             if ((UnityEngine.Random.Range(0, 2) == 1))
@@ -804,7 +804,7 @@ public class DOGEWalletManager : MonoBehaviour
         }
         PlayerPrefs.SetString("Selected_network" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), Asset_Object_text.text);
         PlayerPrefs.SetString("Pay_Address" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), Address_Text.text);
-        // WordNexus_GameController.Instance.Coins -= picoin_decrise;
+            WordNexus_GameController.Instance.SpendCoins(picoin_decrise);
         Coin_Amount.text = WordNexus_GameController.Instance.Coins + " DOGE";
         PlayerPrefs.SetString("FinalStatusTransactionFee_" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), "Pending");
 

@@ -53,11 +53,11 @@ public class InAppReview : MonoBehaviour
             }
         }
         //print(Count);
-        //print(int.Parse(AdManager.instance.review_star_setup));
-        //if (Count >= int.Parse(AdManager.instance.review_star_setup))
+        //print(int.Parse(AdManager.Instance.review_star_setup));
+        //if (Count >= int.Parse(AdManager.Instance.review_star_setup))
         //{
             //Debug.LogError(GlobalValues.Coins);
-            //GlobalValues.Coins +=int.Parse(AdManager.instance.review_reward);
+            //GlobalValues.Coins +=int.Parse(AdManager.Instance.review_reward);
             ////Debug.LogError(GlobalValues.Coins);
             //GameManager.Instance.coinTxt.text = GlobalValues.Coins.ToString();
             //availBalanceTxt.text = GlobalValues.Coins.ToString();
@@ -111,8 +111,8 @@ public class InAppReview : MonoBehaviour
         if (!PlayerPrefs.HasKey("ReviewApplyComplete"))
         {
             InAppReviewPopup.SetActive(true);
-            //InAppReviewTitle.text = AdManager.instance.review_title;
-            //InAppReviewDesc.text = AdManager.instance.review_desc;
+            //InAppReviewTitle.text = AdManager.Instance.review_title;
+            //InAppReviewDesc.text = AdManager.Instance.review_desc;
         }
         else
         {

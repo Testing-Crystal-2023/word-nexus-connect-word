@@ -13,6 +13,7 @@ public class FBAdManager : MonoBehaviour
     public bool isLoaded;
     public bool FBInterLoaded;
     public bool FBRewadLoaded;
+    public bool BannerReady;
 
     public string FBBannerID;
     public string FBInterID;
@@ -63,6 +64,10 @@ public class FBAdManager : MonoBehaviour
         }
         else
         {
+            if (BannerReady)
+            {
+                return;
+            }
             if (this.adView)
             {
                 this.adView.Dispose();
@@ -72,25 +77,27 @@ public class FBAdManager : MonoBehaviour
             this.adView.Register(this.gameObject);
 
             // Set delegates to get notified on changes or when the user interacts with the ad.
-            this.adView.AdViewDidLoad = (delegate()
+            this.adView.AdViewDidLoad = (delegate ()
             {
+                BannerReady = true;
                 Debug.Log("Banner loaded.");
                 this.adView.Show(AdPosition.BOTTOM);
             });
-            adView.AdViewDidFailWithError = (delegate(string error)
+            adView.AdViewDidFailWithError = (delegate (string error)
             {
+                BannerReady = false;
                 Debug.Log("Banner failed to load with error: " + error);
                 if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
                 {
                     StartCoroutine(loadGooleBanner());
                 }
-                else if (AdManager.Instance.Adtype == "3")
+                else if (AdManager.Instance.Adtype == "5" || AdManager.Instance.Adtype == "6")
                 {
-                    StartCoroutine(loadYandexBanner());
+                    StartCoroutine(loadunityBanner());
                 }
             });
-            adView.AdViewWillLogImpression = (delegate() { Debug.Log("Banner logged impression."); });
-            adView.AdViewDidClick = (delegate() { Debug.Log("Banner clicked."); });
+            adView.AdViewWillLogImpression = (delegate () { Debug.Log("Banner logged impression."); });
+            adView.AdViewDidClick = (delegate () { Debug.Log("Banner clicked."); });
 
             // Initiate a request to load an ad.
             adView.LoadAd();
@@ -103,10 +110,10 @@ public class FBAdManager : MonoBehaviour
         GoogleAdMob.Instash.LoadBanner();
     }
 
-    private IEnumerator loadYandexBanner()
+    private IEnumerator loadunityBanner()
     {
         yield return new WaitForSeconds(3);
-        //YandexMobileAdsBanner.Insatsh.LoadBanner();
+        UnityBannermanager.instance.LoadBanner();
     }
 
     public void LoadInterstitial()
@@ -115,34 +122,33 @@ public class FBAdManager : MonoBehaviour
         this.interstitialAd.Register(this.gameObject);
 
         // Set delegates to get notified on changes or when the user interacts with the ad.
-        this.interstitialAd.InterstitialAdDidLoad = (delegate()
+        this.interstitialAd.InterstitialAdDidLoad = (delegate ()
         {
             Debug.Log("Interstitial ad loaded.");
             FBInterLoaded = true;
         });
-        interstitialAd.InterstitialAdDidFailWithError = (delegate(string error)
+        interstitialAd.InterstitialAdDidFailWithError = (delegate (string error)
         {
             FBInterLoaded = false;
             if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
             {
                 StartCoroutine(loadgoogleinter());
             }
-            else if (AdManager.Instance.Adtype == "3")
+            else if (AdManager.Instance.Adtype == "5" || AdManager.Instance.Adtype == "6")
             {
-                StartCoroutine(loadYandexinter());
+                StartCoroutine(loadUnityinter());
             }
 
-            StartCoroutine(loadgoogleinter());
 
             Debug.Log("Interstitial ad failed to load with error: " + error);
         });
-        interstitialAd.InterstitialAdWillLogImpression = (delegate()
+        interstitialAd.InterstitialAdWillLogImpression = (delegate ()
         {
             Debug.Log("Interstitial ad logged impression.");
         });
-        interstitialAd.InterstitialAdDidClick = (delegate() { Debug.Log("Interstitial ad clicked."); });
+        interstitialAd.InterstitialAdDidClick = (delegate () { Debug.Log("Interstitial ad clicked."); });
 
-        this.interstitialAd.interstitialAdDidClose = (delegate()
+        this.interstitialAd.interstitialAdDidClose = (delegate ()
         {
             Debug.Log("Interstitial ad did close.");
 
@@ -158,13 +164,13 @@ public class FBAdManager : MonoBehaviour
             {
                 GoogleAdMob.Instash.LoadLoadInterstitialAd();
             }
-            else if (AdManager.Instance.Adtype == "2")
+            else if (AdManager.Instance.Adtype == "2" || AdManager.Instance.Adtype == "5")
             {
                 LoadInterstitial();
             }
-            else if (AdManager.Instance.Adtype == "3")
+            else if (AdManager.Instance.Adtype == "6")
             {
-                LoadInterstitial();
+                UnityInterstialManager.instance.LoadAd();
             }
         });
 
@@ -178,10 +184,10 @@ public class FBAdManager : MonoBehaviour
         GoogleAdMob.Instash.LoadLoadInterstitialAd();
     }
 
-    IEnumerator loadYandexinter()
+    IEnumerator loadUnityinter()
     {
         yield return new WaitForSeconds(3);
-        //YandexMobileAdsInterstitial.Instash.LoadInterstitial();
+        UnityInterstialManager.instance.LoadAd();
     }
 
     public void ShowInterstitial()
@@ -200,31 +206,31 @@ public class FBAdManager : MonoBehaviour
         this.rewardedVideoAd.Register(this.gameObject);
 
         // Set delegates to get notified on changes or when the user interacts with the ad.
-        this.rewardedVideoAd.RewardedVideoAdDidLoad = (delegate()
+        this.rewardedVideoAd.RewardedVideoAdDidLoad = (delegate ()
         {
             Debug.Log("RewardedVideo ad loaded.");
             FBRewadLoaded = true;
         });
-        this.rewardedVideoAd.RewardedVideoAdDidFailWithError = (delegate(string error)
+        this.rewardedVideoAd.RewardedVideoAdDidFailWithError = (delegate (string error)
         {
             FBRewadLoaded = false;
+
             if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
             {
                 StartCoroutine(loadgooglerewad());
             }
-            else if (AdManager.Instance.Adtype == "3")
+            else if (AdManager.Instance.Adtype == "5" || AdManager.Instance.Adtype == "6")
             {
-                StartCoroutine(loadYandexrewad());
+                StartCoroutine(loadUnityrewad());
             }
-
             Debug.Log("RewardedVideo ad failed to load with error: " + error);
         });
-        this.rewardedVideoAd.RewardedVideoAdWillLogImpression = (delegate()
+        this.rewardedVideoAd.RewardedVideoAdWillLogImpression = (delegate ()
         {
             Debug.Log("RewardedVideo ad logged impression.");
         });
-        this.rewardedVideoAd.RewardedVideoAdDidClick = (delegate() { Debug.Log("RewardedVideo ad clicked."); });
-        this.rewardedVideoAd.RewardedVideoAdDidClose = (delegate()
+        this.rewardedVideoAd.RewardedVideoAdDidClick = (delegate () { Debug.Log("RewardedVideo ad clicked."); });
+        this.rewardedVideoAd.RewardedVideoAdDidClose = (delegate ()
         {
             RewardNow();
             Debug.Log("Rewarded video ad did close.");
@@ -235,27 +241,28 @@ public class FBAdManager : MonoBehaviour
 
             StartCoroutine(callappopentrue());
 
+
             if (AdManager.Instance.Adtype == "1")
             {
                 GoogleAdMob.Instash.LoadRewardedAd();
             }
-            else if (AdManager.Instance.Adtype == "2")
+            else if (AdManager.Instance.Adtype == "2" || AdManager.Instance.Adtype == "5")
             {
                 LoadRewardedVideo();
             }
-            else if (AdManager.Instance.Adtype == "3")
+            else if (AdManager.Instance.Adtype == "6")
             {
-                LoadRewardedVideo();
+                UnityRewardManager.instance.LoadAd();
             }
         });
 
         // For S2S validation you need to register the following two callback
-        this.rewardedVideoAd.RewardedVideoAdDidSucceed = (delegate()
+        this.rewardedVideoAd.RewardedVideoAdDidSucceed = (delegate ()
         {
             // LoadRewardedVideo();
             Debug.Log("Rewarded video ad validated by server");
         });
-        this.rewardedVideoAd.RewardedVideoAdDidFail = (delegate()
+        this.rewardedVideoAd.RewardedVideoAdDidFail = (delegate ()
         {
             Debug.Log("Rewarded video ad not validated, or no response from server");
         });
@@ -269,10 +276,10 @@ public class FBAdManager : MonoBehaviour
         GoogleAdMob.Instash.LoadRewardedAd();
     }
 
-    IEnumerator loadYandexrewad()
+    IEnumerator loadUnityrewad()
     {
         yield return new WaitForSeconds(3);
-        //YandexMobileAdsRewardedAd.Inasth.LoadRewardedAd();
+        UnityRewardManager.instance.LoadAd();
     }
 
     public void ShowRewardedVideo(string rt)

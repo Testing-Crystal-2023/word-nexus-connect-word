@@ -67,7 +67,7 @@ public class QurekaManager : MonoBehaviour
         if (interBool)
         {
             interHolder.SetActive(false);
-            //AdManager.Instance.CloseInterstitial();
+            AdManager.Instance.CloseInterstitial();
             InItInter();
         }
         else
@@ -99,7 +99,7 @@ public class QurekaManager : MonoBehaviour
         if(rewardBool)
         {   
             RewardHolder.SetActive(false);
-            //AdManager.Instance.CompleteRewardedVideoQureka();
+            AdManager.Instance.CompleteRewardedVideoQureka();
             InItRewards();
         }
         else

@@ -215,7 +215,7 @@ public class DOGE_WithdrawManager : MonoBehaviour
 
         TransactionId = "";
 
-        // WordNexus_GameController.Instance.Coins -= int.Parse(withdraw_Amount_Input.text);
+            WordNexus_GameController.Instance.SpendCoins(int.Parse(withdraw_Amount_Input.text));
         // GameManager.Instance.coinTxt.text = WordNexus_GameController.Instance.Coins.ToString();
         PayfeePopup.SetActive(false);
         NewWalletTransactionManager.instance.CheckTransaction();

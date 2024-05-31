@@ -352,7 +352,13 @@ namespace Game
 
 			Coins += coins;
 		}
-
+		/// <summary>
+		/// Spend the coins.
+		/// </summary>
+		public void SpendCoins(int coins)
+		{
+			Coins -= coins;
+		}
 		/// <summary>
 		/// Gives the coins.
 		/// </summary>

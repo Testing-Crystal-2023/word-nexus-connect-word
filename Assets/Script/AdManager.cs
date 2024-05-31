@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using TMPro;
 using Game;
+using EasyUI.Toast;
 [Serializable]
 public class NewQurekaData
 {
@@ -38,10 +39,10 @@ public class AdManager : MonoBehaviour
                 UploadData_SheetURI,
                 Big_Size_Image_Error_Message,
                 Max_Image_Size_MB;
-    public bool isFirstOpen,WebviewOpen,handAnimationShow;
-    public int walletLimit;
+    public bool isFirstOpen, WebviewOpen, handAnimationShow;
+
     public float intervalTime;
-    
+
     public float interClick;
 
     public float timer;
@@ -81,7 +82,6 @@ public class AdManager : MonoBehaviour
     public string qureka;
     public string Winfailads;
     public string Wingetbutton;
-    public GameObject PopupShow;
     public string bottom_banner;
     public string audioMobtime;
     public string audiomobAdRewad;
@@ -295,16 +295,9 @@ public class AdManager : MonoBehaviour
     {
         if (coinReward)
         {
-            // Get the current amount of coins
             int animateFromCoins = WordNexus_GameController.Instance.Coins;
-
-            // Give the amount of coins
             WordNexus_GameController.Instance.GiveCoins(100, false);
-
-            // Get the amount of coins now after giving them
             int animateToCoins = WordNexus_GameController.Instance.Coins;
-
-            // Show the popup to the user so they know they got the coins
             WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { 100, animateFromCoins, animateToCoins });
         }
     }
@@ -312,6 +305,13 @@ public class AdManager : MonoBehaviour
     public void CompleteRewardedVideoQureka()
     {
 
+        if (coinReward)
+        {
+            int animateFromCoins = WordNexus_GameController.Instance.Coins;
+            WordNexus_GameController.Instance.GiveCoins(100, false);
+            int animateToCoins = WordNexus_GameController.Instance.Coins;
+            WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { 100, animateFromCoins, animateToCoins });
+        }
     }
 
     public void generateNo()
@@ -387,16 +387,50 @@ public class AdManager : MonoBehaviour
                     }
                     else if (Adtype == "3" && canshowInter)
                     {
+                        if (GoogleAdMob.Instash.InterReady)
+                        {
+                            GoogleAdMob.Instash.ShowInterstitialAd();
+                        }
+                        else if (UnityInterstialManager.instance.InterLoaded)
+                        {
+                            UnityInterstialManager.instance.ShowAd();
+                        }
+                        ResetTimer();
+                    }
+                    else if (Adtype == "4" && canshowInter)
+                    {
+                        if (UnityInterstialManager.instance.InterLoaded)
+                        {
+                            UnityInterstialManager.instance.ShowAd();
+                        }
+                        else if (GoogleAdMob.Instash.InterReady)
+                        {
+                            GoogleAdMob.Instash.ShowInterstitialAd();
+                        }
+                        ResetTimer();
+                    }
+                    else if (Adtype == "5" && canshowInter)
+                    {
                         if (FBAdManager.Instash.FBInterLoaded)
                         {
                             FBAdManager.Instash.ShowInterstitial();
                         }
-                        //else if (YandexMobileAdsInterstitial.Instash.YandexInterLoad)
-                        //{
-                        //    YandexMobileAdsInterstitial.Instash.ShowInterstitial();
-                        //}
-
-
+                        else if (UnityInterstialManager.instance.InterLoaded)
+                        {
+                            UnityInterstialManager.instance.ShowAd();
+                        }
+                        ResetTimer();
+                    }
+                    else if (Adtype == "6" && canshowInter)
+                    {
+                        if (UnityInterstialManager.instance.InterLoaded)
+                        {
+                            UnityInterstialManager.instance.ShowAd();
+                        }
+                        else if (FBAdManager.Instash.FBInterLoaded)
+                        {
+                            FBAdManager.Instash.ShowInterstitial();
+                        }
                         ResetTimer();
                     }
                 }
@@ -407,53 +441,6 @@ public class AdManager : MonoBehaviour
 
     public void Reward(string rt)
     {
-#if UNITY_EDITOR
-        Debug.Log("rt");
-        /*switch (rt)
-        {
-            /*case "REwadsAdsCall":
-                PotAnimationEventManager.Instansh.REwadsAdsCall();
-                updatewatsh();
-                break;
-            case "GetCoinsByads":
-                PotAnimationEventManager.Instansh.GetCoinsByads();
-                updatewatsh();
-                break;
-            case "RewadsResume":
-                PotAnimationEventManager.Instansh.RewadsResume();
-                updatewatsh();
-                break;
-            case "Dublerewad":
-                PotDailyReward.INstash.Dublerewad();
-                updatewatsh();
-                break;
-            case "StartSpin":
-                PotBonusSpin.Instash.StartSpin();
-                updatewatsh();
-                break;
-            case "getrewad":
-                TimerManager.instash.getrewad();
-                updatewatsh();
-                break;
-            case "Rewaddbule":
-                ChestWinCoins.Insasth.Rewaddbule();
-                updatewatsh();
-                break;
-            case "RewadPigyBank":
-                PiggyBank.Inasth.RewadPigyBank();
-                updatewatsh();
-                break;
-            case "RewadWatchAds":
-                PotRedeemPanelScript.Insasth.RewadWatchAds();
-                break;
-            case "CollectNextrewad":
-                PotMenuReference.THIS.CollectNextrewad();
-                updatewatsh();
-                break;#1#
-        }*/
-        CompleteRewardedVideo();
-
-#endif
         if (PlayerPrefs.GetInt("GmNoAd", 0) == 0)
         {
             if (showaAd == "true")
@@ -472,7 +459,7 @@ public class AdManager : MonoBehaviour
                         }
                         else
                         {
-                            PopupShow.SetActive(true);
+                            show();
                         }
                     }
                     else if (Adtype == "2")
@@ -481,41 +468,84 @@ public class AdManager : MonoBehaviour
                         {
                             FBAdManager.Instash.ShowRewardedVideo(rt);
                         }
-
                         else if (GoogleAdMob.Instash.RewadReady)
                         {
                             GoogleAdMob.Instash.ShowRewardedAd(rt);
                         }
                         else
                         {
-                            PopupShow.SetActive(true);
+                            show();
                         }
                     }
                     else if (Adtype == "3")
+                    {
+                        if (GoogleAdMob.Instash.RewadReady)
+                        {
+                            GoogleAdMob.Instash.ShowRewardedAd(rt);
+                        }
+                        else if (UnityRewardManager.instance.RewardLoaded)
+                        {
+                            UnityRewardManager.instance.ShowAd();
+                        }
+                        else
+                        {
+                            show();
+                        }
+                    }
+                    else if (Adtype == "4")
+                    {
+                        if (UnityRewardManager.instance.RewardLoaded)
+                        {
+                            UnityRewardManager.instance.ShowAd();
+                        }
+                        else if (GoogleAdMob.Instash.RewadReady)
+                        {
+                            GoogleAdMob.Instash.ShowRewardedAd(rt);
+                        }
+                        else
+                        {
+                            show();
+                        }
+                    }
+                    else if (Adtype == "5")
                     {
                         if (FBAdManager.Instash.FBRewadLoaded)
                         {
                             FBAdManager.Instash.ShowRewardedVideo(rt);
                         }
-
-                        //else if (YandexMobileAdsRewardedAd.Inasth.YandexRewadLoad)
-                        //{
-                        //    YandexMobileAdsRewardedAd.Inasth.ShowRewardedAd();
-                        //}
+                        else if (UnityRewardManager.instance.RewardLoaded)
+                        {
+                            UnityRewardManager.instance.ShowAd();
+                        }
                         else
                         {
-                            PopupShow.SetActive(true);
+                            show();
+                        }
+                    }
+                    else if (Adtype == "6")
+                    {
+                        if (UnityRewardManager.instance.RewardLoaded)
+                        {
+                            UnityRewardManager.instance.ShowAd();
+                        }
+                        else if (FBAdManager.Instash.FBRewadLoaded)
+                        {
+                            FBAdManager.Instash.ShowRewardedVideo(rt);
+                        }
+                        else
+                        {
+                            show();
                         }
                     }
                     else
                     {
-                        PopupShow.SetActive(true);
+                        show();
                     }
                 }
             }
             else
             {
-                PopupShow.SetActive(true);
+                show();
             }
         }
 
@@ -525,7 +555,18 @@ public class AdManager : MonoBehaviour
         }
     }
 
+    public void show()
+    {
 
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Toast.Show("Oops! Your device is not connected to the internet. Please connect and try again.");
+        }
+        else
+        {
+            Toast.Show("We apologize, but there are no ads ready to be played right now. Please try again later.");
+        }
+    }
     public void ResetTimer()
     {
         timer = intervalTime;

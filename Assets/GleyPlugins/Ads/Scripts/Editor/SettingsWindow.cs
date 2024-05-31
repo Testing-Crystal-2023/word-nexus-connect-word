@@ -56,7 +56,7 @@
         private ScriptableObject target;
         private SerializedObject so;
 
-        [MenuItem("Dotmob/Mobile Ads", false, 60)]
+        [MenuItem("Word Nexus : Connect word/Mobile Ads", false, 60)]
         private static void Init()
         {
             string path = "Assets//GleyPlugins/Ads/Scripts/Version.txt";

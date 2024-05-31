@@ -11,7 +11,7 @@ namespace Game
 		// Start is called before the first frame update
 		void Start()
 		{
-			Debug.Log("USER CONSENT :" + Advertisements.Instance.UserConsentWasSet());
+			// Debug.Log("USER CONSENT :" + Advertisements.Instance.UserConsentWasSet());
 			Invoke("CheckForGDPR", 0.1f);
 
 			// Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID from app.onesignal.com
@@ -25,10 +25,10 @@ namespace Game
 		//GDPR
 		void CheckForGDPR()
 		{
-			if (Advertisements.Instance.UserConsentWasSet() == false)
-			{
+			// if (Advertisements.Instance.UserConsentWasSet() == false)
+			// {
 				WordNexus_Pop_upManager.Instance.ShowNoAd("consent");
-			}
+			// }
 
 
 		}
@@ -36,13 +36,13 @@ namespace Game
 		//Popup events
 		public void OnUserClickAccept()
 		{
-			Advertisements.Instance.SetUserConsent(true);
+			// Advertisements.Instance.SetUserConsent(true);
 
 		}
 
 		public void OnUserClickCancel()
 		{
-			Advertisements.Instance.SetUserConsent(false);
+			// Advertisements.Instance.SetUserConsent(false);
 
 		}
 	}

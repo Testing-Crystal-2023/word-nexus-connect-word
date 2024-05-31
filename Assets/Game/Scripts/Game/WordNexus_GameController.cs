@@ -208,12 +208,8 @@ namespace Game
 			// Check if we should show an ad
 			if (NumLevelsTillAdShows <= 0)
 			{
-
-				if (Advertisements.Instance.IsInterstitialAvailable())
-				{
-					Advertisements.Instance.ShowInterstitial();
-					NumLevelsTillAdShows = numLevelsTillAd;
-				}
+				AdManager.Instance.ConfirmInter();
+				NumLevelsTillAdShows = numLevelsTillAd;
 			}
 
 			// Decrease the number of levels until an ad shows

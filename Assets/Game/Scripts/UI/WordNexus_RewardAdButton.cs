@@ -49,41 +49,9 @@ namespace Game
 
 				return;
 			}
+			AdManager.Instance.coinReward=true;
+			AdManager.Instance.Reward("rt");
 
-			//if (Advertisements.Instance.IsRewardVideoAvailable())
-			//{
-
-			//	Debug.LogError("[RewardAdButton] The reward button was clicked but there is no ad loaded to show.");
-			//}
-			//         else
-			//         {
-
-			Advertisements.Instance.ShowRewardedVideo(CompleteMethod);
-			//  }
-
-		}
-
-		private void CompleteMethod(bool completed, string advertiser)
-		{
-			Debug.Log("Closed rewarded from: " + advertiser + " -> Completed " + completed);
-			if (completed == true)
-			{
-				// Get the current amount of coins
-				int animateFromCoins = WordNexus_GameController.Instance.Coins;
-
-				// Give the amount of coins
-				WordNexus_GameController.Instance.GiveCoins(coinsToReward, false);
-
-				// Get the amount of coins now after giving them
-				int animateToCoins = WordNexus_GameController.Instance.Coins;
-
-				// Show the popup to the user so they know they got the coins
-				WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { coinsToReward, animateFromCoins, animateToCoins });
-			}
-			else
-			{
-				Debug.Log("NO REWARD");
-			}
 		}
 
 

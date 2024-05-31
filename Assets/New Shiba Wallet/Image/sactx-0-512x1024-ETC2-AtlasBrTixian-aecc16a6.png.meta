@@ -1,0 +1,237 @@
+fileFormatVersion: 2
+guid: 1a79eda4139793642bc285cd3bef345a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 455
+        width: 208
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cebc3a7bc8f6809408276d1635bf0ec4
+      internalID: -800025821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ba10122edf646fc4f837c73feecd6508
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_48: -1114501881
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_57: -1786120612
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_24: -1515777555
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_3: 1727062285
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_54: 761711622
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_38: 1515801606
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_14: -2059680134
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_60: -1807469514
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_53: 280141606
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_62: -1806342555
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_43: -41740843
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_37: 929769251
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_40: -793151224
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_0: -800025821
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_36: -1461803404
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_41: 845347872
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_47: 1428955262
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_44: 954823251
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_9: 1036830956
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_46: 167495355
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_8: 41826390
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_27: 1917901999
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_67: 835612557
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_49: -2097901913
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_68: -1337429641
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_64: 793581577
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_25: 1634206940
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_5: -53087461
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_39: -1331396578
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_65: 1142642940
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_7: 1656152954
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_6: -1509845315
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_2: 1352457766
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_16: -167671276
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_26: 1889273659
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_42: 4694193
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_51: 2034773031
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_52: 617456971
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_17: 538132443
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_34: 905759970
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_20: -1394718503
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_61: -862969639
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_59: -16971307
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_23: -1036361778
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_10: 1843552732
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_19: 1083400175
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_35: -393771027
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_1: 1928983441
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_66: -449483810
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_28: -2002012420
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_21: 2079057397
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_12: 1640576073
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_4: 1891153149
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_29: 1713624723
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_30: -598841282
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_31: 484697664
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_63: 806228026
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_33: -757750396
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_32: 1277394616
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_50: 1151627451
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_58: 1165062558
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_55: -1166130602
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_15: -314376305
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_11: 290526569
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_22: 984479567
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_13: -29079288
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_45: 453924448
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_18: 962299188
+      sactx-0-512x1024-ETC2-AtlasBrTixian-aecc16a6_56: 686586035
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

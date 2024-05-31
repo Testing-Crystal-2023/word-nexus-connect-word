@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using OneSignalSDK;
+// using OneSignalSDK;
 
 namespace Game
 {
@@ -15,7 +15,7 @@ namespace Game
 			Invoke("CheckForGDPR", 0.1f);
 
 			// Replace 'YOUR_ONESIGNAL_APP_ID' with your OneSignal App ID from app.onesignal.com
-			OneSignal.Default.Initialize("YOUR_ONESIGNAL_APP_ID");
+			// OneSignal.Default.Initialize("YOUR_ONESIGNAL_APP_ID");
 
 		}
 
@@ -25,12 +25,7 @@ namespace Game
 		//GDPR
 		void CheckForGDPR()
 		{
-			// if (Advertisements.Instance.UserConsentWasSet() == false)
-			// {
-				WordNexus_Pop_upManager.Instance.ShowNoAd("consent");
-			// }
-
-
+			WordNexus_Pop_upManager.Instance.ShowNoAd("consent");
 		}
 
 		//Popup events

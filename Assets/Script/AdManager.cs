@@ -182,6 +182,7 @@ public class AdManager : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+    
     public void RedirectGame()
     {
         Application.OpenURL(Game_Redirect_ButtonURL);

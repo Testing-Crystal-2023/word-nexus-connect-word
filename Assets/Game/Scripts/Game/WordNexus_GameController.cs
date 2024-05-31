@@ -208,7 +208,7 @@ namespace Game
 			// Check if we should show an ad
 			if (NumLevelsTillAdShows <= 0)
 			{
-				AdManager.Instance.ConfirmInter();
+				// AdManager.Instance.ConfirmInter();
 				NumLevelsTillAdShows = numLevelsTillAd;
 			}
 

@@ -1065,10 +1065,11 @@ namespace Game
 				GamePoints += gamePointsAwarded;
 
 				// Check if the category is now complete
-				if (IsCategoryCompleted(level.categoryInfo))
-				{
+				// if (IsCategoryCompleted(level.categoryInfo))
+				// {
 					// Get the number of coins to award and the current amount of coins
-					categoryCoinsAwarded = level.categoryInfo.coinsAwarded;
+					//  categoryCoinsAwarded = level.categoryInfo.coinsAwarded;
+					categoryCoinsAwarded = Random.Range(10,100);
 					categoryCoinsAmountFrom = Coins;
 
 					// Give the coins right away but don't update the text. This makes it so it the app exits the player has been given the coins
@@ -1077,7 +1078,7 @@ namespace Game
 
 					// Get the amount of coins after the coins have been given
 					categoryCoinsAmountTo = Coins;
-				}
+				// }
 
 				// Award coins for each extra word the player found
 				if (numExtraWordsFound > 0)

@@ -1,6 +1,6 @@
 using Google.Play.Review;
 using System.Collections;
-using System.Collections.Generic;
+using Game;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,10 +19,6 @@ public class InAppReview : MonoBehaviour
 
     public TextMeshProUGUI InAppReviewTitle;
     public TextMeshProUGUI InAppReviewDesc;
-    //public TextMeshProUGUI availBalanceTxt;
-    //public TextMeshProUGUI balanceTxt;
-    //public TextMeshProUGUI availBalanceTxt1;
-    //public TextMeshProUGUI availBalanceTxt2;
     private void Awake()
     {
         if(Instance==null)
@@ -54,27 +50,20 @@ public class InAppReview : MonoBehaviour
         }
         //print(Count);
         //print(int.Parse(AdManager.Instance.review_star_setup));
-        //if (Count >= int.Parse(AdManager.Instance.review_star_setup))
-        //{
+        if (Count >= int.Parse(AdManager.Instance.review_star_setup))
+        {
+            WordNexus_GameController.Instance.GiveCoins(int.Parse(AdManager.Instance.review_reward));
             //Debug.LogError(GlobalValues.Coins);
-            //GlobalValues.Coins +=int.Parse(AdManager.Instance.review_reward);
-            ////Debug.LogError(GlobalValues.Coins);
-            //GameManager.Instance.coinTxt.text = GlobalValues.Coins.ToString();
-            //availBalanceTxt.text = GlobalValues.Coins.ToString();
-            //balanceTxt.text = GlobalValues.Coins.ToString();
-            //availBalanceTxt1.text= GlobalValues.Coins.ToString();
-            //availBalanceTxt2.text= GlobalValues.Coins.ToString();
-            //Debug.LogError(GameManager.Instance.coinTxt.text);
             StartCoroutine(ReviewRequest());
             Count = 0;
             cancel();
-        //}
-        //else
-        //{
-        //print(Count);
-        //    cancel();
-        //    Count = 0;
-        //}
+        }
+        else
+        {
+        print(Count);
+           cancel();
+           Count = 0;
+        }
     }
     public void cancel()
     {
@@ -111,8 +100,8 @@ public class InAppReview : MonoBehaviour
         if (!PlayerPrefs.HasKey("ReviewApplyComplete"))
         {
             InAppReviewPopup.SetActive(true);
-            //InAppReviewTitle.text = AdManager.Instance.review_title;
-            //InAppReviewDesc.text = AdManager.Instance.review_desc;
+            InAppReviewTitle.text = AdManager.Instance.review_title;
+            InAppReviewDesc.text = AdManager.Instance.review_desc;
         }
         else
         {

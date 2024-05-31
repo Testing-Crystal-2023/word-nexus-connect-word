@@ -184,7 +184,7 @@ public class WordNexus_WithdrawManager : MonoBehaviour
         VerifyPopup.SetActive(true);
         Amount_Text_VerifyPopup.text = "<sprite name=\"Ru\"> " + withdraw_Amount_Input.text;
     }
-    public void PayfeePopup_open()
+    void PayfeePopup_open()
     {
         Amount_PayfeePopup.text = "<sprite name=\"Ru\"> " + withdraw_Amount_Input.text;
 

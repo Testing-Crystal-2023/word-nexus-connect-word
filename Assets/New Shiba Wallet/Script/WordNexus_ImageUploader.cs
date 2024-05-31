@@ -12,7 +12,6 @@ public class WordNexus_ImageUploader : MonoBehaviour
     public static WordNexus_ImageUploader instance;
     public Text imageNameDisplay;
     public GameObject RequireImage_Object,Display_Image_Object;
-    public StorageReference old_Image_path;
     private void Awake() {
         if(instance==null)
             instance=this;
@@ -96,17 +95,5 @@ public class WordNexus_ImageUploader : MonoBehaviour
         RequireImage_Object.SetActive(true);
         Display_Image_Object.SetActive(false);
         WordNexus_WalletManager.Instance.PayFee_screen_PayBtn.gameObject.SetActive(false);
-        delete_Image();
-    }
-    void delete_Image()
-    {
-        old_Image_path.DeleteAsync().ContinueWithOnMainThread(task => {
-        if (task.IsCompleted) {
-            Debug.Log("File deleted successfully.");
-        }
-        else {
-            // Uh-oh, an error occurred!
-        }
-        });
     }
 }

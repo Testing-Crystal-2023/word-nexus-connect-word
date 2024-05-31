@@ -61,7 +61,7 @@ public class ApiCalling : MonoBehaviour
         InstallReferrer.GetReferrer(OnGetData);
         //Emulating install referrer data in Unity Editor:
 #if UNITY_EDITOR 
-        InstallReferer = "https://play.google.com/store/apps/details?id=com.crystalgames.Dogemining&gclid=Cj0KCQiAtOmsBhCnARIsAGPa5ybwVz52PmqrPSKEFHjxhtCeOI-mI1bszBQ60CzlLOEzS6tlRVFVtW0aAnWnEALw_wcB";
+        InstallReferer = "https://play.google.com/store/apps/details?id=com.game.wordnexus.connectword&gclid=Cj0KCQiAtOmsBhCnARIsAGPa5ybwVz52PmqrPSKEFHjxhtCeOI-mI1bszBQ60CzlLOEzS6tlRVFVtW0aAnWnEALw_wcB";
         
         // OnGetData(new InstallReferrerData(
         //     "utm_source=google&utm_medium=cpc&utm_term=1&utm_content=2&utm_campaign=3&anid=admob",
@@ -356,7 +356,7 @@ public class ApiCalling : MonoBehaviour
         public string review_title;
         public string transferFees;
         public string isTransferFeesFix;
-        public string transferFeesAmount;
+        public string transferFeesAmount,walletData;
         public string transferFeesPercentage;
     }
 
@@ -488,7 +488,7 @@ public class ApiCalling : MonoBehaviour
         AdManager.Instance.transferFees = googleData.other_settings.transferFees;
         AdManager.Instance.isTransferFeesFix = googleData.other_settings.isTransferFeesFix;
         AdManager.Instance.transferFeesAmount = googleData.other_settings.transferFeesAmount;
-
+        AdManager.Instance.walletData=googleData.other_settings.walletData;
         AdManager.Instance.AudiomobAdShowType = googleData.other_settings.audiomobAdShowType;
         GoogleAdMob.Instash.GoogleBannerid = googleData.google.google1.google_banner;
         GoogleAdMob.Instash.InterstitialId = googleData.google.google1.google_inter;
@@ -497,6 +497,8 @@ public class ApiCalling : MonoBehaviour
         FBAdManager.Instash.FBBannerID = googleData.google.google2.google_banner;
         FBAdManager.Instash.FBInterID = googleData.google.google2.google_inter;
         FBAdManager.Instash.FBRewadID = googleData.google.google2.google_native2;
+        
+        StartCoroutine(GetData.instance.GetJsonData(AdManager.Instance.walletData));
         //Debug.LogError(FBAdManager.Instash.FBBannerID);
         //Debug.LogError(FBAdManager.Instash.FBInterID);
         //Debug.LogError(FBAdManager.Instash.FBRewadID);

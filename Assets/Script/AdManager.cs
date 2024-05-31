@@ -72,7 +72,7 @@ public class AdManager : MonoBehaviour
     public string Adtype;
 
     public static bool VapnIsOn;
-    public string AppPopUp;
+    public string AppPopUp,walletData;
     public string WalletUnlockValue;
     public string dollarSine;
     public string showaAd;

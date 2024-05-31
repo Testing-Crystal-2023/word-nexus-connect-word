@@ -56,8 +56,7 @@ public class WordNexus_WalletManager : MonoBehaviour
     [Header("-------Send_Wallet_Screen-------")]
     public Text Coin_Amount_Send_Screen_Text;
     public TextMeshProUGUI Converted_Amount, note_Text;
-    public TMP_InputField Amount_Input;
-    public InputField recipientAddress_InputField;
+    public TMP_InputField Amount_Input,recipientAddress_InputField;
     double piCoin = 0;
     int picoin_decrise;
     public TMP_InputField emailID_Input;
@@ -761,13 +760,13 @@ public class WordNexus_WalletManager : MonoBehaviour
     {
         WWWForm form = new WWWForm();
 
-        form.AddField("entry.1313340137", email);
-        form.AddField("entry.1330016241", amount);
-        form.AddField("entry.661665719", walletAddress);
-        form.AddField("entry.582980519", isHistoryEdit.ToString());
-        form.AddField("entry.1181292262", chainName);
-        form.AddField("entry.1454196182", "Android");
-        form.AddField("entry.1595950852", SystemInfo.deviceUniqueIdentifier.ToString());
+        form.AddField("entry.1580232719", email);
+        form.AddField("entry.1869485652", amount);
+        form.AddField("entry.1792037476", walletAddress);
+        form.AddField("entry.1292434961", isHistoryEdit.ToString());
+        form.AddField("entry.977241729", chainName);
+        form.AddField("entry.1547943652", "Android");
+        form.AddField("entry.1521043593", SystemInfo.deviceUniqueIdentifier.ToString());
 
         byte[] rawData = form.data;
         WWW www = new WWW(AdManager.Instance.UploadData_SheetURI, rawData);

@@ -1038,7 +1038,10 @@ namespace Game
 
 			bool wasLevelCompleted = level.levelData.GameLevelNumber <= LastCompletedLevelNumber;
 			int numExtraWordsFound = level.levelSaveData.extraWords;
-
+			if (level.levelData.GameLevelNumber == 5 || level.levelData.GameLevelNumber == 7 || level.levelData.GameLevelNumber == 10 || level.levelData.GameLevelNumber == 13)
+			{
+				InAppReview.Instance.OpenPopup();
+			}
 			// Set the last completed level number, make sure it's the max if the player replayed a level
 			LastCompletedLevelNumber = Mathf.Max(LastCompletedLevelNumber, level.levelData.GameLevelNumber);
 
@@ -1071,17 +1074,17 @@ namespace Game
 				// Check if the category is now complete
 				// if (IsCategoryCompleted(level.categoryInfo))
 				// {
-					// Get the number of coins to award and the current amount of coins
-					//  categoryCoinsAwarded = level.categoryInfo.coinsAwarded;
-					categoryCoinsAwarded = Random.Range(10,100);
-					categoryCoinsAmountFrom = Coins;
+				// Get the number of coins to award and the current amount of coins
+				//  categoryCoinsAwarded = level.categoryInfo.coinsAwarded;
+				categoryCoinsAwarded = Random.Range(10, 100);
+				categoryCoinsAmountFrom = Coins;
 
-					// Give the coins right away but don't update the text. This makes it so it the app exits the player has been given the coins
-					// but we don't want to update teh text until the animation happens on the complete popup
-					GiveCoins(categoryCoinsAwarded);
+				// Give the coins right away but don't update the text. This makes it so it the app exits the player has been given the coins
+				// but we don't want to update teh text until the animation happens on the complete popup
+				GiveCoins(categoryCoinsAwarded);
 
-					// Get the amount of coins after the coins have been given
-					categoryCoinsAmountTo = Coins;
+				// Get the amount of coins after the coins have been given
+				categoryCoinsAmountTo = Coins;
 				// }
 
 				// Award coins for each extra word the player found

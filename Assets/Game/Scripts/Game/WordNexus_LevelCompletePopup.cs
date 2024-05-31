@@ -37,7 +37,8 @@ namespace Game
 		public override void OnShowing(object[] inData)
 		{
 			base.OnShowing(inData);
-
+			Debug.LogError(inData);
+			Debug.LogError("show");
 			WordNexus_ActiveLevel level = (WordNexus_ActiveLevel)inData[0];
 			bool isLevelAlreadyComplete = (bool)inData[1];
 			int currentGamePoints = (int)inData[2];
@@ -49,7 +50,7 @@ namespace Game
 			int extraWordsCoinsAmountFrom = (int)inData[8];
 			int extraWordsCoinsAmountTo = (int)inData[9];
 			bool isLastLevel = (bool)inData[10];
-
+Debug.LogError(categoryCoinsAmountTo);
 			backgroundImage.sprite = level.packInfo.background;
 			packNameText.text = level.packInfo.packName;
 			levelText.text = string.Format("LEVEL {0} COMPLETED", level.levelData.GameLevelNumber);
@@ -147,6 +148,9 @@ namespace Game
 			int extraWordsCoinsAmountFrom,
 			int extraWordsCoinsAmountTo)
 		{
+
+			
+			Debug.LogError("show Animate");
 			float duration = 500;
 			float betweenDelay = 0.25f;
 

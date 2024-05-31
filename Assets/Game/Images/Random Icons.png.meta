@@ -1,0 +1,551 @@
+fileFormatVersion: 2
+guid: a4ed39811f9ade54d9fcca0770e235e6
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Random Icons_5
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 660
+        width: 115
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3893b90457ad3c428ee461ae5f57596
+      internalID: 2035730363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_6
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 672
+        width: 123
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce632b017f901644dbe93a9cc6254d5a
+      internalID: 310228838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_9
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 669
+        width: 128
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbb0b07916d72314c8f01957b3e1f2be
+      internalID: 30108985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_11
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 661
+        width: 123
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cac9dc15f699254197f7056c699f83b
+      internalID: -1368458569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_19
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 448
+        width: 127
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abc946924e46ca34bb3a808994047a81
+      internalID: -1194430424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_28
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 458
+        width: 124
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65c1c7a9ce5e6914cae3a70ab060f8ed
+      internalID: -2109085339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_29
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 456
+        width: 125
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b2cef4efd165524ebdad441d40907ba
+      internalID: -1746337042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_30
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 451
+        width: 124
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1702bee6d28886046b33277cde1db86e
+      internalID: 615370691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_34
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 235
+        width: 123
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77967326f852715498ffa8b562da00de
+      internalID: 779603775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_37
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 228
+        width: 97
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51151defc58984c40a6405bcd9e69b79
+      internalID: -406190168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_40
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 221
+        width: 105
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db452fcab0194eb42a56c4a6d65349c4
+      internalID: -289048379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_41
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 234
+        width: 122
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baaa4534db6dcb442b3b9fa08b371f5e
+      internalID: 887997760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_47
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 8
+        width: 97
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4650921c3aa463247b2de9eb853e2433
+      internalID: -1182020588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_49
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 127
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c32bb360a4ebd74ab2f5a5ba9dce0aa
+      internalID: -922097294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_52
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 8
+        width: 123
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e15018df116a06d4d8914d5c4380eee2
+      internalID: -1807071398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Random Icons_54
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 0
+        width: 140
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44eca7dd9c80b2d488defa68608264a5
+      internalID: 1224970715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: e81f439d07b17bb409785402998a1288
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Random Icons_55: -150024510
+      Random Icons_28: -2109085339
+      Random Icons_17: -111654582
+      Random Icons_39: 664623067
+      Random Icons_34: 779603775
+      Random Icons_2: -1695147129
+      Random Icons_29: -1746337042
+      Random Icons_42: 1645139388
+      Random Icons_11: -1368458569
+      Random Icons_53: 738839784
+      Random Icons_38: 145764933
+      Random Icons_32: 1670080829
+      Random Icons_15: 1764905743
+      Random Icons_30: 615370691
+      Random Icons_26: -432601060
+      Random Icons_47: -1182020588
+      Random Icons_33: 103006521
+      Random Icons_14: -142191243
+      Random Icons_27: 1031828626
+      Random Icons_46: 44678213
+      Random Icons_37: -406190168
+      Random Icons_1: -1120294369
+      Random Icons_21: 1991096288
+      Random Icons_48: 1248111360
+      Random Icons_41: 887997760
+      Random Icons_19: -1194430424
+      Random Icons_35: -33344587
+      Random Icons_45: -665637802
+      Random Icons_16: 462094943
+      Random Icons_6: 310228838
+      Random Icons_12: -2001221509
+      Random Icons_36: 1459703504
+      Random Icons_52: -1807071398
+      Random Icons_5: 2035730363
+      Random Icons_4: 744594918
+      Random Icons_3: 1749846187
+      Random Icons_8: -1698662804
+      Random Icons_23: -260460087
+      Random Icons_51: 1766339058
+      Random Icons_25: 182614758
+      Random Icons_22: -1079090419
+      Random Icons_9: 30108985
+      Random Icons_24: 177500064
+      Random Icons_50: -861732039
+      Random Icons_0: -1886392444
+      Random Icons_31: -61402575
+      Random Icons_54: 1224970715
+      Random Icons_13: 586537222
+      Random Icons_44: 254371454
+      Random Icons_7: 2115685311
+      Random Icons_40: -289048379
+      Random Icons_10: 1689507342
+      Random Icons_18: -176539171
+      Random Icons_49: -922097294
+      Random Icons_20: 587769007
+      Random Icons_43: -2047562562
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

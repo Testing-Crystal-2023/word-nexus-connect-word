@@ -43,7 +43,6 @@ public class NewNotificationManager : MonoBehaviour
             {
                 AppMetEvents.Instance.isOpenByTransNoti = true;
                 AppMetEvents.Instance.NotificationOpen("Transaction");
-                // GameManager.Instance.showNotificationWallet();
             }
             else if(channel == dailyRewardsChannel && !AppMetEvents.Instance.isOpenByDailyNoti)
             {
@@ -56,7 +55,7 @@ public class NewNotificationManager : MonoBehaviour
         dailyRewardsChannel = "daily_rewards_channel11";
 
         AndroidNotificationCenter.CancelAllDisplayedNotifications();
-        DOGE_WithdrawManager.instance.sendRepitNotification();
+        WordNexus_WithdrawManager.instance.sendRepitNotification();
         var channel1 = new AndroidNotificationChannel()
         {
             Id = transactionChannel,
@@ -80,7 +79,6 @@ public class NewNotificationManager : MonoBehaviour
         AndroidNotificationCenter.RegisterNotificationChannel(channel1);
         AndroidNotificationCenter.RegisterNotificationChannel(channel2);
 
-        // GameManager.Instance.CheckTransaction();
     }
 
 
@@ -257,7 +255,7 @@ public class NewNotificationManager : MonoBehaviour
     public void CalculateNotifications(int ID)
     {
         AndroidNotificationCenter.CancelAllNotifications();
-        DOGE_WithdrawManager.instance.sendRepitNotification();
+        WordNexus_WithdrawManager.instance.sendRepitNotification();
 
         if (!String.IsNullOrEmpty(PlayerPrefs.GetString("Date_" + ID)))
         {

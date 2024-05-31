@@ -53,7 +53,7 @@ public class QREncodeTest : MonoBehaviour
 	{
 		if (e_qrController != null)
 		{
-			string valueStr = DOGEWalletManager.Instance.myAddress;
+			string valueStr = WordNexus_WalletManager.Instance.myAddress;
 			int errorlog = e_qrController.Encode(valueStr);
 			// infoText.color = Color.red;
 			// if (errorlog == -13) {

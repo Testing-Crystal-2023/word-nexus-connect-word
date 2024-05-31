@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3540243335816689116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3540243335816689118}
+  - component: {fileID: 3540243335816689117}
+  m_Layer: 0
+  m_Name: Qureka Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3540243335816689118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540243335816689116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.9804535, y: -14.350438, z: -3.8480499}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3540243335816689117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540243335816689116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48db03d6bac75d64bb297b10f16cf6dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gifManager: {fileID: 0}
+  bannerHolder: {fileID: 0}
+  interHolder: {fileID: 0}
+  RewardHolder: {fileID: 0}
+  bannerImgs:
+  - {fileID: 21300000, guid: 42491aaf616182e4d8a554030e19ee72, type: 3}
+  - {fileID: 21300000, guid: 2f8ae2313842e774784e4a51b5fb3b30, type: 3}
+  - {fileID: 21300000, guid: 683aebb70204b1d449d507e8badfd23c, type: 3}
+  - {fileID: 21300000, guid: 61bf6db6196888646ade7b47eba2b732, type: 3}
+  - {fileID: 21300000, guid: 00b0bc1bd256a6441b6b87f5deacdecc, type: 3}
+  - {fileID: 21300000, guid: 48802334aa784944f9866278781d0b4a, type: 3}
+  interImgs:
+  - {fileID: 21300000, guid: ab487434a3e8fa841bac0fa31ecd0315, type: 3}
+  - {fileID: 21300000, guid: 66f6a6c6968501541bbce31336b4b734, type: 3}
+  - {fileID: 21300000, guid: 3348782c31be33b4c893714888188241, type: 3}
+  - {fileID: 21300000, guid: 1f28322cb565cea4cafe38f856c8c2d7, type: 3}
+  - {fileID: 21300000, guid: cdb1ab0ba84db9a44adc5c7ad61227cf, type: 3}
+  - {fileID: 21300000, guid: 08d107ce90c295348813aebbcc355e89, type: 3}
+  - {fileID: 21300000, guid: 5fdedba3c9541c746bd3a1330e889615, type: 3}
+  - {fileID: 21300000, guid: 5701386918a7cf14f956e436bb2d211a, type: 3}
+  - {fileID: 21300000, guid: 07263e7dab6c6f04c91eaca44ce73cbe, type: 3}
+  - {fileID: 21300000, guid: eb647d8becf9d7a438e82b30188fc8cc, type: 3}
+  - {fileID: 21300000, guid: c6ca4f8c5fd49c949be01ca99205e19a, type: 3}
+  - {fileID: 21300000, guid: b225c56cade440245828848e04865d5d, type: 3}
+  - {fileID: 21300000, guid: e627973298fc04e42bbba9dd8fcd3899, type: 3}
+  - {fileID: 21300000, guid: c04ee9e4baa6b3c42b95fa4ca2cb20d3, type: 3}
+  rewardImgs:
+  - {fileID: 21300000, guid: 0abecd18aa174d844bfce017dc5f5d6a, type: 3}
+  - {fileID: 21300000, guid: 363720f4149b1df4095744e7f517a325, type: 3}
+  - {fileID: 21300000, guid: 8fcc11f852dec1b419f5f1716a4a412f, type: 3}
+  - {fileID: 21300000, guid: 6b73334454e1d2e47bbb2f98026551d2, type: 3}
+  - {fileID: 21300000, guid: 0d704f7290cfdbb4abfc24476809d31e, type: 3}
+  - {fileID: 21300000, guid: 700b49a43e4ba5548a5f0083475a7f7d, type: 3}
+  - {fileID: 21300000, guid: b5410b8af6906374c9a42a33522906d3, type: 3}
+  bannerImgHolder: {fileID: 0}
+  interImgHolder: {fileID: 0}
+  rewardImgHolder: {fileID: 0}
+  interBool: 0
+  rewardBool: 0

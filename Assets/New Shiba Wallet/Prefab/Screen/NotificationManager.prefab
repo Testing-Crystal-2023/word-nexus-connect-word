@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6687967723352869680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6687967723352869685}
+  - component: {fileID: 6687967723352869684}
+  m_Layer: 0
+  m_Name: NotificationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6687967723352869685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687967723352869680}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6687967723352869684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687967723352869680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2841c5c690c46f145a9aa98d2642f656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: {fileID: 0}
+  transactionChannel: transaction_channel00
+  dailyRewardsChannel: daily_rewards_channel11
+  dailyTitles:
+  - Tap Rewards
+  - Daily Gift
+  - Claim Doge Prize
+  - Reward Crypto
+  - Daily Doge Earn
+  - Quick Reward
+  - Daily Tap-In
+  - Crypto Bounty
+  - Daily Incentive
+  - Claim Doge Daily.
+  - Bonus Alert
+  - Daily crypto
+  - Reward Tap
+  - Claim Now
+  - Daily Bounty
+  - Quick Bonus
+  - Claim Doge Reward
+  - Crypto Bonus
+  - Daily Bonus
+  - Claim Crypto.
+  dailyDescriptions:
+  - Take advantage of your daily reward by tapping on the notification text, it's
+    waiting for you
+  - Congratulations! You've earned your daily reward for today
+  - You're crushing it! Keep up the momentum and enjoy your well-deserved daily reward
+  - You're doing amazing! Keep up the momentum and enjoy your hard-earned daily reward
+  - You're one step closer to your goals. Celebrate with your daily reward and keep
+    up the momentum.
+  - Your daily efforts are adding up to big results. Keep it up and enjoy your daily
+    reward!
+  - Your dedication to improvement is paying off. Celebrate your progress with your
+    daily reward and keep moving forward.
+  - Your dedication is inspiring - keep up the great work and enjoy your well-deserved
+    daily reward
+  - Every day is a new opportunity to succeed. Congrats on earning your daily reward!
+  - Each day is a fresh start to achieve greatness. Keep up the momentum and enjoy
+    your daily reward as a small victory.
+  - You're one step closer to your goals. Celebrate with your daily reward and keep
+    pushing towards success.
+  - Your daily efforts are adding up to something great. Keep pushing towards your
+    goals and enjoy your well-deserved daily reward.
+  - Your dedication to your goals is paying off. Take a moment to celebrate with
+    your daily reward and keep up the momentum.
+  - Your persistence and determination are impressive. Enjoy your daily reward as
+    a reminder of your progress and keep aiming for success.
+  - Your consistency is the key to your success. Congrats on earning your daily reward
+    and keep up the great work!
+  - You're on the right track to achieving your dreams. Keep going and enjoy your
+    daily reward as a symbol of your progress.
+  transactionTitles:
+  - Wallet Status Notification
+  - Transaction Progress Report
+  - Payment Update Alert
+  - Transaction Status Change
+  - Payment Status Update
+  - Wallet Transaction Notification
+  transactionDesc:
+  - We wanted to let you know that there has been a change to your transaction status.
+    Please check your wallet for updated information.
+  - Good news! Your transaction status has been updated. Please check your wallet
+    for the latest details.
+  - "An update has been made to your transaction status. Kindly review your wallet
+    for the most recent\_information."

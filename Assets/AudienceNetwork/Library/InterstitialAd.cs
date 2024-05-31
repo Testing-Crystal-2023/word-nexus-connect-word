@@ -317,7 +317,7 @@ namespace AudienceNetwork
             {
 #if UNITY_IOS
                 return new InterstitialAdBridgeIOS();
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID && !UNITY_EDITOR
                 return new InterstitialAdBridgeAndroid();
 #endif
             }
@@ -395,7 +395,7 @@ namespace AudienceNetwork
         }
     }
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
     internal class InterstitialAdBridgeAndroid : InterstitialAdBridge
     {
 

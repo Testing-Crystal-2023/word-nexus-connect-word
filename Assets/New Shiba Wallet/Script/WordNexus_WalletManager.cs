@@ -217,11 +217,6 @@ public class WordNexus_WalletManager : MonoBehaviour
     }
     public void Show_Main_Wallet_Screen()
     {
-        if (AdManager.Instance.handAnimationShow)
-        {
-            GameManager.Instance.HandAnimation.SetActive(true);
-        }
-
         if (AdManager.Instance.WalletShow.ToLower() == "true" && AdManager.Instance.Crypto_Wallet_Show.ToLower() == "true")
         {
             Main_Wallet_Screen.SetActive(true);

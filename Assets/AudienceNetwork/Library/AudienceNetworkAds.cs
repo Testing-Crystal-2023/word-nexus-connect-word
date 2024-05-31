@@ -16,7 +16,7 @@ namespace AudienceNetwork
 
             PlayerPrefs.SetString("an_isUnitySDK", SdkVersion.Build);
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
             AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
             AndroidJavaObject context = currentActivity.Call<AndroidJavaObject>("getApplicationContext");
@@ -28,7 +28,7 @@ namespace AudienceNetwork
 
         internal static bool IsInitialized()
         {
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
             AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
             AndroidJavaObject context = currentActivity.Call<AndroidJavaObject>("getApplicationContext");

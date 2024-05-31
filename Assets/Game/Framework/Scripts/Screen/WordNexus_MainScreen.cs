@@ -25,7 +25,7 @@ namespace Game
 		//GDPR
 		void CheckForGDPR()
 		{
-			WordNexus_Pop_upManager.Instance.ShowNoAd("consent");
+			// WordNexus_Pop_upManager.Instance.ShowNoAd("consent");
 		}
 
 		//Popup events

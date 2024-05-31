@@ -403,7 +403,7 @@ namespace AudienceNetwork
             {
 #if UNITY_IOS
                 return new RewardedVideoAdBridgeIOS();
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID && !UNITY_EDITOR
                 return new RewardedVideoAdBridgeAndroid();
 #endif
             }
@@ -497,7 +497,7 @@ namespace AudienceNetwork
 
     }
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
     internal class RewardedVideoAdBridgeAndroid : RewardedVideoAdBridge
     {
 

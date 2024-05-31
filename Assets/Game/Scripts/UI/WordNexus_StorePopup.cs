@@ -4,10 +4,10 @@ using UnityEngine;
 
 using Game;
 
-#if DM_IAP
-using UnityEngine.Purchasing;
-using UnityEngine.Purchasing.Extension;
-#endif
+// #if DM_IAP
+// using UnityEngine.Purchasing;
+// using UnityEngine.Purchasing.Extension;
+// #endif
 
 namespace Game
 {
@@ -23,26 +23,26 @@ namespace Game
 
 		public override void OnShowing(object[] inData)
 		{
-			IAPManager.Instance.OnProductPurchased += OnProductPurchases;
+			// IAPManager.Instance.OnProductPurchased += OnProductPurchases;
 		}
 
 		public override void OnHiding()
 		{
 			base.OnHiding();
 
-			IAPManager.Instance.OnProductPurchased -= OnProductPurchases;
+			// IAPManager.Instance.OnProductPurchased -= OnProductPurchases;
 		}
 
 		#endregion
 
 		#region Private Methods
 
-		private void OnProductPurchases(string productId)
-		{
-			Hide(false);
+		// private void OnProductPurchases(string productId)
+		// {
+		// 	Hide(false);
 
-			WordNexus_Pop_upManager.Instance.Show("product_purchased");
-		}
+		// 	// WordNexus_Pop_upManager.Instance.Show("product_purchased");
+		// }
 
 		#endregion
 	}

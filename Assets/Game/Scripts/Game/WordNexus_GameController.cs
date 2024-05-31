@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Game;
+using EasyUI.Toast;
 
 namespace Game
 {
@@ -230,7 +231,8 @@ namespace Game
 
 			if (Coins < CoinCostPerHint)
 			{
-				WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
+				// WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
+				Toast.Show("Insufficient coins available. Please collect more coins to proceed.", 4);
 			}
 			else
 			{
@@ -256,7 +258,8 @@ namespace Game
 
 			if (Coins < CoinCostPerMultiHint)
 			{
-				WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
+				// WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
+				Toast.Show("Insufficient coins available. Please collect more coins to proceed.", 4);
 			}
 			else
 			{
@@ -286,7 +289,8 @@ namespace Game
 			}
 			else if (Coins < CoinCostPerTargetHint)
 			{
-				WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
+				// WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
+				Toast.Show("Insufficient coins available. Please collect more coins to proceed.", 4);
 			}
 			else
 			{

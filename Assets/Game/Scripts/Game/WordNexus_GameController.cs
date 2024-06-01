@@ -1142,6 +1142,8 @@ namespace Game
 			// Game points are calculated by multiplying the number of letters level by the sqrt of the level number
 			int numberOfLetters = level.levelData.Letters.Length;
 			int sqrtOfLevelNumber = Mathf.RoundToInt(Mathf.Sqrt(level.levelData.GameLevelNumber));
+			Debug.Log("level.levelData.Letters => "+level.levelData.Letters);
+			Debug.Log("sqrtOfLevelNumber => "+sqrtOfLevelNumber);
 
 			return numberOfLetters * sqrtOfLevelNumber;
 		}

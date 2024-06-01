@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using AndroidInstallReferrer;
+using System.Threading.Tasks;
 
 public class ApiCalling : MonoBehaviour
 {
@@ -27,19 +28,30 @@ public class ApiCalling : MonoBehaviour
     private string PlayInstant;
     private bool Retantion;
     private bool MarketingUser;
-
+    public Text loading;
 
     void Start()
     {
         pakageName = Application.identifier;
         deviceID = SystemInfo.deviceUniqueIdentifier;
+        InvokeRepeating("ani",0f,2f);
     }
 
     public void CallApi()
     {
         StartCoroutine(Webavtarupdate("https://sevtameta.shop:8000/api/auth/userDownload"));
     }
-
+    async void ani()
+    {
+      loading.text="Loading.";
+      await Task.Delay(500);
+      loading.text="Loading..";
+      await Task.Delay(500);
+      loading.text="Loading...";
+      await Task.Delay(500);
+      loading.text="Loading..";
+      await Task.Delay(500);
+    }
 
     private void Awake()
     {

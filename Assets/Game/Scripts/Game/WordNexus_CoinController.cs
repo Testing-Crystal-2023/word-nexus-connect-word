@@ -79,9 +79,9 @@ namespace Game
 			coinToAnimate.SetParent(animationContainer);
 
 			Vector2 animateToPosition = WordNexus_Utilities.SwitchToRectTransform(animateTo, animationContainer);
-Debug.LogError("coinToAnimate => "+coinToAnimate);
-Debug.LogError("animateToPosition.x => "+animateToPosition.x);
-Debug.LogError("animateToPosition.y => "+animateToPosition.y);
+			// Debug.LogError("coinToAnimate => " + coinToAnimate);
+			// Debug.LogError("animateToPosition.x => " + animateToPosition.x);
+			// Debug.LogError("animateToPosition.y => " + animateToPosition.y);
 
 			// Aniamte the x position position of the coin
 			PlayAnimation(WordNexus_UIAnimation.PositionX(coinToAnimate, animateToPosition.x, animationDuration), startDelay);

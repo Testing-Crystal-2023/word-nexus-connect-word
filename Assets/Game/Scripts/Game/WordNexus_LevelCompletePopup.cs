@@ -115,6 +115,17 @@ namespace Game
 			WordNexus_CoinController.Instance.SetCoinsText(WordNexus_GameController.Instance.Coins);
 
 			Hide(false, new object[] { PlayNextAction });
+			if (AdManager.Instance.Wingetbutton.ToLower() == "true")
+			{
+				if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+				{
+					AdManager.Instance.ConfirmInter();
+				}
+				else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+				{
+					QurekaManager.Instance.ShowInterAd();
+				}
+			}
 		}
 
 		public void OnBackClicked()

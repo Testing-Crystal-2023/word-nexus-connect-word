@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 using Game;
 using System;
+using EasyUI.Toast;
 
 namespace Game
 {
@@ -49,8 +50,30 @@ namespace Game
 
 				return;
 			}
-			AdManager.Instance.coinReward=true;
-			AdManager.Instance.Reward("rt");
+
+			if (GoogleAdMob.Instash.RewadReady || UnityRewardManager.instance.RewardLoaded || FBAdManager.Instash.FBRewadLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			{
+				AdManager.Instance.coinReward = true;
+				AdManager.Instance.Reward("rt");
+				AppMetEvents.Instance.VideoAdsStarted("WinPanel_Multicoin_X-Reward_AdWatch");
+			}
+			else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+			{
+				AdManager.Instance.coinReward = true;
+				AppMetEvents.Instance.VideoAdsStarted("WinPanel_Multicoin_X-Reward_AdWatch");
+				QurekaManager.Instance.ShowRewardedAd("WinPanel_Multicoin_X-Reward_AdWatch");
+			}
+			else
+			{
+				if (Application.internetReachability == NetworkReachability.NotReachable)
+				{
+					Toast.Show("Oops! Your device is not connected to the internet. Please connect and try again.");
+				}
+				else
+				{
+					Toast.Show("We apologize, but there are no ads ready to be played right now. Please try again later.");
+				}
+			}
 
 		}
 

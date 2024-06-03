@@ -152,20 +152,34 @@ namespace Game
 		/// </summary>
 		public void StartLevel(int gameLevelNumber)
 		{
+			if (gameLevelNumber > 1164)
+			{
+				WordNexus_PackInfo packInfo = PackInfos[Random.Range(0, 9)];
+				WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[Random.Range(0, packInfo.categoryInfos.Count)];
+				StartLevel(packInfo, categoryInfo, categoryInfo.LevelDatas[Random.Range(0, categoryInfo.LevelDatas.Count)]);
+				return;
+			}
 			for (int i = 0; i < packInfos.Count; i++)
 			{
+				Debug.LogError("PackInfos[i] =>" + PackInfos[i].packName);
 				WordNexus_PackInfo packInfo = PackInfos[i];
 
 				for (int j = 0; j < packInfo.categoryInfos.Count; j++)
 				{
+					Debug.LogError("packInfo.categoryInfos.Count =>" + packInfo.categoryInfos[j].displayName);
 					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
-
+					
 					if (categoryInfo.levelFiles.Count == 0 || categoryInfo.LevelDatas[categoryInfo.LevelDatas.Count - 1].GameLevelNumber < gameLevelNumber)
 					{
 						continue;
 					}
+					Debug.LogError("gameLevelNumber =>" + gameLevelNumber);
+					Debug.LogError("categoryInfo.LevelDatas[0].GameLevelNumber =>" + categoryInfo.LevelDatas[0].GameLevelNumber);
 
 					int levelIndex = gameLevelNumber - categoryInfo.LevelDatas[0].GameLevelNumber;
+					Debug.LogError("packInfo =>" + packInfo.packName);
+					Debug.LogError("categoryInfo =>" + categoryInfo.displayName);
+					Debug.LogError("categoryInfo.LevelDatas[levelIndex] =>" + categoryInfo.LevelDatas[levelIndex]);
 
 					StartLevel(packInfo, categoryInfo, categoryInfo.LevelDatas[levelIndex]);
 
@@ -228,10 +242,16 @@ namespace Game
 			{
 				return;
 			}
-
+			if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			{
+				AdManager.Instance.ConfirmInter();
+			}
+			else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+			{
+				QurekaManager.Instance.ShowInterAd();
+			}
 			if (Coins < CoinCostPerHint)
 			{
-				// WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
 				Toast.Show("Insufficient coins available. Please collect more coins to proceed.", 4);
 			}
 			else
@@ -256,9 +276,16 @@ namespace Game
 				return;
 			}
 
+			if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			{
+				AdManager.Instance.ConfirmInter();
+			}
+			else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+			{
+				QurekaManager.Instance.ShowInterAd();
+			}
 			if (Coins < CoinCostPerMultiHint)
 			{
-				// WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
 				Toast.Show("Insufficient coins available. Please collect more coins to proceed.", 4);
 			}
 			else
@@ -283,13 +310,20 @@ namespace Game
 				return;
 			}
 
+			if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			{
+				AdManager.Instance.ConfirmInter();
+			}
+			else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+			{
+				QurekaManager.Instance.ShowInterAd();
+			}
 			if (PlayerSelectingHint)
 			{
 				EndPlayerSelectingHint();
 			}
 			else if (Coins < CoinCostPerTargetHint)
 			{
-				// WordNexus_Pop_upManager.Instance.Show("not_enough_coins");
 				Toast.Show("Insufficient coins available. Please collect more coins to proceed.", 4);
 			}
 			else
@@ -1132,6 +1166,17 @@ namespace Game
 			yield return new WaitForSeconds(0.5f);
 
 			WordNexus_Pop_upManager.Instance.Show("level_complete", popupInData, OnLevelCompletePopupClosed);
+			if (AdManager.Instance.Winfailads.ToLower() == "true")
+			{
+				if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+				{
+					AdManager.Instance.ConfirmInter();
+				}
+				else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
+				{
+					QurekaManager.Instance.ShowInterAd();
+				}
+			}
 		}
 
 		/// <summary>
@@ -1142,8 +1187,8 @@ namespace Game
 			// Game points are calculated by multiplying the number of letters level by the sqrt of the level number
 			int numberOfLetters = level.levelData.Letters.Length;
 			int sqrtOfLevelNumber = Mathf.RoundToInt(Mathf.Sqrt(level.levelData.GameLevelNumber));
-			Debug.Log("level.levelData.Letters => "+level.levelData.Letters);
-			Debug.Log("sqrtOfLevelNumber => "+sqrtOfLevelNumber);
+			Debug.Log("level.levelData.Letters => " + level.levelData.Letters);
+			Debug.Log("sqrtOfLevelNumber => " + sqrtOfLevelNumber);
 
 			return numberOfLetters * sqrtOfLevelNumber;
 		}
@@ -1255,10 +1300,14 @@ namespace Game
 					}
 				}
 			}
-
 			// Re-assign the pack and category info incase they changed
 			packInfo = packInfos[packIndex];
 			categoryInfo = packInfo.categoryInfos[categoryIndex];
+
+			Debug.LogError(packIndex);
+			Debug.LogError(packInfos[packIndex].packName);
+			Debug.LogError(categoryIndex);
+			Debug.LogError(packInfo.categoryInfos[categoryIndex].displayName);
 
 			return true;
 		}

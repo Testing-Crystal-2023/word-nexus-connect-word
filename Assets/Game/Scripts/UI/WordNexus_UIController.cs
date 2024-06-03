@@ -79,7 +79,8 @@ namespace Game
 			UpdateUI();
 
 			// Remove the play button if all the levels have been completed
-			playButton.SetActive(!WordNexus_GameController.Instance.IsLastLevelInGameCompleted());
+			playButton.SetActive(true);
+			// playButton.SetActive(!WordNexus_GameController.Instance.IsLastLevelInGameCompleted());
 
 			WordNexus_ScreenManager.Instance.OnShowingScreen += OnScreenShowing;
 			WordNexus_ScreenManager.Instance.OnSwitchingScreens += OnSwitchingScreens;
@@ -260,7 +261,8 @@ namespace Game
 				gamePointsText.text = WordNexus_GameController.Instance.GamePoints.ToString();
 
 				// Remove the play button if all the levels have been completed
-				playButton.SetActive(!WordNexus_GameController.Instance.IsLastLevelInGameCompleted());
+				// playButton.SetActive(!WordNexus_GameController.Instance.IsLastLevelInGameCompleted());
+				playButton.SetActive(true);
 			}
 		}
 

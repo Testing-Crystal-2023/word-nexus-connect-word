@@ -161,25 +161,25 @@ namespace Game
 			}
 			for (int i = 0; i < packInfos.Count; i++)
 			{
-				Debug.LogError("PackInfos[i] =>" + PackInfos[i].packName);
+				// Debug.LogError("PackInfos[i] =>" + PackInfos[i].packName);
 				WordNexus_PackInfo packInfo = PackInfos[i];
 
 				for (int j = 0; j < packInfo.categoryInfos.Count; j++)
 				{
-					Debug.LogError("packInfo.categoryInfos.Count =>" + packInfo.categoryInfos[j].displayName);
+					// Debug.LogError("packInfo.categoryInfos.Count =>" + packInfo.categoryInfos[j].displayName);
 					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
 
 					if (categoryInfo.levelFiles.Count == 0 || categoryInfo.LevelDatas[categoryInfo.LevelDatas.Count - 1].GameLevelNumber < gameLevelNumber)
 					{
 						continue;
 					}
-					Debug.LogError("gameLevelNumber =>" + gameLevelNumber);
-					Debug.LogError("categoryInfo.LevelDatas[0].GameLevelNumber =>" + categoryInfo.LevelDatas[0].GameLevelNumber);
+					// Debug.LogError("gameLevelNumber =>" + gameLevelNumber);
+					// Debug.LogError("categoryInfo.LevelDatas[0].GameLevelNumber =>" + categoryInfo.LevelDatas[0].GameLevelNumber);
 
 					int levelIndex = gameLevelNumber - categoryInfo.LevelDatas[0].GameLevelNumber;
-					Debug.LogError("packInfo =>" + packInfo.packName);
-					Debug.LogError("categoryInfo =>" + categoryInfo.displayName);
-					Debug.LogError("categoryInfo.LevelDatas[levelIndex] =>" + categoryInfo.LevelDatas[levelIndex]);
+					// Debug.LogError("packInfo =>" + packInfo.packName);
+					// Debug.LogError("categoryInfo =>" + categoryInfo.displayName);
+					// Debug.LogError("categoryInfo.LevelDatas[levelIndex] =>" + categoryInfo.LevelDatas[levelIndex]);
 
 					StartLevel(packInfo, categoryInfo, categoryInfo.LevelDatas[levelIndex]);
 

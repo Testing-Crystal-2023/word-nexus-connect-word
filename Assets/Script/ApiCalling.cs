@@ -73,13 +73,13 @@ public class ApiCalling : MonoBehaviour
         InstallReferrer.GetReferrer(OnGetData);
         //Emulating install referrer data in Unity Editor:
 #if UNITY_EDITOR 
-        InstallReferer = "https://play.google.com/store/apps/details?id=com.game.wordnexus.connectword&gclid=Cj0KCQiAtOmsBhCnARIsAGPa5ybwVz52PmqrPSKEFHjxhtCeOI-mI1bszBQ60CzlLOEzS6tlRVFVtW0aAnWnEALw_wcB";
+        // InstallReferer = "https://play.google.com/store/apps/details?id=com.game.wordnexus.connectword&gclid=Cj0KCQiAtOmsBhCnARIsAGPa5ybwVz52PmqrPSKEFHjxhtCeOI-mI1bszBQ60CzlLOEzS6tlRVFVtW0aAnWnEALw_wcB";
         
-        // OnGetData(new InstallReferrerData(
-        //     "utm_source=google&utm_medium=cpc&utm_term=1&utm_content=2&utm_campaign=3&anid=admob",
-        //     "1.0", false,
-        //     DateTime.Now, DateTime.Now,
-        //     DateTime.Now, DateTime.Now));
+        OnGetData(new InstallReferrerData(
+            "utm_source=google&utm_medium=cpc&utm_term=1&utm_content=2&utm_campaign=3&anid=admob",
+            "1.0", false,
+            DateTime.Now, DateTime.Now,
+            DateTime.Now, DateTime.Now));
 #endif
     }
 

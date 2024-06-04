@@ -92,11 +92,11 @@ namespace Game
 
 		public void UpdateUI()
 		{
-			if (!WordNexus_GameController.Instance.IsLastLevelInGameCompleted())
-			{
+			// if (!WordNexus_GameController.Instance.IsLastLevelInGameCompleted())
+			// {
 				// Set the main screens play button text
 				playButtonText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
-			}
+			// }
 
 			UpdatePackListItems();
 			UpdateLevelListItems();
@@ -109,7 +109,7 @@ namespace Game
 			selectedCategoryInfo = WordNexus_GameController.Instance.CurrentActiveLevel.categoryInfo;
 
 			// Set the new level text on the top bar
-			topBarLevelText.text = "Level " + WordNexus_GameController.Instance.CurrentActiveLevel.levelData.GameLevelNumber;
+			topBarLevelText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
 
 			// Make sure the correct background is being displayed
 			SetBackground(selectedPackInfo.background);
@@ -300,7 +300,7 @@ namespace Game
 
 			if (toScreenId == "game")
 			{
-				topBarLevelText.text = "Level " + WordNexus_GameController.Instance.CurrentActiveLevel.levelData.GameLevelNumber;
+				topBarLevelText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);;
 
 				// Fade in the level text
 				PlayTopBarAnimation(WordNexus_UIAnimation.Alpha(topBarLevelText.gameObject, 0f, 1f, topBarAnimDuration));

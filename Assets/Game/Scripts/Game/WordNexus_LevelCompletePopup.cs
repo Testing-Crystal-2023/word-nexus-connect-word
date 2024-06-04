@@ -53,9 +53,9 @@ namespace Game
 			// Debug.LogError(categoryCoinsAmountTo);
 			backgroundImage.sprite = level.packInfo.background;
 			packNameText.text = level.packInfo.packName;
-			levelText.text = string.Format("LEVEL {0} COMPLETED", level.levelData.GameLevelNumber);
+			levelText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber);
 			//gamePointsText.text			= currentGamePoints.ToString();
-			nextLevelButtonText.text = isLastLevel ? "Home" : string.Format("Level {0}", level.levelData.GameLevelNumber + 1);
+			nextLevelButtonText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
 
 			categoryCoinPrizeIcon.gameObject.SetActive(true);
 			extraWordsCoinMarker.gameObject.SetActive(true);

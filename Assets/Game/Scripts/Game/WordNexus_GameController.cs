@@ -168,7 +168,7 @@ namespace Game
 				{
 					Debug.LogError("packInfo.categoryInfos.Count =>" + packInfo.categoryInfos[j].displayName);
 					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
-					
+
 					if (categoryInfo.levelFiles.Count == 0 || categoryInfo.LevelDatas[categoryInfo.LevelDatas.Count - 1].GameLevelNumber < gameLevelNumber)
 					{
 						continue;
@@ -634,7 +634,7 @@ namespace Game
 
 			// Award any coins that can be awarded
 			//AwardCoins(level, levelWordData);
-
+			Debug.LogError("FoundWord");
 			// Check if the level is complete
 			if (IsBoardComplete(level))
 			{
@@ -1053,7 +1053,7 @@ namespace Game
 					wordBoardList.ShowLetterForHint(levelWordData, letterIndex);
 					break;
 			}
-
+			Debug.LogError("ShowLetterForHint");
 			// Check if the level is now complete after placing the hint
 			if (IsBoardComplete(level))
 			{
@@ -1077,8 +1077,19 @@ namespace Game
 				InAppReview.Instance.OpenPopup();
 			}
 			// Set the last completed level number, make sure it's the max if the player replayed a level
-			LastCompletedLevelNumber = Mathf.Max(LastCompletedLevelNumber, level.levelData.GameLevelNumber);
-
+			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
+			if (level.levelData.GameLevelNumber < LastCompletedLevelNumber && LastCompletedLevelNumber >= 1164)
+			{
+				Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+				LastCompletedLevelNumber += 1;
+			}
+			else
+			{
+				LastCompletedLevelNumber = Mathf.Max(LastCompletedLevelNumber, level.levelData.GameLevelNumber);
+			}
+			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
+			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 			// Remove the level save data since it's no longer needed (A new one will be created if the level is re-played)
 			levelSaveDatas.Remove(level.levelData.Id);
 
@@ -1097,8 +1108,8 @@ namespace Game
 			int extraWordsCoinsAmountTo = 0;
 
 			// Check if the level has not already been completed
-			if (!wasLevelCompleted)
-			{
+			// if (!wasLevelCompleted)
+			// {
 				// Calculate the number of game points to award
 				gamePointsAwarded = CalculateGamePointsAwardedForLevel(level);
 
@@ -1135,7 +1146,7 @@ namespace Game
 					// Get the amount of coins after the coins have been given
 					extraWordsCoinsAmountTo = Coins;
 				}
-			}
+			// }
 
 			bool isLastLevel = IsLastLevel(level.levelData);
 
@@ -1245,6 +1256,13 @@ namespace Game
 		/// </summary>
 		private void PlayNextLevel(WordNexus_ActiveLevel level)
 		{
+			if (level.levelData.GameLevelNumber > 1164)
+			{
+				WordNexus_PackInfo packInfo1 = PackInfos[Random.Range(0, 9)];
+				WordNexus_CategoryInfo categoryInfo1 = packInfo1.categoryInfos[Random.Range(0, packInfo1.categoryInfos.Count)];
+				StartLevel(packInfo1, categoryInfo1, categoryInfo1.LevelDatas[Random.Range(0, categoryInfo1.LevelDatas.Count)]);
+				return;
+			}
 			// Get the next pack, category, and level index to play
 			WordNexus_PackInfo packInfo;
 			WordNexus_CategoryInfo categoryInfo;

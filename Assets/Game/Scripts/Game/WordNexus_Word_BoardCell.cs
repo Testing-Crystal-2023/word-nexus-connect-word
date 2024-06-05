@@ -35,33 +35,13 @@ namespace Game
 		public int Col { get; set; }
 		public bool HasCoin { get; set; }
 		public State CurrentState { get; set; }
-		public Image coin;
-		public Sprite crypto,cash,Coin_Simple;
+
 		public System.Action<int, int> OnCellClicked { get; set; }
 
 		#endregion
 
 		#region Public Methods
-		/// <summary>
-		/// Start is called on the frame when a script is enabled just before
-		/// any of the Update methods is called the first time.
-		/// </summary>
-		void Start()
-		{
 
-			if (AdManager.Instance.Crypto_Wallet_Show.ToString() == "true" && AdManager.Instance.WalletShow.ToString() == "true")
-			{
-				coin.sprite = crypto;
-			}
-			else if (AdManager.Instance.UPI_Wallet_Show.ToString() == "true" && AdManager.Instance.WalletShow.ToString() == "true")
-			{
-				coin.sprite = cash;
-			}
-			else
-			{
-				coin.sprite = Coin_Simple;
-			}
-		}
 		/// <summary>
 		/// Invoked when the button for this cell is clicked
 		/// </summary>

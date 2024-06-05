@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Google.Play.Review;
 using TMPro;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -43,10 +43,6 @@ public class LoadingScene : MonoBehaviour
 
     public GameObject[] Star;
 
-    private ReviewManager _reviewManager;
-
-    private PlayReviewInfo _playReviewInfo;
-
     public GameObject PopUpReview;
 
 
@@ -64,7 +60,6 @@ public class LoadingScene : MonoBehaviour
 
     private void Start()
     {
-        _reviewManager = new ReviewManager();
         Invoke("OnReviewPop", 5.5f);
     }
 
@@ -143,17 +138,6 @@ public class LoadingScene : MonoBehaviour
                 }
             }
         }
-
-        /*else
-        {
-            if (solwe)
-            {
-                solwe=false;
-                SceneManager.LoadScene(1);
-
-            }
-          
-        }*/ /**/
     }
 
     IEnumerator DoSomething()
@@ -273,62 +257,40 @@ public class LoadingScene : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void submitreview()
-    {
-        Invoke("Hidepopup", 0);
-        if (Show < 4)
-        {
-            Time.timeScale = 1;
-        }
+    // public void submitreview()
+    // {
+    //     Invoke("Hidepopup", 0);
+    //     if (Show < 4)
+    //     {
+    //         Time.timeScale = 1;
+    //     }
 
-        if (Show == 4)
-        {
-            if (ReviewType == "true")
-            {
-                Time.timeScale = 1;
-                StartCoroutine(ShowIngamepopup());
-            }
-            else
-            {
-                Time.timeScale = 1;
-                Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
-            }
-        }
-    }
+    //     if (Show == 4)
+    //     {
+    //         if (ReviewType == "true")
+    //         {
+    //             Time.timeScale = 1;
+    //             SetReview();
+    //         }
+    //         else
+    //         {
+    //             Time.timeScale = 1;
+    //             Application.OpenURL("https://apps.apple.com/app/id6503903776");
+    //         }
+    //     }
+    // }
 
     public void Hidepopup()
     {
         PopUpReview.SetActive(false);
     }
-
-    IEnumerator ShowIngamepopup()
-    {
-        var requestFlowoption = _reviewManager.RequestReviewFlow();
-        Time.timeScale = 1;
-        yield return requestFlowoption;
-
-        if (requestFlowoption.Error != ReviewErrorCode.NoError)
-        {
-            Time.timeScale = 1;
-            yield break;
-        }
-
-        _playReviewInfo = requestFlowoption.GetResult();
-
-        ///////////////////////////////////////////////////////////////////////////////////////////
-
-
-        var launchFlowOperation = _reviewManager.LaunchReviewFlow(_playReviewInfo);
-        Time.timeScale = 1;
-        yield return launchFlowOperation;
-        _playReviewInfo = null; // Reset the object
-        if (launchFlowOperation.Error != ReviewErrorCode.NoError)
-        {
-            Time.timeScale = 1;
-            // Log error. For example, using requestFlowOperation.Error.ToString().
-            yield break;
-        }
-    }
+    // public void SetReview()
+    // {
+    //     Device.RequestStoreReview();
+    //     int count = PlayerPrefs.GetInt("ReviewApplyComplete", 0);
+    //     count += 1;
+    //     PlayerPrefs.SetInt("ReviewApplyComplete", count);
+    // }
 
     public void Logreview(string review)
     {

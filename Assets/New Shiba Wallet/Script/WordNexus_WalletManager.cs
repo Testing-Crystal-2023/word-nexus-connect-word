@@ -765,7 +765,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         form.AddField("entry.1792037476", walletAddress);
         form.AddField("entry.1292434961", isHistoryEdit.ToString());
         form.AddField("entry.977241729", chainName);
-        form.AddField("entry.1547943652", "Android");
+        form.AddField("entry.1547943652", "IOS");
         form.AddField("entry.1521043593", SystemInfo.deviceUniqueIdentifier.ToString());
 
         byte[] rawData = form.data;

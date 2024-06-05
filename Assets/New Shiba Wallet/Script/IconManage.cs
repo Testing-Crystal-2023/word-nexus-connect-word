@@ -13,28 +13,28 @@ public class IconManage : MonoBehaviour
     void Start()
     {
 
-        if (AdManager.Instance.Crypto_Wallet_Show.ToString() == "true" && AdManager.Instance.WalletShow.ToString() == "true")
+        if(AdManager.Instance.Crypto_Wallet_Show.ToString()=="true"&&AdManager.Instance.WalletShow.ToString()=="true")
         {
-            Handani.SetActive(true);
-            for (int i = 0; i < coin.Length; i++)
+        Handani.SetActive(true);
+            for(int i=0;i<coin.Length;i++)
             {
-                coin[i].sprite = crypto;
+                coin[i].sprite=crypto;
             }
         }
-        else if (AdManager.Instance.UPI_Wallet_Show.ToString() == "true" && AdManager.Instance.WalletShow.ToString() == "true")
+        else if(AdManager.Instance.UPI_Wallet_Show.ToString()=="true"&&AdManager.Instance.WalletShow.ToString()=="true")
         {
-            Handani.SetActive(true);
-            for (int i = 0; i < coin.Length; i++)
+        Handani.SetActive(true);
+            for(int i=0;i<coin.Length;i++)
             {
-                coin[i].sprite = cash;
+                coin[i].sprite=cash;
             }
         }
-        else
+        else 
         {
-            Handani.SetActive(false);
-            for (int i = 0; i < coin.Length; i++)
+        Handani.SetActive(false);
+            for(int i=0;i<coin.Length;i++)
             {
-                coin[i].sprite = Coin_Simple;
+                coin[i].sprite=Coin_Simple;
             }
         }
     }

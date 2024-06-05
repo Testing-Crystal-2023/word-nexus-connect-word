@@ -161,25 +161,18 @@ namespace Game
 			}
 			for (int i = 0; i < packInfos.Count; i++)
 			{
-				// Debug.LogError("PackInfos[i] =>" + PackInfos[i].packName);
 				WordNexus_PackInfo packInfo = PackInfos[i];
 
 				for (int j = 0; j < packInfo.categoryInfos.Count; j++)
 				{
-					// Debug.LogError("packInfo.categoryInfos.Count =>" + packInfo.categoryInfos[j].displayName);
 					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
 
 					if (categoryInfo.levelFiles.Count == 0 || categoryInfo.LevelDatas[categoryInfo.LevelDatas.Count - 1].GameLevelNumber < gameLevelNumber)
 					{
 						continue;
 					}
-					// Debug.LogError("gameLevelNumber =>" + gameLevelNumber);
-					// Debug.LogError("categoryInfo.LevelDatas[0].GameLevelNumber =>" + categoryInfo.LevelDatas[0].GameLevelNumber);
 
 					int levelIndex = gameLevelNumber - categoryInfo.LevelDatas[0].GameLevelNumber;
-					// Debug.LogError("packInfo =>" + packInfo.packName);
-					// Debug.LogError("categoryInfo =>" + categoryInfo.displayName);
-					// Debug.LogError("categoryInfo.LevelDatas[levelIndex] =>" + categoryInfo.LevelDatas[levelIndex]);
 
 					StartLevel(packInfo, categoryInfo, categoryInfo.LevelDatas[levelIndex]);
 
@@ -634,7 +627,6 @@ namespace Game
 
 			// Award any coins that can be awarded
 			//AwardCoins(level, levelWordData);
-			Debug.LogError("FoundWord");
 			// Check if the level is complete
 			if (IsBoardComplete(level))
 			{
@@ -1074,22 +1066,18 @@ namespace Game
 			int numExtraWordsFound = level.levelSaveData.extraWords;
 			if (level.levelData.GameLevelNumber == 5 || level.levelData.GameLevelNumber == 7 || level.levelData.GameLevelNumber == 10 || level.levelData.GameLevelNumber == 13)
 			{
-				InAppReview.Instance.OpenPopup();
+				if(AdManager.Instance.isReviewShow.ToLower() == "true")
+                	InAppReview.Instance.OpenPopup();
 			}
 			// Set the last completed level number, make sure it's the max if the player replayed a level
-			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
-			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
 			if (level.levelData.GameLevelNumber < LastCompletedLevelNumber && LastCompletedLevelNumber >= 1164)
 			{
-				Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 				LastCompletedLevelNumber += 1;
 			}
 			else
 			{
 				LastCompletedLevelNumber = Mathf.Max(LastCompletedLevelNumber, level.levelData.GameLevelNumber);
 			}
-			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
-			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 			// Remove the level save data since it's no longer needed (A new one will be created if the level is re-played)
 			levelSaveDatas.Remove(level.levelData.Id);
 
@@ -1322,10 +1310,6 @@ namespace Game
 			packInfo = packInfos[packIndex];
 			categoryInfo = packInfo.categoryInfos[categoryIndex];
 
-			Debug.LogError(packIndex);
-			Debug.LogError(packInfos[packIndex].packName);
-			Debug.LogError(categoryIndex);
-			Debug.LogError(packInfo.categoryInfos[categoryIndex].displayName);
 
 			return true;
 		}

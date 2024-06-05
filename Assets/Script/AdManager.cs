@@ -99,7 +99,7 @@ public class AdManager : MonoBehaviour
     public List<Sprite> interSprites;
     public List<Sprite> rewardSprites;
     public List<string> gifUrls;
-    public string review_star_setup, review_title, review_reward, review_desc, minimumWithdrawal, transactionMinuteForTransferFeesFlow, transferFees, isTransferFeesFix;
+    public string review_star_setup, review_title, review_reward, review_desc, minimumWithdrawal, transactionMinuteForTransferFeesFlow, transferFees, isTransferFeesFix,isReviewShow;
     public NewQurekaData jsnData;
     private void Awake()
     {
@@ -189,7 +189,8 @@ public class AdManager : MonoBehaviour
     }
     public void UpdateGame()
     {
-        Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
+        // 6503903776
+        Application.OpenURL("https://apps.apple.com/app/id6503903776");
     }
     public void CloseRedirect()
     {

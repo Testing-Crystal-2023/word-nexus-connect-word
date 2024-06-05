@@ -51,7 +51,7 @@ namespace Game
 				return;
 			}
 
-			if (GoogleAdMob.Instash.RewadReady || UnityRewardManager.instance.RewardLoaded || FBAdManager.Instash.FBRewadLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			if (GoogleAdMob.Instash.RewadReady || UnityManager.Instance.UnityRewardLoaded || FBAdManager.Instash.FBRewadLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
 			{
 				AdManager.Instance.coinReward = true;
 				AdManager.Instance.Reward("rt");
@@ -90,6 +90,7 @@ namespace Game
 
 		private void OnRewardAdGranted(string rewardId, double rewardAmount)
 		{
+			coinsToReward = UnityEngine.Random.Range(10,100);
 			// Get the current amount of coins
 			int animateFromCoins = WordNexus_GameController.Instance.Coins;
 

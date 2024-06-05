@@ -21,6 +21,7 @@ public class GoogleAdMob : MonoBehaviour
     public bool BannerReady = false;
     private void Awake()
     {
+        Application.runInBackground = false;
         if (Instash == null)
         {
             Instash = this;
@@ -35,6 +36,10 @@ public class GoogleAdMob : MonoBehaviour
 
     void Start()
     {
+
+        MobileAds.SetiOSAppPauseOnBackground(true);
+
+        MobileAds.RaiseAdEventsOnUnityMainThread = true;
 
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
@@ -61,14 +66,14 @@ public class GoogleAdMob : MonoBehaviour
 
     public void LoadGoogleads()
     {
-        LoadRewardedAd();
-        LoadLoadInterstitialAd();
-        LoadBanner();
         if (AdManager.Instance.appopenshow == "true")
         {
             LoadAppOpenAd();
         }
 
+        LoadRewardedAd();
+        LoadLoadInterstitialAd();
+        LoadBanner();
     }
 
     #region Banner
@@ -82,10 +87,7 @@ public class GoogleAdMob : MonoBehaviour
         }
         else
         {
-            if (BannerReady)
-            {
-                return;
-            }
+            BannerReady = false;
             // create an instance of a banner view first.
             if (_bannerView == null)
             {
@@ -107,26 +109,11 @@ public class GoogleAdMob : MonoBehaviour
         Debug.Log("Creating banner view");
 
         // If we already have a banner, destroy the old one.
-        if (_bannerView != null)
-        {
-            DestroyBannerView();
-        }
+
         // Create a 320x50 banner at top of the screen
         _bannerView = new BannerView(GoogleBannerid, AdSize.Banner, AdPosition.Bottom);
     }
-    public void DestroyBannerView()
-    {
-        if (_bannerView != null)
-        {
-            Debug.Log("Destroying banner view.");
-            _bannerView.Destroy();
-            _bannerView = null;
-        }
-    }
 
-    /// <summary>
-    /// listen to events the banner view may raise.
-    /// </summary>
     private void ListenToAdEvents()
     {
         // Raised when an ad is loaded into the banner view.
@@ -134,15 +121,24 @@ public class GoogleAdMob : MonoBehaviour
         {
             BannerReady = true;
             Debug.Log("Banner view loaded an ad with response : "
-                + _bannerView.GetResponseInfo());
+                      + _bannerView.GetResponseInfo());
         };
         // Raised when an ad fails to load into the banner view.
         _bannerView.OnBannerAdLoadFailed += (LoadAdError error) =>
         {
             BannerReady = false;
             Debug.LogError("Banner view failed to load an ad with error : "
-                + error);
-            StartCoroutine(loadbanner());
+                           + error);
+            if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
+            {
+                Debug.LogWarning("Google failed and FB request");
+                StartCoroutine(loadfacebookbanner());
+            }
+            else if (AdManager.Instance.Adtype == "3" || AdManager.Instance.Adtype == "4")
+            {
+                Debug.LogWarning("Google failed and unity request");
+                StartCoroutine(loadunitybanner());
+            }
         };
         // Raised when the ad is estimated to have earned money.
         _bannerView.OnAdPaid += (AdValue adValue) =>
@@ -152,39 +148,28 @@ public class GoogleAdMob : MonoBehaviour
                 adValue.CurrencyCode));
         };
         // Raised when an impression is recorded for an ad.
-        _bannerView.OnAdImpressionRecorded += () =>
-        {
-            Debug.Log("Banner view recorded an impression.");
-        };
+        _bannerView.OnAdImpressionRecorded += () => { Debug.Log("Banner view recorded an impression."); };
         // Raised when a click is recorded for an ad.
-        _bannerView.OnAdClicked += () =>
-        {
-            Debug.Log("Banner view was clicked.");
-        };
+        _bannerView.OnAdClicked += () => { Debug.Log("Banner view was clicked."); };
         // Raised when an ad opened full screen content.
-        _bannerView.OnAdFullScreenContentOpened += () =>
-        {
-            Debug.Log("Banner view full screen content opened.");
-        };
+        _bannerView.OnAdFullScreenContentOpened += () => { Debug.Log("Banner view full screen content opened."); };
         // Raised when the ad closed full screen content.
-        _bannerView.OnAdFullScreenContentClosed += () =>
-        {
-            BannerReady = false;
-            Debug.Log("Banner view full screen content closed.");
-        };
+        _bannerView.OnAdFullScreenContentClosed += () => { Debug.Log("Banner view full screen content closed."); };
     }
 
-    IEnumerator loadbanner()
+    IEnumerator loadfacebookbanner()
     {
         yield return new WaitForSeconds(3);
-        if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
-        {
+        
+        if(!FBAdManager.Instash.FBBannerLoaded)
             FBAdManager.Instash.LoadBanner();
-        }
-        else if (AdManager.Instance.Adtype == "3" || AdManager.Instance.Adtype == "4")
-        {
-            UnityBannermanager.instance.LoadBanner();
-        }
+    }
+    IEnumerator loadunitybanner()
+    {
+        yield return new WaitForSeconds(3);
+        Debug.LogWarning("loadunitybanner is run");
+        if(!UnityManager.Instance.UnityBannerLoaded)
+            UnityManager.Instance.LoadBanner();
     }
 
     #endregion
@@ -202,8 +187,8 @@ public class GoogleAdMob : MonoBehaviour
             _rewardedAd = null;
         }
 
-
-
+       
+        
 
         Debug.Log("Loading the rewarded ad.");
 
@@ -221,9 +206,17 @@ public class GoogleAdMob : MonoBehaviour
                     Debug.LogError("Rewarded ad failed to load an ad " +
                                    "with error : " + error);
                     RewadReady = false;
-
-
-                    StartCoroutine(LoadReward());
+                    
+                    if ((AdManager.Instance.Adtype == "3" || AdManager.Instance.Adtype == "4"))
+                    {
+                        Debug.LogWarning("Google reward failed StartCoroutine(LoadUnityReward())");
+                        StartCoroutine(LoadUnityReward());
+                    }
+                    else if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
+                    {
+                        Debug.LogWarning("Google reward failed StartCoroutine(LoadFacebokk())");
+                        StartCoroutine(LoadFacebokk());
+                    }
                     return;
                 }
 
@@ -261,14 +254,14 @@ public class GoogleAdMob : MonoBehaviour
         // Raised when an impression is recorded for an ad.
         ad.OnAdImpressionRecorded += () =>
         {
-
-
+          
+           
             Debug.Log("Rewarded ad recorded an impression.");
         };
         // Raised when a click is recorded for an ad.
         ad.OnAdClicked += () =>
         {
-
+          
 
             Debug.Log("Rewarded ad was clicked.");
         };
@@ -277,37 +270,34 @@ public class GoogleAdMob : MonoBehaviour
         // Raised when the ad closed full screen content.
         ad.OnAdFullScreenContentClosed += () =>
         {
-
-
+         
+      
             StartCoroutine(callappopentrue());
             RewadReady = false;
-
             if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "3")
             {
+                Debug.LogWarning("Google reward LoadRewardedAd();");
                 LoadRewardedAd();
             }
             else if (AdManager.Instance.Adtype == "2")
             {
+                Debug.LogWarning("Google reward FBAdManager.Instash.LoadRewardedVideo();");
                 FBAdManager.Instash.LoadRewardedVideo();
             }
             else if (AdManager.Instance.Adtype == "4")
             {
-                UnityRewardManager.instance.LoadAd();
+                Debug.LogWarning("Google reward UnityManager.Instance.LoadRewardedVideo();");
+                UnityManager.Instance.LoadRewardedVideo();
             }
+
             Debug.Log("Rewarded ad full screen content closed.");
         };
         // Raised when the ad failed to open full screen content.
         ad.OnAdFullScreenContentFailed += (AdError error) =>
         {
+            
+            
             RewadReady = false;
-            if (Application.internetReachability == NetworkReachability.NotReachable)
-            {
-                Toast.Show("Oops! Your device is not connected to the internet. Please connect and try again.");
-            }
-            else
-            {
-                Toast.Show("We apologize, but there are no ads ready to be played right now. Please try again later.");
-            }
             StartCoroutine(LoadRewadsfail());
             Debug.LogError("Rewarded ad failed to open full screen content " +
                            "with error : " + error);
@@ -321,18 +311,16 @@ public class GoogleAdMob : MonoBehaviour
         LoadRewardedAd();
     }
 
-    IEnumerator LoadReward()
+    IEnumerator LoadFacebokk()
     {
         yield return new WaitForSeconds(3);
-
-        if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
-        {
-            FBAdManager.Instash.LoadRewardedVideo();
-        }
-        else if (AdManager.Instance.Adtype == "3" || AdManager.Instance.Adtype == "4")
-        {
-            UnityRewardManager.instance.LoadAd();
-        }
+        FBAdManager.Instash.LoadRewardedVideo();
+    }
+    IEnumerator LoadUnityReward()
+    {
+        yield return new WaitForSeconds(3);
+        Debug.LogWarning("Google UnityManager.Instance.LoadRewardedVideo()");
+        UnityManager.Instance.LoadRewardedVideo();
     }
 
 
@@ -356,8 +344,8 @@ public class GoogleAdMob : MonoBehaviour
             _interstitialAd = null;
         }
 
-
-
+     
+     
         Debug.Log("Loading the interstitial ad.");
 
         // create our request used to load the ad.
@@ -375,7 +363,16 @@ public class GoogleAdMob : MonoBehaviour
                     InterReady = false;
 
 
-                    StartCoroutine(Loadinter());
+                    if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
+                    {
+                        Debug.LogWarning("call google fail  LoadFacebokkinter()");
+                        StartCoroutine(LoadFacebokkinter());
+                    }
+                    else if (AdManager.Instance.Adtype == "3" || AdManager.Instance.Adtype == "4")
+                    {
+                        Debug.LogWarning("call google fail LoadUnityinter()");
+                        StartCoroutine(LoadUnityinter());
+                    }
                     return;
                 }
 
@@ -411,13 +408,13 @@ public class GoogleAdMob : MonoBehaviour
         // Raised when an impression is recorded for an ad.
         interstitialAd.OnAdImpressionRecorded += () =>
         {
-
+           
             Debug.Log("Interstitial ad recorded an impression.");
         };
         // Raised when a click is recorded for an ad.
         interstitialAd.OnAdClicked += () =>
         {
-
+           
             Debug.Log("Interstitial ad was clicked.");
         };
         // Raised when an ad opened full screen content.
@@ -428,31 +425,34 @@ public class GoogleAdMob : MonoBehaviour
         // Raised when the ad closed full screen content.
         interstitialAd.OnAdFullScreenContentClosed += () =>
         {
+           
             StartCoroutine(callappopentrue());
             InterReady = false;
             if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "3")
             {
+                Debug.LogWarning("Google inter close LoadLoadInterstitialAd()");
                 LoadLoadInterstitialAd();
             }
             else if (AdManager.Instance.Adtype == "2")
             {
+                Debug.LogWarning("Google inter close FBAdManager.Instash.LoadInterstitial()");
                 FBAdManager.Instash.LoadInterstitial();
             }
             else if (AdManager.Instance.Adtype == "4")
             {
-                UnityInterstialManager.instance.LoadAd();
+                Debug.LogWarning("Google inter close UnityManager.Instance.LoadInterstitialAd()");
+                UnityManager.Instance.LoadInterstitialAd();
             }
-            AdManager.Instance.CloseInterstitial();
+
             Debug.Log("Interstitial ad full screen content closed.");
         };
         // Raised when the ad failed to open full screen content.
         interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
             InterReady = false;
-            AdManager.Instance.CloseInterstitial();
             StartCoroutine(LoadIntersialfail());
-
-
+           
+           
             Debug.LogError("Interstitial ad failed to open full screen content " +
                            "with error : " + error);
         };
@@ -465,17 +465,17 @@ public class GoogleAdMob : MonoBehaviour
         LoadLoadInterstitialAd();
     }
 
-    IEnumerator Loadinter()
+    IEnumerator LoadFacebokkinter()
     {
         yield return new WaitForSeconds(3);
-        if (AdManager.Instance.Adtype == "1" || AdManager.Instance.Adtype == "2")
-        {
-            FBAdManager.Instash.LoadInterstitial();
-        }
-        else if (AdManager.Instance.Adtype == "3" || AdManager.Instance.Adtype == "4")
-        {
-            UnityInterstialManager.instance.LoadAd();
-        }
+        FBAdManager.Instash.LoadInterstitial();
+    }
+    
+    IEnumerator LoadUnityinter()
+    {
+        yield return new WaitForSeconds(3);
+        Debug.LogWarning("Google UnityManager.Instance.LoadInterstitialAd()");
+        UnityManager.Instance.LoadInterstitialAd();
     }
 
     #endregion
@@ -513,6 +513,7 @@ public class GoogleAdMob : MonoBehaviour
                 // if error is not null, the load request failed.
                 if (error != null || ad == null)
                 {
+                    AppOpenReady = false;
                     Debug.LogError("app open ad failed to load an ad " +
                                    "with error : " + error);
                     StartCoroutine(LoadAppopenfail());
@@ -554,6 +555,7 @@ public class GoogleAdMob : MonoBehaviour
         // Raised when the ad closed full screen content.
         ad.OnAdFullScreenContentClosed += () =>
         {
+            AppOpenReady = false;
             Debug.Log("App open ad full screen content closed.");
             StartCoroutine(callappopentrue());
             LoadAppOpenAd();
@@ -561,9 +563,9 @@ public class GoogleAdMob : MonoBehaviour
         // Raised when the ad failed to open full screen content.
         ad.OnAdFullScreenContentFailed += (AdError error) =>
         {
+            AppOpenReady = false;
             Debug.LogError("App open ad failed to open full screen content " +
                            "with error : " + error);
-            AdManager.Instance.ConfirmInter();
             StartCoroutine(LoadAppopenfail());
         };
     }
@@ -580,10 +582,12 @@ public class GoogleAdMob : MonoBehaviour
         // if the app is Foregrounded and the ad is available, show it.
         if (state == AppState.Foreground)
         {
-            if (IsAdAvailable)
+            if (AdManager.Instance.appopenshow == "true")
             {
-                if (AdManager.Instance.PreLoad.ToLower() == "true" && AdManager.Instance.showaAd.ToLower() == "true" && AdManager.Instance.appopenshow.ToLower() == "true")
+                if(AppOpenReady)
                     ShowAppOpenAd();
+                else
+                    AdManager.Instance.ConfirmInter();
             }
         }
     }

@@ -242,7 +242,7 @@ namespace Game
 			{
 				return;
 			}
-			if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			if (GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
 			{
 				AdManager.Instance.ConfirmInter();
 			}
@@ -276,7 +276,7 @@ namespace Game
 				return;
 			}
 
-			if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			if (GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
 			{
 				AdManager.Instance.ConfirmInter();
 			}
@@ -310,7 +310,7 @@ namespace Game
 				return;
 			}
 
-			if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+			if (GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
 			{
 				AdManager.Instance.ConfirmInter();
 			}
@@ -1074,7 +1074,8 @@ namespace Game
 			int numExtraWordsFound = level.levelSaveData.extraWords;
 			if (level.levelData.GameLevelNumber == 5 || level.levelData.GameLevelNumber == 7 || level.levelData.GameLevelNumber == 10 || level.levelData.GameLevelNumber == 13)
 			{
-				InAppReview.Instance.OpenPopup();
+				if(AdManager.Instance.isReviewShow.ToLower() == "true")
+                	InAppReview.Instance.OpenPopup();
 			}
 			// Set the last completed level number, make sure it's the max if the player replayed a level
 			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
@@ -1179,7 +1180,7 @@ namespace Game
 			WordNexus_Pop_upManager.Instance.Show("level_complete", popupInData, OnLevelCompletePopupClosed);
 			if (AdManager.Instance.Winfailads.ToLower() == "true")
 			{
-				if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+				if (GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
 				{
 					AdManager.Instance.ConfirmInter();
 				}

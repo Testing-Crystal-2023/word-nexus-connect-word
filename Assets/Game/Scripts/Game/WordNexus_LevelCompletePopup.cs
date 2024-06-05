@@ -117,7 +117,7 @@ namespace Game
 			Hide(false, new object[] { PlayNextAction });
 			if (AdManager.Instance.Wingetbutton.ToLower() == "true")
 			{
-				if (GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
+				if (GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
 				{
 					AdManager.Instance.ConfirmInter();
 				}

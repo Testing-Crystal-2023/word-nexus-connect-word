@@ -1,8 +1,8 @@
-using Google.Play.Review;
 using System.Collections;
 using Game;
 using TMPro;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.UI;
 
 public class InAppReview : MonoBehaviour
@@ -13,9 +13,6 @@ public class InAppReview : MonoBehaviour
     public Sprite FullstarImage;
     public Sprite BlankstarImage;
     int Count;
-
-    ReviewManager _reviewManager;
-    PlayReviewInfo _playReviewInfo;
 
     public TextMeshProUGUI InAppReviewTitle;
     public TextMeshProUGUI InAppReviewDesc;
@@ -54,7 +51,7 @@ public class InAppReview : MonoBehaviour
         {
             WordNexus_GameController.Instance.GiveCoins(int.Parse(AdManager.Instance.review_reward));
             //Debug.LogError(GlobalValues.Coins);
-            StartCoroutine(ReviewRequest());
+            SetReview();
             Count = 0;
             cancel();
         }
@@ -68,30 +65,13 @@ public class InAppReview : MonoBehaviour
     public void cancel()
     {
         InAppReviewPopup.SetActive(false);
-    }
-    IEnumerator ReviewRequest()
+    } 
+    public void SetReview()
     {
+        Device.RequestStoreReview();
         int count = PlayerPrefs.GetInt("ReviewApplyComplete", 0);
         count += 1;
-        PlayerPrefs.SetInt("ReviewApplyComplete", count);
-        _reviewManager = new ReviewManager();
-        var requestFlowOperation = _reviewManager.RequestReviewFlow();
-        yield return requestFlowOperation;
-        if (requestFlowOperation.Error != ReviewErrorCode.NoError)
-        {
-            // Log error. For example, using requestFlowOperation.Error.ToString().
-            yield break;
-        }
-        _playReviewInfo = requestFlowOperation.GetResult();
-
-        var launchFlowOperation = _reviewManager.LaunchReviewFlow(_playReviewInfo);
-        yield return launchFlowOperation;
-        _playReviewInfo = null; // Reset the object
-        if (launchFlowOperation.Error != ReviewErrorCode.NoError)
-        {
-            // Log error. For example, using requestFlowOperation.Error.ToString().
-            yield break;
-        }
+        PlayerPrefs.SetInt("ReviewApplyComplete", count); 
     }
 
     public void OpenPopup()
@@ -106,7 +86,7 @@ public class InAppReview : MonoBehaviour
         else
         {
 
-            StartCoroutine(ReviewRequest());
+            SetReview();
         }
 
     }

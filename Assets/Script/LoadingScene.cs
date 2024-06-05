@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Google.Play.Review;
 using TMPro;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -43,10 +43,6 @@ public class LoadingScene : MonoBehaviour
 
     public GameObject[] Star;
 
-    private ReviewManager _reviewManager;
-
-    private PlayReviewInfo _playReviewInfo;
-
     public GameObject PopUpReview;
 
 
@@ -64,7 +60,6 @@ public class LoadingScene : MonoBehaviour
 
     private void Start()
     {
-        _reviewManager = new ReviewManager();
         Invoke("OnReviewPop", 5.5f);
     }
 
@@ -103,43 +98,20 @@ public class LoadingScene : MonoBehaviour
                     LoadAds();
                 }
             }
-
-            if (!AdManager.VapnIsOn)
+            if (PreLoad == "true" && Internet || PreLoad == "false" && Internet)
             {
-                if (PreLoad == "true" && Internet || PreLoad == "false" && Internet)
+                if (GoogleAdMob.Instash.InterReady || FBAdManager.Instash.FBInterLoaded || Dar >= 15 ||
+                    PreLoad == "false" || showaAd == "false")
                 {
-                    if (GoogleAdMob.Instash.InterReady || FBAdManager.Instash.FBInterLoaded || Dar >= 15 ||
-                        PreLoad == "false" || showaAd == "false")
-                    {
-                        Call = true;
-                    }
-
-                    if (Call && solwe)
-                    {
-                        solwe = false;
-                        Call = false;
-                        cooldown.fillAmount = 1;
-                        StartCoroutine(DoSomething());
-                    }
+                    Call = true;
                 }
-            }
-            else if (AdManager.VapnIsOn)
-            {
-                if (PreLoad == "true" && Internet || PreLoad == "false" && Internet)
-                {
-                    if (GoogleAdMob.Instash.InterReady || FBAdManager.Instash.FBInterLoaded || Dar >= 15 ||
-                        PreLoad == "false" || showaAd == "false")
-                    {
-                        Call = true;
-                    }
 
-                    if (Call && solwe)
-                    {
-                        solwe = false;
-                        Call = false;
-                        cooldown.fillAmount = 1;
-                        StartCoroutine(DoSomething());
-                    }
+                if (Call && solwe)
+                {
+                    solwe = false;
+                    Call = false;
+                    cooldown.fillAmount = 1;
+                    StartCoroutine(DoSomething());
                 }
             }
         }
@@ -188,7 +160,7 @@ public class LoadingScene : MonoBehaviour
     {
         if (AdManager.Instance.Qureka_ads_status.ToLower() == "false")
         {
-            if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded)
+            if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded)
             {
                 AdManager.Instance.ConfirmInter();
             }
@@ -247,12 +219,7 @@ public class LoadingScene : MonoBehaviour
             {
                 GoogleAdMob.Instash.LoadAppOpenAd();
             }
-            Debug.Log(UnityInterstialManager.instance._androidAdUnitId);
-            Debug.Log(UnityRewardManager.instance._androidAdUnitId);
-            Debug.Log(UnityBannermanager.instance._androidAdUnitId);
-            UnityBannermanager.instance.LoadBanner();
-            UnityRewardManager.instance.LoadAd();
-            UnityInterstialManager.instance.LoadAd();
+            UnityManager.Instance.LoadUnityads();
 
         }
     }
@@ -286,12 +253,12 @@ public class LoadingScene : MonoBehaviour
             if (ReviewType == "true")
             {
                 Time.timeScale = 1;
-                StartCoroutine(ShowIngamepopup());
+    //             SetReview();
             }
             else
             {
                 Time.timeScale = 1;
-                Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
+                Application.OpenURL("https://apps.apple.com/app/id6503903776");
             }
         }
     }
@@ -301,33 +268,12 @@ public class LoadingScene : MonoBehaviour
         PopUpReview.SetActive(false);
     }
 
-    IEnumerator ShowIngamepopup()
+    public void SetReview()
     {
-        var requestFlowoption = _reviewManager.RequestReviewFlow();
-        Time.timeScale = 1;
-        yield return requestFlowoption;
-
-        if (requestFlowoption.Error != ReviewErrorCode.NoError)
-        {
-            Time.timeScale = 1;
-            yield break;
-        }
-
-        _playReviewInfo = requestFlowoption.GetResult();
-
-        ///////////////////////////////////////////////////////////////////////////////////////////
-
-
-        var launchFlowOperation = _reviewManager.LaunchReviewFlow(_playReviewInfo);
-        Time.timeScale = 1;
-        yield return launchFlowOperation;
-        _playReviewInfo = null; // Reset the object
-        if (launchFlowOperation.Error != ReviewErrorCode.NoError)
-        {
-            Time.timeScale = 1;
-            // Log error. For example, using requestFlowOperation.Error.ToString().
-            yield break;
-        }
+        Device.RequestStoreReview();
+        int count = PlayerPrefs.GetInt("ReviewApplyComplete", 0);
+        count += 1;
+        PlayerPrefs.SetInt("ReviewApplyComplete", count);
     }
 
     public void Logreview(string review)

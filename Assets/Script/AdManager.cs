@@ -70,9 +70,7 @@ public class AdManager : MonoBehaviour
 
 
     public string Adtype;
-
-    public static bool VapnIsOn;
-    public string AppPopUp,walletData;
+    public string AppPopUp, walletData;
     public string WalletUnlockValue;
     public string dollarSine;
     public string showaAd;
@@ -99,11 +97,10 @@ public class AdManager : MonoBehaviour
     public List<Sprite> interSprites;
     public List<Sprite> rewardSprites;
     public List<string> gifUrls;
-    public string review_star_setup, review_title, review_reward, review_desc, minimumWithdrawal, transactionMinuteForTransferFeesFlow, transferFees, isTransferFeesFix;
+    public string review_star_setup, review_title, review_reward, review_desc, minimumWithdrawal, transactionMinuteForTransferFeesFlow, transferFees, isTransferFeesFix,isReviewShow;
     public NewQurekaData jsnData;
     private void Awake()
     {
-        Application.runInBackground = false;
         if (Instance == null)
         {
             Instance = this;
@@ -182,14 +179,14 @@ public class AdManager : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-    
+
     public void RedirectGame()
     {
         Application.OpenURL(Game_Redirect_ButtonURL);
     }
     public void UpdateGame()
     {
-        Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
+        Application.OpenURL("https://apps.apple.com/app/id6503903776");
     }
     public void CloseRedirect()
     {
@@ -388,50 +385,71 @@ public class AdManager : MonoBehaviour
                     }
                     else if (Adtype == "3" && canshowInter)
                     {
+                        Debug.LogWarning("Adtype = 3");
                         if (GoogleAdMob.Instash.InterReady)
                         {
+                            Debug.LogWarning("Adtype = 3 & GoogleAdMob.Instash.InterReady");
                             GoogleAdMob.Instash.ShowInterstitialAd();
                         }
-                        else if (UnityInterstialManager.instance.InterLoaded)
+                        else if (UnityManager.Instance.UnityInterLoaded)
                         {
-                            UnityInterstialManager.instance.ShowAd();
+                            Debug.LogWarning("Adtype = 3 & UnityManager.Instance.UnityInterLoaded");
+                            Debug.LogWarning("Show unity ads");
+                            UnityManager.Instance.ShowInterstitialAd();
                         }
+
+
                         ResetTimer();
                     }
                     else if (Adtype == "4" && canshowInter)
                     {
-                        if (UnityInterstialManager.instance.InterLoaded)
+                        Debug.LogWarning("Adtype = 4");
+                        if (UnityManager.Instance.UnityInterLoaded)
                         {
-                            UnityInterstialManager.instance.ShowAd();
+                            Debug.LogWarning("Adtype = 4 & UnityManager.Instance.UnityInterLoaded");
+                            Debug.LogWarning("Show unity ads");
+                            UnityManager.Instance.ShowInterstitialAd();
                         }
                         else if (GoogleAdMob.Instash.InterReady)
                         {
+                            Debug.LogWarning("Adtype = 4 & GoogleAdMob.Instash.InterReady");
                             GoogleAdMob.Instash.ShowInterstitialAd();
                         }
+
+
                         ResetTimer();
                     }
                     else if (Adtype == "5" && canshowInter)
                     {
+                        Debug.LogWarning("Adtype = 5");
                         if (FBAdManager.Instash.FBInterLoaded)
                         {
                             FBAdManager.Instash.ShowInterstitial();
                         }
-                        else if (UnityInterstialManager.instance.InterLoaded)
+                        else if (UnityManager.Instance.UnityInterLoaded)
                         {
-                            UnityInterstialManager.instance.ShowAd();
+                            Debug.LogWarning("Adtype = 5 & UnityManager.Instance.UnityInterLoaded");
+                            Debug.LogWarning("Show unity ads");
+                            UnityManager.Instance.ShowInterstitialAd();
                         }
+
                         ResetTimer();
                     }
                     else if (Adtype == "6" && canshowInter)
                     {
-                        if (UnityInterstialManager.instance.InterLoaded)
+                        Debug.LogWarning("Adtype = 6");
+                        if (UnityManager.Instance.UnityInterLoaded)
                         {
-                            UnityInterstialManager.instance.ShowAd();
+                            Debug.LogWarning("Adtype = 6 & UnityManager.Instance.UnityInterLoaded");
+                            Debug.LogWarning("Show unity ads");
+                            UnityManager.Instance.ShowInterstitialAd();
                         }
                         else if (FBAdManager.Instash.FBInterLoaded)
                         {
                             FBAdManager.Instash.ShowInterstitial();
                         }
+
+
                         ResetTimer();
                     }
                 }
@@ -482,11 +500,13 @@ public class AdManager : MonoBehaviour
                     {
                         if (GoogleAdMob.Instash.RewadReady)
                         {
+                            Debug.LogWarning("Adtype = 3 & GoogleAdMob.Instash.RewadReady");
                             GoogleAdMob.Instash.ShowRewardedAd(rt);
                         }
-                        else if (UnityRewardManager.instance.RewardLoaded)
+                        else if (UnityManager.Instance.UnityRewardLoaded)
                         {
-                            UnityRewardManager.instance.ShowAd();
+                            Debug.LogWarning("Adtype = 3 & UnityManager.Instance.UnityInterLoaded");
+                            UnityManager.Instance.ShowRewardedVideo();
                         }
                         else
                         {
@@ -495,12 +515,14 @@ public class AdManager : MonoBehaviour
                     }
                     else if (Adtype == "4")
                     {
-                        if (UnityRewardManager.instance.RewardLoaded)
+                        if (UnityManager.Instance.UnityRewardLoaded)
                         {
-                            UnityRewardManager.instance.ShowAd();
+                            Debug.LogWarning("Adtype = 4 & UnityManager.Instance.UnityInterLoaded");
+                            UnityManager.Instance.ShowRewardedVideo();
                         }
                         else if (GoogleAdMob.Instash.RewadReady)
                         {
+                            Debug.LogWarning("Adtype = 4 & GoogleAdMob.Instash.RewadReady");
                             GoogleAdMob.Instash.ShowRewardedAd(rt);
                         }
                         else
@@ -510,13 +532,15 @@ public class AdManager : MonoBehaviour
                     }
                     else if (Adtype == "5")
                     {
+
                         if (FBAdManager.Instash.FBRewadLoaded)
                         {
                             FBAdManager.Instash.ShowRewardedVideo(rt);
                         }
-                        else if (UnityRewardManager.instance.RewardLoaded)
+                        else if (UnityManager.Instance.UnityRewardLoaded)
                         {
-                            UnityRewardManager.instance.ShowAd();
+                            Debug.Log("Adtype = 5 & UnityManager.Instance.UnityInterLoaded");
+                            UnityManager.Instance.ShowRewardedVideo();
                         }
                         else
                         {
@@ -525,9 +549,10 @@ public class AdManager : MonoBehaviour
                     }
                     else if (Adtype == "6")
                     {
-                        if (UnityRewardManager.instance.RewardLoaded)
+                        if (UnityManager.Instance.UnityRewardLoaded)
                         {
-                            UnityRewardManager.instance.ShowAd();
+                            Debug.Log("Adtype = 6 & UnityManager.Instance.UnityInterLoaded");
+                            UnityManager.Instance.ShowRewardedVideo();
                         }
                         else if (FBAdManager.Instash.FBRewadLoaded)
                         {

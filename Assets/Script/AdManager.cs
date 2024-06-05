@@ -26,7 +26,7 @@ public class QurekaData
 public class AdManager : MonoBehaviour
 {
     public static AdManager Instance;
-    public string WebviewURL,
+    public string WebviewURL,isReviewShow,
                 UPI_WEBVIEW_AMOUNT,
                 transactionMinuteForUPIFlow,
                 minimumWithdrawal_UPI_Flow,
@@ -297,7 +297,7 @@ public class AdManager : MonoBehaviour
         if (coinReward)
         {
             int animateFromCoins = WordNexus_GameController.Instance.Coins;
-            WordNexus_GameController.Instance.GiveCoins(100, false);
+            WordNexus_GameController.Instance.GiveCoins(100);
             int animateToCoins = WordNexus_GameController.Instance.Coins;
             WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { 100, animateFromCoins, animateToCoins });
         }
@@ -309,7 +309,7 @@ public class AdManager : MonoBehaviour
         if (coinReward)
         {
             int animateFromCoins = WordNexus_GameController.Instance.Coins;
-            WordNexus_GameController.Instance.GiveCoins(100, false);
+            WordNexus_GameController.Instance.GiveCoins(100);
             int animateToCoins = WordNexus_GameController.Instance.Coins;
             WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { 100, animateFromCoins, animateToCoins });
         }

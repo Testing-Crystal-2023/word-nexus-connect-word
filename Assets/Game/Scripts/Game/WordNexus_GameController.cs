@@ -20,7 +20,7 @@ namespace Game
 		[Space]
 		[SerializeField] private string saveFileName = "save";
 		[SerializeField] private TextAsset wordFile = null;
-		[SerializeField] private int coinsToStart = 500;
+		[SerializeField] private int coinsToStart = 100;
 		[SerializeField] private int coinsMultiplier = 1;
 		[SerializeField] private int coinCostPerHint = 10;
 		[SerializeField] private int coinCostPerTargetHint = 25;
@@ -381,13 +381,8 @@ namespace Game
 		/// <summary>
 		/// Gives the coins.
 		/// </summary>
-		public void GiveCoins(int coins, bool applyMultiplier = true)
+		public void GiveCoins(int coins)
 		{
-			if (applyMultiplier)
-			{
-				coins *= coinsMultiplier;
-			}
-
 			Coins += coins;
 		}
 		/// <summary>
@@ -634,7 +629,7 @@ namespace Game
 
 			// Award any coins that can be awarded
 			//AwardCoins(level, levelWordData);
-			Debug.LogError("FoundWord");
+			// Debug.LogError("FoundWord");
 			// Check if the level is complete
 			if (IsBoardComplete(level))
 			{
@@ -1053,7 +1048,7 @@ namespace Game
 					wordBoardList.ShowLetterForHint(levelWordData, letterIndex);
 					break;
 			}
-			Debug.LogError("ShowLetterForHint");
+			// Debug.LogError("ShowLetterForHint");
 			// Check if the level is now complete after placing the hint
 			if (IsBoardComplete(level))
 			{
@@ -1077,19 +1072,19 @@ namespace Game
 				InAppReview.Instance.OpenPopup();
 			}
 			// Set the last completed level number, make sure it's the max if the player replayed a level
-			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
-			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
+			// Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+			// Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
 			if (level.levelData.GameLevelNumber < LastCompletedLevelNumber && LastCompletedLevelNumber >= 1164)
 			{
-				Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+				// Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 				LastCompletedLevelNumber += 1;
 			}
 			else
 			{
 				LastCompletedLevelNumber = Mathf.Max(LastCompletedLevelNumber, level.levelData.GameLevelNumber);
 			}
-			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
-			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+			// Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
+			// Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 			// Remove the level save data since it's no longer needed (A new one will be created if the level is re-played)
 			levelSaveDatas.Remove(level.levelData.Id);
 
@@ -1322,10 +1317,10 @@ namespace Game
 			packInfo = packInfos[packIndex];
 			categoryInfo = packInfo.categoryInfos[categoryIndex];
 
-			Debug.LogError(packIndex);
-			Debug.LogError(packInfos[packIndex].packName);
-			Debug.LogError(categoryIndex);
-			Debug.LogError(packInfo.categoryInfos[categoryIndex].displayName);
+			// Debug.LogError(packIndex);
+			// Debug.LogError(packInfos[packIndex].packName);
+			// Debug.LogError(categoryIndex);
+			// Debug.LogError(packInfo.categoryInfos[categoryIndex].displayName);
 
 			return true;
 		}

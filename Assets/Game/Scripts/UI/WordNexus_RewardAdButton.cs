@@ -14,7 +14,7 @@ namespace Game
 	{
 		#region Inspector Variables
 
-		[SerializeField] private int coinsToReward;
+		int coinsToReward;
 		[SerializeField] private bool testMode;
 
 		#endregion
@@ -90,11 +90,12 @@ namespace Game
 
 		private void OnRewardAdGranted(string rewardId, double rewardAmount)
 		{
+			coinsToReward=UnityEngine.Random.Range(10,100);
 			// Get the current amount of coins
 			int animateFromCoins = WordNexus_GameController.Instance.Coins;
 
 			// Give the amount of coins
-			WordNexus_GameController.Instance.GiveCoins(coinsToReward, false);
+			WordNexus_GameController.Instance.GiveCoins(coinsToReward);
 
 			// Get the amount of coins now after giving them
 			int animateToCoins = WordNexus_GameController.Instance.Coins;

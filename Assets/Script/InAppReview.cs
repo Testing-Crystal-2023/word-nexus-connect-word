@@ -21,19 +21,19 @@ public class InAppReview : MonoBehaviour
     public TextMeshProUGUI InAppReviewDesc;
     private void Awake()
     {
-        if(Instance==null)
+        if (Instance == null)
             Instance = this;
     }
     public void StarClick(int Number)
     {
-        for(int i=0;i<Stars.Length;i++)
+        for (int i = 0; i < Stars.Length; i++)
         {
-            if(Stars[i].GetComponent<Image>().sprite == FullstarImage)
+            if (Stars[i].GetComponent<Image>().sprite == FullstarImage)
             {
                 Stars[i].GetComponent<Image>().sprite = BlankstarImage;
             }
         }
-        for(int i = 0; i < Number; i++)
+        for (int i = 0; i < Number; i++)
         {
             Stars[i].GetComponent<Image>().sprite = FullstarImage;
         }
@@ -60,9 +60,9 @@ public class InAppReview : MonoBehaviour
         }
         else
         {
-        print(Count);
-           cancel();
-           Count = 0;
+            print(Count);
+            cancel();
+            Count = 0;
         }
     }
     public void cancel()
@@ -96,18 +96,19 @@ public class InAppReview : MonoBehaviour
 
     public void OpenPopup()
     {
-        //print("come");
-        if (!PlayerPrefs.HasKey("ReviewApplyComplete"))
+        if (AdManager.Instance.isReviewShow.ToLower() == "true")
         {
-            InAppReviewPopup.SetActive(true);
-            InAppReviewTitle.text = AdManager.Instance.review_title;
-            InAppReviewDesc.text = AdManager.Instance.review_desc;
-        }
-        else
-        {
+            if (!PlayerPrefs.HasKey("ReviewApplyComplete"))
+            {
+                InAppReviewPopup.SetActive(true);
+                InAppReviewTitle.text = AdManager.Instance.review_title;
+                InAppReviewDesc.text = AdManager.Instance.review_desc;
+            }
+            else
+            {
 
-            StartCoroutine(ReviewRequest());
+                StartCoroutine(ReviewRequest());
+            }
         }
-
     }
 }

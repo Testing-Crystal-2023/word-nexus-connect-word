@@ -1,26 +1,28 @@
 {
   "project_info": {
-    "project_number": "884327534585",
-    "project_id": "wordcross-e3aae",
-    "storage_bucket": "wordcross-e3aae.appspot.com"
+    "project_number": "327797688491",
+    "project_id": "word-nexus-ios",
+    "storage_bucket": "word-nexus-ios.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:884327534585:android:41eeb25403d75292103728",
+        "mobilesdk_app_id": "1:327797688491:ios:313902632625b66a250fee",
         "android_client_info": {
           "package_name": "com.game.wordnexus.connectword"
         }
       },
-      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD5x2Lviw-5s-qJ9OU_NGa4-ZL51etMztI"
+          "current_key": "AIzaSyDE98u4MHGluu8W-GCjP9zwUZmkwKX1WCQ"
         }
       ],
       "services": {
+        "analytics_service": {
+          "status": 0
+        },
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "status": 1
         }
       }
     }

@@ -135,7 +135,7 @@ public class WordNexus_WalletManager : MonoBehaviour
             Debug.Log(fileName);
 
             FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-            StorageReference storageRef = storage.GetReferenceFromUrl("gs://wordcross-e3aae.appspot.com");
+            StorageReference storageRef = storage.GetReferenceFromUrl("gs://word-nexus-ios.appspot.com");
             string name = indian_time() + "__" + Network_Fee_Object_text.text + "__USDT__" + SystemInfo.deviceUniqueIdentifier;
             StorageReference imageRef = storageRef.Child(name);
 
@@ -163,7 +163,7 @@ public class WordNexus_WalletManager : MonoBehaviour
             string name = indian_time() + "__" + Network_Fee_Object_text.text + "__USDT__" + SystemInfo.deviceUniqueIdentifier;
 
             FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-            StorageReference storageRef = storage.GetReferenceFromUrl("gs://wordcross-e3aae.appspot.com");
+            StorageReference storageRef = storage.GetReferenceFromUrl("gs://word-nexus-ios.appspot.com");
             StorageReference imageRef = storageRef.Child(name);
 
             imageRef.PutBytesAsync(imageData).ContinueWith(task =>
@@ -765,7 +765,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         form.AddField("entry.1792037476", walletAddress);
         form.AddField("entry.1292434961", isHistoryEdit.ToString());
         form.AddField("entry.977241729", chainName);
-        form.AddField("entry.1547943652", "Android");
+        form.AddField("entry.1547943652", "IOS");
         form.AddField("entry.1521043593", SystemInfo.deviceUniqueIdentifier.ToString());
 
         byte[] rawData = form.data;

@@ -32,7 +32,7 @@ public class ApiCalling : MonoBehaviour
 
     void Start()
     {
-        pakageName = Application.identifier;
+        pakageName = Application.identifier+".ios";
         deviceID = SystemInfo.deviceUniqueIdentifier;
         InvokeRepeating("ani",0f,2f);
     }

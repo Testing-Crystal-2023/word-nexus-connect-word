@@ -217,7 +217,7 @@ public class WordNexus_WalletTransactionManager : MonoBehaviour
             }
             if (AdManager.Instance.Qureka_ads_status.ToLower() == "false")
             {
-                if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded)
+                if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady  || UnityInterstialManager.instance.InterLoaded)
                 {
                     AdManager.Instance.ConfirmInter();
                 }

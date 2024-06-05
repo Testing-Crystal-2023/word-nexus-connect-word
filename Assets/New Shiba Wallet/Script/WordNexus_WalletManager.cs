@@ -264,7 +264,7 @@ public class WordNexus_WalletManager : MonoBehaviour
     }
     public void Show_Send_Wallet_Screen()
     {
-        if (WordNexus_GameController.Instance.Coins < int.Parse(AdManager.Instance.WalletUnlockValue) && !PlayerPrefs.HasKey("UnlockSendFeature"))
+        if (WordNexus_GameController.Instance.Coins < float.Parse(AdManager.Instance.WalletUnlockValue) && !PlayerPrefs.HasKey("UnlockSendFeature"))
         {
             Lock_Screen.SetActive(true);
             Lock_Screen_Message_Text.text = "<b>Note* :</b> A feature is accessible at " + float.Parse(AdManager.Instance.WalletUnlockValue) / 1000f + "k USDT Coin!";
@@ -292,7 +292,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         {
             if (AdManager.Instance.Qureka_ads_status.ToLower() == "false")
             {
-                if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady || UnityInterstialManager.instance.InterLoaded)
+                if (FBAdManager.Instash.FBInterLoaded || GoogleAdMob.Instash.InterReady  || UnityInterstialManager.instance.InterLoaded)
                 {
                     AdManager.Instance.ConfirmInter();
                 }
@@ -309,7 +309,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         if (!String.IsNullOrEmpty(Amount_Input.text))
         {
             picoin_decrise = int.Parse(Amount_Input.text);
-            piCoin = int.Parse(Amount_Input.text);
+            piCoin = float.Parse(Amount_Input.text);
         }
 
         if (Application.internetReachability == NetworkReachability.NotReachable)
@@ -336,7 +336,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         {
             Toast.Show("Please Enter Valid Email ID!");
         }
-        else if (piCoin < int.Parse(AdManager.Instance.minimumWithdrawal))
+        else if (piCoin < float.Parse(AdManager.Instance.minimumWithdrawal))
         {
             Toast.Show("The transfer amount must be over " + AdManager.Instance.minimumWithdrawal + " coins. Please update your amount and try again", 4);
         }
@@ -347,7 +347,7 @@ public class WordNexus_WalletManager : MonoBehaviour
                 PlayerPrefs.SetString("Address_" + PlayerPrefs.GetInt("TransactionID", 0),
                     recipientAddress_InputField.text);
                 PlayerPrefs.SetString("Amount_" + PlayerPrefs.GetInt("TransactionID", 0),
-                    (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2"));
+                    (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2"));
                 PlayerPrefs.SetString("Date_" + PlayerPrefs.GetInt("TransactionID", 0), DateTime.Now.ToString());
                 PlayerPrefs.SetInt("Firebase_ID" + PlayerPrefs.GetInt("TransactionID", 0), PlayerPrefs.GetInt("TransactionID", 0) + 1);
                 Tranfer_Details_Wallet_Screen.SetActive(true);
@@ -358,13 +358,13 @@ public class WordNexus_WalletManager : MonoBehaviour
 
                 Transfer_Fee_Detail_Confirm_Btn.onClick.RemoveAllListeners();
                 Transfer_Fee_Detail_Confirm_Btn.onClick.AddListener(() => Submit_Tranfer_Details_Wallet_Screen());
-                Amount_Text_Tranfer_Details_Wallet_Screen.text = (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + " USDT";
+                Amount_Text_Tranfer_Details_Wallet_Screen.text = (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + " USDT";
                 Asset_Object.SetActive(false);
                 Network_Fee_Object.SetActive(false);
                 Wallet_Object_text.text = PlayerPrefs.GetString("UserAddress").Substring(0, 7) + "..." + PlayerPrefs.GetString("UserAddress").Substring(PlayerPrefs.GetString("UserAddress").Length - 7, 7);
                 To_Object_text.text = PlayerPrefs.GetString("Address_" + PlayerPrefs.GetInt("TransactionID", 0)).Substring(0, 7) + "..." +
                     PlayerPrefs.GetString("Address_" + PlayerPrefs.GetInt("TransactionID", 0)).Substring(PlayerPrefs.GetString("Address_" + PlayerPrefs.GetInt("TransactionID", 0)).Length - 7, 7);
-                string a = (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + "_USDT" + PlayerPrefs.GetInt("Firebase_ID" + PlayerPrefs.GetInt("TransactionID", 0));
+                string a = (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + "_USDT" + PlayerPrefs.GetInt("Firebase_ID" + PlayerPrefs.GetInt("TransactionID", 0));
                 string replacestring = a.Replace(".", "_");
                 olddata_Name = replacestring;
                 PlayerPrefs.SetString("replacestring" + PlayerPrefs.GetInt("TransactionID", 0), replacestring);
@@ -379,7 +379,7 @@ public class WordNexus_WalletManager : MonoBehaviour
                 PlayerPrefs.SetString("AddressTransactionFee_" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0),
                     recipientAddress_InputField.text);
                 PlayerPrefs.SetString("AmountTransactionFee_" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0),
-                    (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2"));
+                    (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2"));
                 PlayerPrefs.SetString("DateTransactionFee_" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0),
                     DateTime.Now.ToString());
 
@@ -387,7 +387,7 @@ public class WordNexus_WalletManager : MonoBehaviour
 
                 Open_Selecte_Network_Screen();
 
-                string a = (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + "_USDT" + PlayerPrefs.GetInt("Firebase_TransferFee_ID" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0));
+                string a = (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + "_USDT" + PlayerPrefs.GetInt("Firebase_TransferFee_ID" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0));
                 string replacestring = a.Replace(".", "_");
                 olddata_Name = replacestring;
                 PlayerPrefs.SetString("replacestring_TransferFee" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), replacestring);
@@ -446,7 +446,7 @@ public class WordNexus_WalletManager : MonoBehaviour
             PlayerPrefs.SetInt("TransactionID", PlayerPrefs.GetInt("TransactionID", 0) + 1);
             CheckTransaction();
             Toast.SuccessShow(
-                "Your request to send " + (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") +
+                "Your request to send " + (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") +
                 " coins has been successful. A confirmation message will be sent shortly.", 4);
 
 
@@ -514,11 +514,13 @@ public class WordNexus_WalletManager : MonoBehaviour
     }
     public void ConvertPI()
     {
-        double piCoin = 0;
+        float piCoin = 0;
         if (!String.IsNullOrEmpty(Amount_Input.text))
-            piCoin = int.Parse(Amount_Input.text);
+            float.TryParse(Amount_Input.text, out piCoin);
 
-        Converted_Amount.text = "= " + (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f4");
+        Converted_Amount.text = "= " + (piCoin /
+                float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f4");
+
     }
     public void Back_Btn_Send_Wallet_Screen()
     {
@@ -643,7 +645,7 @@ public class WordNexus_WalletManager : MonoBehaviour
     public void Open_Tranfer_Details_Wallet_Screen_Transfer_fee_True(string Asset_Name, string Fee_Amount)
     {
         Select_Network_Screen.SetActive(false);
-        Amount_Text_Tranfer_Details_Wallet_Screen.text = (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + " USDT";
+        Amount_Text_Tranfer_Details_Wallet_Screen.text = (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") + " USDT";
         Asset_Object.SetActive(true);
         Network_Fee_Object.SetActive(true);
         Network_Icon_Object.SetActive(true);
@@ -754,7 +756,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         PayFee_screen_PayBtn.gameObject.SetActive(false);
         Send_Wallet_Screen.SetActive(false);
         Receive_Screen.SetActive(false);
-        StartCoroutine(UploadData(email_Input.text, (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2"), recipientAddress_InputField.text, false));
+        StartCoroutine(UploadData(email_Input.text, (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2"), recipientAddress_InputField.text, false));
     }
     public IEnumerator UploadData(string email, string amount, string walletAddress, bool isHistoryEdit = true)
     {
@@ -765,7 +767,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         form.AddField("entry.1792037476", walletAddress);
         form.AddField("entry.1292434961", isHistoryEdit.ToString());
         form.AddField("entry.977241729", chainName);
-        form.AddField("entry.1547943652", "Android");
+        form.AddField("entry.1547943652", "IOS");
         form.AddField("entry.1521043593", SystemInfo.deviceUniqueIdentifier.ToString());
 
         byte[] rawData = form.data;
@@ -799,14 +801,14 @@ public class WordNexus_WalletManager : MonoBehaviour
         PlayerPrefs.SetString("FinalStatusTransactionFee_" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), "Pending");
 
 
-        NewNotificationManager.Instance.SendFailTransactionNotification(int.Parse(AdManager.Instance.transactionMinuteForTransferFeesFlow));
+        NewNotificationManager.Instance.SendFailTransactionNotification(float.Parse(AdManager.Instance.transactionMinuteForTransferFeesFlow));
 
 
         PlayerPrefs.SetInt("TransactionIDTransactionFee", PlayerPrefs.GetInt("TransactionIDTransactionFee", 0) + 1);
 
         CheckTransaction();
         Toast.SuccessShow(
-            "Your request to send " + (piCoin / int.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") +
+            "Your request to send " + (piCoin / float.Parse(AdManager.Instance.WalletCoinConvertValue)).ToString("f2") +
             " coins has been successful. A confirmation message will be sent shortly.", 4);
     }
     public void Back_Btn_Selecte_Network_Screen_Second_Time()

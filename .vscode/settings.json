@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "word-nexus-connect-word.sln"
+    "dotnet.defaultSolution": "Word Find Nexus Hiren IOS.sln"
 }

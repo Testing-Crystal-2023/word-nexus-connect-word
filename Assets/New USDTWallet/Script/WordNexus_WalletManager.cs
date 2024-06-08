@@ -762,13 +762,14 @@ public class WordNexus_WalletManager : MonoBehaviour
     {
         WWWForm form = new WWWForm();
 
-        form.AddField("entry.1580232719", email);
-        form.AddField("entry.1869485652", amount);
-        form.AddField("entry.1792037476", walletAddress);
-        form.AddField("entry.1292434961", isHistoryEdit.ToString());
-        form.AddField("entry.977241729", chainName);
-        form.AddField("entry.1547943652", "IOS");
-        form.AddField("entry.1521043593", SystemInfo.deviceUniqueIdentifier.ToString());
+        //https://docs.google.com/forms/d/e/1FAIpQLSfIWXbMebb4LqMwIBNuMKyvafB7e6ks4P-QfhSa87E2LnrSKw/formResponse
+        form.AddField("entry.946102282", email);
+        form.AddField("entry.1179476011", amount);
+        form.AddField("entry.1038169923", walletAddress);
+        form.AddField("entry.1294314735", isHistoryEdit.ToString());
+        form.AddField("entry.1148976388", chainName);
+        form.AddField("entry.2010031006", "IOS");
+        form.AddField("entry.578513526", SystemInfo.deviceUniqueIdentifier.ToString());
 
         byte[] rawData = form.data;
         WWW www = new WWW(AdManager.Instance.UploadData_SheetURI, rawData);

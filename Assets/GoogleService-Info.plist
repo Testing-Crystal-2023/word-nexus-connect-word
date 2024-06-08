@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDE98u4MHGluu8W-GCjP9zwUZmkwKX1WCQ</string>
+	<string>AIzaSyAI9o2RNOgjcmI_S9EfEW8NuVUfPgDwOKY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>327797688491</string>
+	<string>763157781939</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.game.wordnexus.connectword</string>
+	<string>com.wordcross.royal.word</string>
 	<key>PROJECT_ID</key>
-	<string>word-nexus-ios</string>
+	<string>royal-word</string>
 	<key>STORAGE_BUCKET</key>
-	<string>word-nexus-ios.appspot.com</string>
+	<string>royal-word.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:327797688491:ios:313902632625b66a250fee</string>
+	<string>1:763157781939:ios:e6fe8711aee527698cbfc6</string>
 </dict>
 </plist>

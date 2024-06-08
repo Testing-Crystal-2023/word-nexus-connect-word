@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "327797688491",
-    "project_id": "word-nexus-ios",
-    "storage_bucket": "word-nexus-ios.appspot.com"
+    "project_number": "763157781939",
+    "project_id": "royal-word",
+    "storage_bucket": "royal-word.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:327797688491:ios:313902632625b66a250fee",
+        "mobilesdk_app_id": "1:763157781939:ios:e6fe8711aee527698cbfc6",
         "android_client_info": {
-          "package_name": "com.game.wordnexus.connectword"
+          "package_name": "com.wordcross.royal.word"
         }
       },
       "api_key": [
         {
-          "current_key": "AIzaSyDE98u4MHGluu8W-GCjP9zwUZmkwKX1WCQ"
+          "current_key": "AIzaSyAI9o2RNOgjcmI_S9EfEW8NuVUfPgDwOKY"
         }
       ],
       "services": {

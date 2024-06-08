@@ -43,13 +43,17 @@ public class ApiCalling : MonoBehaviour
   }
   async void ani()
   {
-    loading.text = "Loading.";
+    if(loading!=null)
+      loading.text = "Loading.";
     await Task.Delay(500);
-    loading.text = "Loading..";
+    if(loading!=null)
+      loading.text = "Loading..";
     await Task.Delay(500);
-    loading.text = "Loading...";
+    if(loading!=null)
+      loading.text = "Loading...";
     await Task.Delay(500);
-    loading.text = "Loading..";
+    if(loading!=null)
+      loading.text = "Loading..";
     await Task.Delay(500);
   }
 

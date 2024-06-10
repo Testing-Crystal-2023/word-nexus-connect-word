@@ -529,6 +529,7 @@ public class ApiCalling : MonoBehaviour
     }
     AdManager.Instance.Popup();
     LoadingScene.instash.Setid();
+    StartCoroutine(GetData.instance.GetJsonData(AdManager.Instance.walletData));
   }
 
   private Dictionary<string, (double rate, string symbol)> currencyData = new Dictionary<string, (double, string)>

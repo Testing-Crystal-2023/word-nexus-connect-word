@@ -45,7 +45,7 @@ public class WordNexus_WithdrawManager : MonoBehaviour
     public void wallet_Close()
     {
         wallet.SetActive(false);
-        GameManager.Instance.coinTxt.text =WordNexus_GameController.Instance.Coins.ToString();
+        GameManager.Instance.coinTxt.text =RoyalWord_GameController.Instance.Coins.ToString();
         withdraw_Amount_Input.text = "";
     }
     public void History_close()
@@ -105,7 +105,7 @@ public class WordNexus_WithdrawManager : MonoBehaviour
         {
             wallet.SetActive(true);
             NoteText_Wallet.text = "Only if your withdrawal amount is more than " + AdManager.Instance.minimumWithdrawal_UPI_Flow + " you can withdraw otherwise not allowed";
-            availablebalancetxt.text = WordNexus_GameController.Instance.Coins + " <sprite name=\"Paisa\">";
+            availablebalancetxt.text = RoyalWord_GameController.Instance.Coins + " <sprite name=\"Paisa\">";
             NewWalletTransactionManager.instance.CheckTransaction();
             withdraw_Amount_Input.text = "";
         }
@@ -116,7 +116,7 @@ public class WordNexus_WithdrawManager : MonoBehaviour
         {
             Toast.Show("Please Enter Withdraw Amount");
         }
-        else if (int.Parse(withdraw_Amount_Input.text) > WordNexus_GameController.Instance.Coins)
+        else if (int.Parse(withdraw_Amount_Input.text) > RoyalWord_GameController.Instance.Coins)
         {
             Toast.Show("Insufficient coins in your wallet to initiate the transfer. Please collect more coins to proceed.", 4);
         }
@@ -124,7 +124,7 @@ public class WordNexus_WithdrawManager : MonoBehaviour
         {
             Toast.Show("The transfer amount must be over " + AdManager.Instance.minimumWithdrawal_UPI_Flow + " coins. Please update your amount and try again", 4);
         }
-        else if (int.Parse(withdraw_Amount_Input.text) <= WordNexus_GameController.Instance.Coins)
+        else if (int.Parse(withdraw_Amount_Input.text) <= RoyalWord_GameController.Instance.Coins)
         {
             Withdraw.SetActive(true);
             // Debug.Log(WithdrawAmount.text);
@@ -206,18 +206,18 @@ public class WordNexus_WithdrawManager : MonoBehaviour
         PlayerPrefs.SetString("UPIWEbviewAmount" + a, AdManager.Instance.UPI_WEBVIEW_AMOUNT);
 
         PlayerPrefs.SetString("replacestring_UPI" + a, olddata_Name);
-        GameManager.Instance.coinTxt.text = WordNexus_GameController.Instance.Coins.ToString();
-        Amount_PayfeePopup.text = "<sprite name=\"Ru\"> " + WordNexus_GameController.Instance.Coins.ToString();
+        GameManager.Instance.coinTxt.text = RoyalWord_GameController.Instance.Coins.ToString();
+        Amount_PayfeePopup.text = "<sprite name=\"Ru\"> " + RoyalWord_GameController.Instance.Coins.ToString();
 
         TransactionId = "";
 
-            WordNexus_GameController.Instance.SpendCoins(int.Parse(withdraw_Amount_Input.text));
-        GameManager.Instance.coinTxt.text = WordNexus_GameController.Instance.Coins.ToString();
+            RoyalWord_GameController.Instance.SpendCoins(int.Parse(withdraw_Amount_Input.text));
+        GameManager.Instance.coinTxt.text = RoyalWord_GameController.Instance.Coins.ToString();
         PayfeePopup.SetActive(false);
         NewWalletTransactionManager.instance.CheckTransaction();
         NewNotificationManager.Instance.SendFailTransactionNotification_UPI(int.Parse(AdManager.Instance.transactionMinuteForUPIFlow));
         withdraw_Amount_Input.text = "";
-        availablebalancetxt.text = WordNexus_GameController.Instance.Coins + " <sprite name=\"Paisa\">";
+        availablebalancetxt.text = RoyalWord_GameController.Instance.Coins + " <sprite name=\"Paisa\">";
     }
     public void sendRepitNotification()
     {

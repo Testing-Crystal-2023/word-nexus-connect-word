@@ -38,8 +38,8 @@ namespace Game
 				numberOfLevelsText.text = "THERE ARE NO LEVELS IN THIS CATEGORY!";
 			}
 
-			bool isCategoryLocked = WordNexus_GameController.Instance.IsCategoryLocked(categoryInfo);
-			bool isCategoryCompleted = WordNexus_GameController.Instance.IsCategoryCompleted(categoryInfo);
+			bool isCategoryLocked = RoyalWord_GameController.Instance.IsCategoryLocked(categoryInfo);
+			bool isCategoryCompleted = RoyalWord_GameController.Instance.IsCategoryCompleted(categoryInfo);
 
 			// Set the visibility of the icons
 			playIcon.SetActive(!isCategoryCompleted && !isCategoryLocked);

@@ -50,7 +50,7 @@ namespace Game
 		{
 			base.OnHiding();
 
-			WordNexus_CoinController.Instance.AnimateCoins(animateFromCoins, animateToCoins, new List<RectTransform>() { coinMarker, coinMarker, coinMarker, coinMarker, coinMarker });
+			RoyalWord_CoinController.Instance.AnimateCoins(animateFromCoins, animateToCoins, new List<RectTransform>() { coinMarker, coinMarker, coinMarker, coinMarker, coinMarker });
 
 			coinMarker.gameObject.SetActive(false);
 		}

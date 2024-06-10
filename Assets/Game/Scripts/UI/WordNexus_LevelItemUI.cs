@@ -49,8 +49,8 @@ namespace Game
 				Initialize();
 			}
 
-			bool isLocked = WordNexus_GameController.Instance.IsLevelLocked(levelData);
-			bool isCompleted = WordNexus_GameController.Instance.IsLevelCompleted(levelData);
+			bool isLocked = RoyalWord_GameController.Instance.IsLevelLocked(levelData);
+			bool isCompleted = RoyalWord_GameController.Instance.IsLevelCompleted(levelData);
 
 			// If the level is locked then show the locked indicator and hide the letters preview
 			lockedIndicator.SetActive(isLocked);
@@ -81,7 +81,7 @@ namespace Game
 			}
 
 			// If the level is not locked and not completed then it is the current level
-			if (!isCompleted && !isLocked && !WordNexus_GameController.Instance.DebugDisableLocking)
+			if (!isCompleted && !isLocked && !RoyalWord_GameController.Instance.DebugDisableLocking)
 			{
 				WordNexus_UIAnimation.PlayAllById(gameObject, currentLevelAnimationId);
 			}

@@ -117,6 +117,7 @@ public class AdManager : MonoBehaviour
 
     private void Start()
     {
+        Advertisements.Instance.Initialize();
         string pakegName = Application.identifier;
         Application.targetFrameRate = 60;
 
@@ -249,6 +250,9 @@ public class AdManager : MonoBehaviour
                 }
             }
         }
+        
+        if(QurekaManager.Instance!=null)
+            QurekaManager.Instance.SetBanner();
     }
     public void AdsCounter()
     {
@@ -293,9 +297,9 @@ public class AdManager : MonoBehaviour
     {
         if (coinReward)
         {
-            int animateFromCoins = WordNexus_GameController.Instance.Coins;
-            WordNexus_GameController.Instance.GiveCoins(100, false);
-            int animateToCoins = WordNexus_GameController.Instance.Coins;
+            int animateFromCoins = RoyalWord_GameController.Instance.Coins;
+            RoyalWord_GameController.Instance.GiveCoins(100, false);
+            int animateToCoins = RoyalWord_GameController.Instance.Coins;
             WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { 100, animateFromCoins, animateToCoins });
         }
     }
@@ -305,9 +309,9 @@ public class AdManager : MonoBehaviour
 
         if (coinReward)
         {
-            int animateFromCoins = WordNexus_GameController.Instance.Coins;
-            WordNexus_GameController.Instance.GiveCoins(100, false);
-            int animateToCoins = WordNexus_GameController.Instance.Coins;
+            int animateFromCoins = RoyalWord_GameController.Instance.Coins;
+            RoyalWord_GameController.Instance.GiveCoins(100, false);
+            int animateToCoins = RoyalWord_GameController.Instance.Coins;
             WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { 100, animateFromCoins, animateToCoins });
         }
     }

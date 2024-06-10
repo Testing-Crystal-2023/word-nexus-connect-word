@@ -191,6 +191,15 @@ public class LoadingScene : MonoBehaviour
         AdManager.Instance.ReviewType = ReviewType;
         AdManager.Instance.AppPopUp = AppPopUp;
         AdManager.Instance.showaAd = showaAd;
+
+        if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && 
+        AdManager.Instance.showaAd.ToLower() == "false")
+        {
+            Debug.Log("enter");
+            Debug.Log(AdManager.Instance.qureka);
+            StartCoroutine(AdManager.Instance.GetJsonData(AdManager.Instance.qureka));
+
+        }
     }
 
     public void LoadAds()

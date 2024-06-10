@@ -24,21 +24,27 @@ public class QurekaManager : MonoBehaviour
         interHolder.SetActive(false);
         RewardHolder.SetActive(false);
 
-        bannerImgs.Clear();
         interImgs.Clear();
         rewardImgs.Clear();
 
-        bannerImgs = AdManager.Instance.bannerSprites;
-        bannerImgHolder.sprite = bannerImgs[Random.Range(0, bannerImgs.Count-1)];
-        
+
+        bannerImgs.Clear();
+        if(AdManager.Instance.bannerSprites.Count>2)
+            SetBanner();
         InItInter();
         InItRewards();
 
+    }
+    public void SetBanner()
+    {
         if(AdManager.Instance.Qureka_ads_status.ToLower() == "true")
         {
             bannerHolder.SetActive(true);
             gifManager.gifPath = AdManager.Instance.gifUrls[Random.Range(0, AdManager.Instance.gifUrls.Count-1)];
             gifManager.Play();
+
+            bannerImgs = AdManager.Instance.bannerSprites;
+            bannerImgHolder.sprite = bannerImgs[Random.Range(0, bannerImgs.Count-1)];
         }
     }
     public void BannerAdClick()

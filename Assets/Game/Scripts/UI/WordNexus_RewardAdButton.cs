@@ -92,13 +92,13 @@ namespace Game
 		{
 			coinsToReward = UnityEngine.Random.Range(10,100);
 			// Get the current amount of coins
-			int animateFromCoins = WordNexus_GameController.Instance.Coins;
+			int animateFromCoins = RoyalWord_GameController.Instance.Coins;
 
 			// Give the amount of coins
-			WordNexus_GameController.Instance.GiveCoins(coinsToReward, false);
+			RoyalWord_GameController.Instance.GiveCoins(coinsToReward, false);
 
 			// Get the amount of coins now after giving them
-			int animateToCoins = WordNexus_GameController.Instance.Coins;
+			int animateToCoins = RoyalWord_GameController.Instance.Coins;
 
 			// Show the popup to the user so they know they got the coins
 			WordNexus_Pop_upManager.Instance.Show("reward_ad_granted", new object[] { coinsToReward, animateFromCoins, animateToCoins });

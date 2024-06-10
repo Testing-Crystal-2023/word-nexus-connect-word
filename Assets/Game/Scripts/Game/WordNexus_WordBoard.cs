@@ -190,7 +190,7 @@ namespace Game
 			List<WordNexus_Word_BoardCell> wordGridCells = GetWordGridCells(levelWordData);
 			WordNexus_Word_BoardCell wordBoardCell = wordGridCells[index];
 
-			if (awardCoins && wordBoardCell.HasCoin && wordBoardCell.CurrentState == WordNexus_Word_BoardCell.State.Blank && WordNexus_CoinController.Exists())
+			if (awardCoins && wordBoardCell.HasCoin && wordBoardCell.CurrentState == WordNexus_Word_BoardCell.State.Blank && RoyalWord_CoinController.Exists())
 			{
 				AwardCoins(new List<RectTransform>() { wordBoardCell.coinObject.transform as RectTransform });
 			}
@@ -313,16 +313,16 @@ namespace Game
 		protected void AwardCoins(List<RectTransform> coinsToAward)
 		{
 			// Get the current amount of coins
-			int animateFromCoins = WordNexus_GameController.Instance.Coins;
+			int animateFromCoins = RoyalWord_GameController.Instance.Coins;
 
 			// Give the amount of coins
-			WordNexus_GameController.Instance.GiveCoins(coinsToAward.Count);
+			RoyalWord_GameController.Instance.GiveCoins(coinsToAward.Count);
 
 			// Get the amount of coins now after giving them
-			int animateToCoins = WordNexus_GameController.Instance.Coins;
+			int animateToCoins = RoyalWord_GameController.Instance.Coins;
 
 			// Animate the coins to the coin container
-			WordNexus_CoinController.Instance.AnimateCoins(animateFromCoins, animateToCoins, coinsToAward);
+			RoyalWord_CoinController.Instance.AnimateCoins(animateFromCoins, animateToCoins, coinsToAward);
 		}
 
 		#endregion

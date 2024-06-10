@@ -49,7 +49,7 @@ public class InAppReview : MonoBehaviour
         //print(int.Parse(AdManager.Instance.review_star_setup));
         if (Count >= int.Parse(AdManager.Instance.review_star_setup))
         {
-            WordNexus_GameController.Instance.GiveCoins(int.Parse(AdManager.Instance.review_reward));
+            RoyalWord_GameController.Instance.GiveReviewCoins(int.Parse(AdManager.Instance.review_reward));
             //Debug.LogError(GlobalValues.Coins);
             SetReview();
             Count = 0;

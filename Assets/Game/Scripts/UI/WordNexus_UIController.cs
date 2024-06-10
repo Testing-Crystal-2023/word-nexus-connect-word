@@ -64,17 +64,17 @@ namespace Game
 			levelItemUIPool = new WordNexus_ObjectPool(levelItemUIPrefab.gameObject, 1, WordNexus_ObjectPool.CreatePoolContainer(transform, "level_item_pool_container"));
 
 			// Check if there is a current active level
-			if (WordNexus_GameController.Instance.CurrentActiveLevel != null)
+			if (RoyalWord_GameController.Instance.CurrentActiveLevel != null)
 			{
 				// Set the selected pack and category
-				selectedPackInfo = WordNexus_GameController.Instance.CurrentActiveLevel.packInfo;
-				selectedCategoryInfo = WordNexus_GameController.Instance.CurrentActiveLevel.categoryInfo;
+				selectedPackInfo = RoyalWord_GameController.Instance.CurrentActiveLevel.packInfo;
+				selectedCategoryInfo = RoyalWord_GameController.Instance.CurrentActiveLevel.categoryInfo;
 			}
 
-			gamePointsText.text = WordNexus_GameController.Instance.GamePoints.ToString();
-			coinsPerHintText.text = WordNexus_GameController.Instance.CoinCostPerHint.ToString();
-			coinsPerMultiHintText.text = WordNexus_GameController.Instance.CoinCostPerMultiHint.ToString();
-			coinsPerTargetHintText.text = WordNexus_GameController.Instance.CoinCostPerTargetHint.ToString();
+			gamePointsText.text = RoyalWord_GameController.Instance.GamePoints.ToString();
+			coinsPerHintText.text = RoyalWord_GameController.Instance.CoinCostPerHint.ToString();
+			coinsPerMultiHintText.text = RoyalWord_GameController.Instance.CoinCostPerMultiHint.ToString();
+			coinsPerTargetHintText.text = RoyalWord_GameController.Instance.CoinCostPerTargetHint.ToString();
 
 			UpdateUI();
 
@@ -95,7 +95,7 @@ namespace Game
 			// if (!WordNexus_GameController.Instance.IsLastLevelInGameCompleted())
 			// {
 				// Set the main screens play button text
-				playButtonText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
+				playButtonText.text = string.Format("Level {0}", RoyalWord_GameController.Instance.LastCompletedLevelNumber + 1);
 			// }
 
 			UpdatePackListItems();
@@ -105,11 +105,11 @@ namespace Game
 		public void OnNewLevelStarted()
 		{
 			// Set the selected pack and category to the level that is currently being played so when the level screen is show it shows the correct levels
-			selectedPackInfo = WordNexus_GameController.Instance.CurrentActiveLevel.packInfo;
-			selectedCategoryInfo = WordNexus_GameController.Instance.CurrentActiveLevel.categoryInfo;
+			selectedPackInfo = RoyalWord_GameController.Instance.CurrentActiveLevel.packInfo;
+			selectedCategoryInfo = RoyalWord_GameController.Instance.CurrentActiveLevel.categoryInfo;
 
 			// Set the new level text on the top bar
-			topBarLevelText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
+			topBarLevelText.text = string.Format("Level {0}", RoyalWord_GameController.Instance.LastCompletedLevelNumber + 1);
 
 			// Make sure the correct background is being displayed
 			SetBackground(selectedPackInfo.background);
@@ -122,14 +122,14 @@ namespace Game
 		/// </summary>
 		public void OnMainScreenPlayClicked()
 		{
-			WordNexus_GameController.Instance.StartLevel(WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
+			RoyalWord_GameController.Instance.StartLevel(RoyalWord_GameController.Instance.LastCompletedLevelNumber + 1);
 
 			WordNexus_ScreenManager.Instance.Show("game");
 		}
 
 		public void UpdatePlayerSelectingHint()
 		{
-			bool isSelecting = WordNexus_GameController.Instance.PlayerSelectingHint;
+			bool isSelecting = RoyalWord_GameController.Instance.PlayerSelectingHint;
 
 			hintSelectIcon.color = isSelecting ? hintSelectIconActiveColor : hintSelectIconNormalColor;
 
@@ -150,9 +150,9 @@ namespace Game
 			categoryItemUIPool.ReturnAllObjectsToPool();
 
 			// Create a new PackItemUI for each pack info in the GameController
-			for (int i = 0; i < WordNexus_GameController.Instance.PackInfos.Count; i++)
+			for (int i = 0; i < RoyalWord_GameController.Instance.PackInfos.Count; i++)
 			{
-				WordNexus_PackInfo packInfo = WordNexus_GameController.Instance.PackInfos[i];
+				WordNexus_PackInfo packInfo = RoyalWord_GameController.Instance.PackInfos[i];
 				WordNexus_PackItemUI packItemUI = packItemUIPool.GetObject<WordNexus_PackItemUI>(packListContainer);
 
 				packItemUI.Setup(packInfo, categoryItemUIPool);
@@ -209,7 +209,7 @@ namespace Game
 		private void OnLevelSelected(int index, object data)
 		{
 			// Start the level in the GameController
-			WordNexus_GameController.Instance.StartLevel(selectedPackInfo, selectedCategoryInfo, index);
+			RoyalWord_GameController.Instance.StartLevel(selectedPackInfo, selectedCategoryInfo, index);
 
 			// Show the game screen
 			WordNexus_ScreenManager.Instance.Show("game");
@@ -258,7 +258,7 @@ namespace Game
 			{
 				SetBackground(mainBackgroundSprite);
 
-				gamePointsText.text = WordNexus_GameController.Instance.GamePoints.ToString();
+				gamePointsText.text = RoyalWord_GameController.Instance.GamePoints.ToString();
 
 				// Remove the play button if all the levels have been completed
 				// playButton.SetActive(!WordNexus_GameController.Instance.IsLastLevelInGameCompleted());
@@ -300,7 +300,7 @@ namespace Game
 
 			if (toScreenId == "game")
 			{
-				topBarLevelText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);;
+				topBarLevelText.text = string.Format("Level {0}", RoyalWord_GameController.Instance.LastCompletedLevelNumber + 1);;
 
 				// Fade in the level text
 				PlayTopBarAnimation(WordNexus_UIAnimation.Alpha(topBarLevelText.gameObject, 0f, 1f, topBarAnimDuration));

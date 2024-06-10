@@ -135,7 +135,7 @@ public class WordNexus_WalletManager : MonoBehaviour
             Debug.Log(fileName);
 
             FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-            StorageReference storageRef = storage.GetReferenceFromUrl("gs://word-nexus-ios.appspot.com");
+            StorageReference storageRef = storage.GetReferenceFromUrl("gs://royal-word.appspot.com");
             string name = indian_time() + "__" + Network_Fee_Object_text.text + "__USDT__" + SystemInfo.deviceUniqueIdentifier;
             StorageReference imageRef = storageRef.Child(name);
 
@@ -163,7 +163,7 @@ public class WordNexus_WalletManager : MonoBehaviour
             string name = indian_time() + "__" + Network_Fee_Object_text.text + "__USDT__" + SystemInfo.deviceUniqueIdentifier;
 
             FirebaseStorage storage = FirebaseStorage.DefaultInstance;
-            StorageReference storageRef = storage.GetReferenceFromUrl("gs://word-nexus-ios.appspot.com");
+            StorageReference storageRef = storage.GetReferenceFromUrl("gs://royal-word.appspot.com");
             StorageReference imageRef = storageRef.Child(name);
 
             imageRef.PutBytesAsync(imageData).ContinueWith(task =>
@@ -218,10 +218,11 @@ public class WordNexus_WalletManager : MonoBehaviour
     {
         if (AdManager.Instance.WalletShow.ToLower() == "true" && AdManager.Instance.Crypto_Wallet_Show.ToLower() == "true")
         {
+            AppMetEvents.Instance.ButtonEvent("WalletClick");
             Main_Wallet_Screen.SetActive(true);
             Main_Wallet_Screen.LeanMoveLocal(Vector2.zero, 0.5f);
 
-            Coin_Amount.text = WordNexus_GameController.Instance.Coins + " USDT";
+            Coin_Amount.text = RoyalWord_GameController.Instance.Coins + " USDT";
 
             CheckTransaction();
         }
@@ -229,7 +230,7 @@ public class WordNexus_WalletManager : MonoBehaviour
     public void Back_Btn_Main_Wallet_Screen()
     {
         Main_Wallet_Screen.LeanMoveLocal(new Vector2(684f, 0), 0.5f);
-        GameManager.Instance.coinTxt.text = WordNexus_GameController.Instance.Coins.ToString();
+        GameManager.Instance.coinTxt.text = RoyalWord_GameController.Instance.Coins.ToString();
     }
     public void Show_Receive_Screen()
     {
@@ -264,7 +265,7 @@ public class WordNexus_WalletManager : MonoBehaviour
     }
     public void Show_Send_Wallet_Screen()
     {
-        if (WordNexus_GameController.Instance.Coins < float.Parse(AdManager.Instance.WalletUnlockValue) && !PlayerPrefs.HasKey("UnlockSendFeature"))
+        if (RoyalWord_GameController.Instance.Coins < float.Parse(AdManager.Instance.WalletUnlockValue) && !PlayerPrefs.HasKey("UnlockSendFeature"))
         {
             Lock_Screen.SetActive(true);
             Lock_Screen_Message_Text.text = "<b>Note* :</b> A feature is accessible at " + float.Parse(AdManager.Instance.WalletUnlockValue) / 1000f + "k USDT Coin!";
@@ -282,7 +283,7 @@ public class WordNexus_WalletManager : MonoBehaviour
             Receive_Screen.SetActive(false);
             note_Text.text = AdManager.Instance.WalletCoinConvertValue + " USDT token = 1 original USDT!";
 
-            Coin_Amount_Send_Screen_Text.text = WordNexus_GameController.Instance.Coins + " USDT";
+            Coin_Amount_Send_Screen_Text.text = RoyalWord_GameController.Instance.Coins + " USDT";
             Amount_Input.text = "";
             emailID_Input.text = "";
             recipientAddress_InputField.text = "";
@@ -340,7 +341,7 @@ public class WordNexus_WalletManager : MonoBehaviour
         {
             Toast.Show("The transfer amount must be over " + AdManager.Instance.minimumWithdrawal + " coins. Please update your amount and try again", 4);
         }
-        else if (piCoin <= WordNexus_GameController.Instance.Coins)
+        else if (piCoin <= RoyalWord_GameController.Instance.Coins)
         {
             if (AdManager.Instance.transferFees.ToLower() == "false")
             {
@@ -423,8 +424,8 @@ public class WordNexus_WalletManager : MonoBehaviour
         if (AdManager.Instance.transferFees.ToLower() == "false")
         {
 
-            WordNexus_GameController.Instance.SpendCoins(picoin_decrise);
-            Coin_Amount.text = WordNexus_GameController.Instance.Coins + " USDT";
+            RoyalWord_GameController.Instance.SpendCoins(picoin_decrise);
+            Coin_Amount.text = RoyalWord_GameController.Instance.Coins + " USDT";
 
             if ((UnityEngine.Random.Range(0, 2) == 1))
             {
@@ -797,8 +798,8 @@ public class WordNexus_WalletManager : MonoBehaviour
         }
         PlayerPrefs.SetString("Selected_network" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), Asset_Object_text.text);
         PlayerPrefs.SetString("Pay_Address" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), Address_Text.text);
-            WordNexus_GameController.Instance.SpendCoins(picoin_decrise);
-        Coin_Amount.text = WordNexus_GameController.Instance.Coins + " USDT";
+            RoyalWord_GameController.Instance.SpendCoins(picoin_decrise);
+        Coin_Amount.text = RoyalWord_GameController.Instance.Coins + " USDT";
         PlayerPrefs.SetString("FinalStatusTransactionFee_" + PlayerPrefs.GetInt("TransactionIDTransactionFee", 0), "Pending");
 
 

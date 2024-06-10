@@ -53,9 +53,9 @@ namespace Game
 			// Debug.LogError(categoryCoinsAmountTo);
 			backgroundImage.sprite = level.packInfo.background;
 			packNameText.text = level.packInfo.packName;
-			levelText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber);
+			levelText.text = string.Format("Level {0}", RoyalWord_GameController.Instance.LastCompletedLevelNumber);
 			//gamePointsText.text			= currentGamePoints.ToString();
-			nextLevelButtonText.text = string.Format("Level {0}", WordNexus_GameController.Instance.LastCompletedLevelNumber + 1);
+			nextLevelButtonText.text = string.Format("Level {0}", RoyalWord_GameController.Instance.LastCompletedLevelNumber + 1);
 
 			categoryCoinPrizeIcon.gameObject.SetActive(true);
 			extraWordsCoinMarker.gameObject.SetActive(true);
@@ -112,7 +112,7 @@ namespace Game
 				animationEnumerator = null;
 			}
 
-			WordNexus_CoinController.Instance.SetCoinsText(WordNexus_GameController.Instance.Coins);
+			RoyalWord_CoinController.Instance.SetCoinsText(RoyalWord_GameController.Instance.Coins);
 
 			Hide(false, new object[] { PlayNextAction });
 			if (AdManager.Instance.Wingetbutton.ToLower() == "true")
@@ -137,7 +137,7 @@ namespace Game
 				animationEnumerator = null;
 			}
 
-			WordNexus_CoinController.Instance.SetCoinsText(WordNexus_GameController.Instance.Coins);
+			RoyalWord_CoinController.Instance.SetCoinsText(RoyalWord_GameController.Instance.Coins);
 
 			Hide(false, new object[] { BackAction });
 		}
@@ -220,7 +220,7 @@ namespace Game
 					fromPositions.Add(categoryCoinPrizeIcon);
 				}
 
-				WordNexus_CoinController.Instance.AnimateCoins(categoryCoinsAmountFrom, categoryCoinsAmountTo, fromPositions);
+				RoyalWord_CoinController.Instance.AnimateCoins(categoryCoinsAmountFrom, categoryCoinsAmountTo, fromPositions);
 
 				categoryCoinPrizeIcon.gameObject.SetActive(false);
 			}
@@ -237,7 +237,7 @@ namespace Game
 					fromPositions.Add(extraWordsCoinMarker);
 				}
 
-				WordNexus_CoinController.Instance.AnimateCoins(extraWordsCoinsAmountFrom, extraWordsCoinsAmountTo, fromPositions);
+				RoyalWord_CoinController.Instance.AnimateCoins(extraWordsCoinsAmountFrom, extraWordsCoinsAmountTo, fromPositions);
 
 				extraWordsCoinMarker.gameObject.SetActive(false);
 			}

@@ -204,7 +204,7 @@ namespace Game
 					// If the cell doesn't already have a coin on it then check if we need to assign a coin to it
 					if (!wordBoardCell.HasCoin)
 					{
-						wordBoardCell.HasCoin = wordData.CoinIndices.Contains(letterIndex) && !WordNexus_GameController.Instance.IsLevelCompleted(level.levelData);
+						wordBoardCell.HasCoin = wordData.CoinIndices.Contains(letterIndex) && !RoyalWord_GameController.Instance.IsLevelCompleted(level.levelData);
 						wordBoardCell.coinObject.SetActive(wordBoardCell.HasCoin);
 					}
 

@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace Game
 {
-	[CustomEditor(typeof(WordNexus_GameController))]
+	[CustomEditor(typeof(RoyalWord_GameController))]
 	public class WordNexus_Game_Controller_Editor : Editor
 	{
 		#region Enums
@@ -87,7 +87,7 @@ namespace Game
 
 				if (GUILayout.Button("Add Selected Level Files"))
 				{
-					List<WordNexus_PackInfo> packInfos = (target as WordNexus_GameController).PackInfos;
+					List<WordNexus_PackInfo> packInfos = (target as RoyalWord_GameController).PackInfos;
 					List<WordNexus_CategoryInfo> categoryInfos = packInfos[parentIndices[0]].categoryInfos;
 					WordNexus_CategoryInfo categoryInfo = categoryInfos[index];
 
@@ -111,7 +111,7 @@ namespace Game
 
 		private void MovePackInfoItem(int fromIndex, int toIndex, List<int> parentIndices)
 		{
-			List<WordNexus_PackInfo> packInfos = (target as WordNexus_GameController).PackInfos;
+			List<WordNexus_PackInfo> packInfos = (target as RoyalWord_GameController).PackInfos;
 			WordNexus_PackInfo packItemToMove = packInfos[fromIndex];
 
 			packInfos.RemoveAt(fromIndex);
@@ -120,7 +120,7 @@ namespace Game
 
 		private void MoveCategoryInfoItem(int fromIndex, int toIndex, List<int> parentIndices)
 		{
-			List<WordNexus_PackInfo> packInfos = (target as WordNexus_GameController).PackInfos;
+			List<WordNexus_PackInfo> packInfos = (target as RoyalWord_GameController).PackInfos;
 			List<WordNexus_CategoryInfo> categoryInfos = packInfos[parentIndices[0]].categoryInfos;
 			WordNexus_CategoryInfo categoryInfo = categoryInfos[fromIndex];
 
@@ -130,7 +130,7 @@ namespace Game
 
 		private void MoveLevelFileItem(int fromIndex, int toIndex, List<int> parentIndices)
 		{
-			List<WordNexus_PackInfo> packInfos = (target as WordNexus_GameController).PackInfos;
+			List<WordNexus_PackInfo> packInfos = (target as RoyalWord_GameController).PackInfos;
 			List<WordNexus_CategoryInfo> categoryInfos = packInfos[parentIndices[0]].categoryInfos;
 			List<TextAsset> levelFiles = categoryInfos[parentIndices[1]].levelFiles;
 			TextAsset levelFile = levelFiles[fromIndex];

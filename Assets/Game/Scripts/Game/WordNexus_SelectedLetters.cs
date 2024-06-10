@@ -41,7 +41,7 @@ namespace Game
 
 			selectedLettersText.color = color;
 
-			// backgroundImage.color = packColor;
+			backgroundImage.color = Color.white;
 
 			selectedLettersText.text = selectedLetters;
 		}

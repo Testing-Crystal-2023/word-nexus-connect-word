@@ -101,6 +101,7 @@ public class AdManager : MonoBehaviour
     public NewQurekaData jsnData;
     private void Awake()
     {
+        Advertisements.Instance.Initialize();
         if (Instance == null)
         {
             Instance = this;

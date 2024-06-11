@@ -78,7 +78,7 @@ public class UnityManager : MonoBehaviour, IUnityAdsInitializationListener, IUni
 
 
             // Set the banner position:
-            Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
+            Advertisement.Banner.SetPosition(UnityEngine.Advertisements.BannerPosition.BOTTOM_CENTER);
             // Load the Ad Unit with banner content:
             Advertisement.Banner.Load(_bannerId, options);
         }

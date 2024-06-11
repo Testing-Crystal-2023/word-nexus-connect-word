@@ -582,7 +582,7 @@ public class GoogleAdMob : MonoBehaviour
         // if the app is Foregrounded and the ad is available, show it.
         if (state == AppState.Foreground)
         {
-            if (AdManager.Instance.appopenshow == "true")
+            if (AdManager.Instance.appopenshow == "true" && AppShow)
             {
                 if(AppOpenReady)
                     ShowAppOpenAd();

@@ -1,0 +1,68 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Game
+{
+	[RequireComponent(typeof(Button))]
+	[RequireComponent(typeof(CanvasGroup))]
+	public class RoyalWord_Scr_eenBackButton : MonoBehaviour
+	{
+		#region Inspector Variables
+
+		[SerializeField] private float fadeDuration = 0.5f;
+
+		#endregion
+
+		#region Properties
+
+		private Button Button { get { return gameObject.GetComponent<Button>(); } }
+		private CanvasGroup CanvasGroup { get { return gameObject.GetComponent<CanvasGroup>(); } }
+
+		#endregion
+
+		#region Unity Methods
+
+		private void Start()
+		{
+			Button.onClick.AddListener(OnButtonClicked);
+
+			CanvasGroup.alpha = 0f;
+
+			RoyalWord_ScreenManager.Instance.OnSwitchingScreens += OnSwitchingScreens;
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void OnButtonClicked()
+		{
+			RoyalWord_ScreenManager.Instance.Back();
+		}
+
+		private void OnSwitchingScreens(string fromScreenId, string toScreenId)
+		{
+			if (toScreenId == RoyalWord_ScreenManager.Instance.HomeScreenId)
+			{
+				// Fade out the back button
+				PlayAnimation(UIAnimation.Alpha(gameObject, 1f, 0f, fadeDuration));
+			}
+			else if (fromScreenId == RoyalWord_ScreenManager.Instance.HomeScreenId)
+			{
+				// Fade in the back button
+				PlayAnimation(UIAnimation.Alpha(gameObject, 0f, 1f, fadeDuration));
+			}
+		}
+
+		private void PlayAnimation(UIAnimation anim)
+		{
+			anim.style = UIAnimation.Style.EaseOut;
+			anim.startOnFirstFrame = true;
+			anim.Play();
+		}
+
+		#endregion
+	}
+}

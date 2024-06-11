@@ -31,8 +31,12 @@ public class QurekaManager : MonoBehaviour
         bannerImgs.Clear();
         if(AdManager.Instance.bannerSprites.Count>2)
             SetBanner();
-        InItInter();
-        InItRewards();
+
+        if(AdManager.Instance.Qureka_ads_status.ToLower() == "true")
+            InItInter();
+            
+        if(AdManager.Instance.Qureka_ads_status.ToLower() == "true")
+            InItRewards();
 
     }
     public void SetBanner()

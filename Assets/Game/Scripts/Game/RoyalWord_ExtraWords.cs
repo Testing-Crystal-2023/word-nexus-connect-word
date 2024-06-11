@@ -47,7 +47,7 @@ namespace Game
 					toPos += shakeDir * shakeAmount;
 				}
 
-				WordNexus_UIAnimation.PositionX(transform as RectTransform, toPos, shakeSpeed).Play();
+				RoyalWord_UIAnimation.PositionX(transform as RectTransform, toPos, shakeSpeed).Play();
 
 				shakeDir *= -1;
 

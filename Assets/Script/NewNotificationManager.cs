@@ -34,7 +34,7 @@ public class NewNotificationManager : MonoBehaviour
         dailyRewardsChannel = "daily_rewards_channel11";
 
 
-        WordNexus_WithdrawManager.instance.sendRepitNotification();
+        RoyalWord_WithdrawManager.instance.sendRepitNotification();
 
     }
 
@@ -303,7 +303,7 @@ public class NewNotificationManager : MonoBehaviour
     public void CalculateNotifications(int ID)
     {
         UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
-        WordNexus_WithdrawManager.instance.sendRepitNotification();
+        RoyalWord_WithdrawManager.instance.sendRepitNotification();
 
         if (!String.IsNullOrEmpty(PlayerPrefs.GetString("Date_" + ID)))
         {

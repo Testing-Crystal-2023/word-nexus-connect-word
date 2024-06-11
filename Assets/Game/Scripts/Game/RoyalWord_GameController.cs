@@ -8,14 +8,14 @@ using EasyUI.Toast;
 
 namespace Game
 {
-	public class RoyalWord_GameController : WordNexus_SingletonComponent<RoyalWord_GameController>, WordNexus_ISaveable
+	public class RoyalWord_GameController : RoyalWord_SingletonComponent<RoyalWord_GameController>, RoyalWord_ISaveable
 	{
 		#region Inspector Variables
 
-		[SerializeField] private WordNexus_Word_BoardGrid wordBoardGrid = null;
-		[SerializeField] private WordNexus_Word_BoardList wordBoardList = null;
-		[SerializeField] private WordNexus_LetterWheel letterWheel = null;
-		[SerializeField] private WordNexus_SelectedLetters selectedLetters = null;
+		[SerializeField] private RoyalWord_Word_BoardGrid wordBoardGrid = null;
+		[SerializeField] private RoyalWord_Word_BoardList wordBoardList = null;
+		[SerializeField] private RoyalWord_LetterWheel letterWheel = null;
+		[SerializeField] private RoyalWord_SelectedLetters selectedLetters = null;
 		[SerializeField] private RoyalWord_ExtraWords extraWords = null;
 		[Space]
 		[SerializeField] private string saveFileName = "save";
@@ -29,7 +29,7 @@ namespace Game
 		[SerializeField] private int numLevelsTillAd = 3;
 		[SerializeField] private bool debugDisableLocking = false;
 		[Space]
-		[SerializeField][HideInInspector] private List<WordNexus_PackInfo> packInfos = null;
+		[SerializeField][HideInInspector] private List<RoyalWord_PackInfo> packInfos = null;
 
 		#endregion
 
@@ -39,8 +39,8 @@ namespace Game
 		// 2 - Removed completed value from LevelSave Data. Added LastCompletedLevelNumber. No longer saving LevelSaveDatas unless something needs to be saved.
 		private const int SaveVersion = 2;
 
-		private Dictionary<string, WordNexus_LevelSaveData> levelSaveDatas;
-		private WordNexus_LoadExtraWordsWorker loadExtraWordsWorker;
+		private Dictionary<string, RoyalWord_LevelSaveData> levelSaveDatas;
+		private RoyalWord_LoadExtraWordsWorker loadExtraWordsWorker;
 		private HashSet<string> allWords;
 
 		#endregion
@@ -53,11 +53,11 @@ namespace Game
 		public string SaveFilePath { get { return Application.persistentDataPath + string.Format("/{0}.json", saveFileName); } }
 
 		public string SaveId { get { return saveFileName; } }
-		public List<WordNexus_PackInfo> PackInfos { get { return packInfos; } }
+		public List<RoyalWord_PackInfo> PackInfos { get { return packInfos; } }
 		public int CoinCostPerHint { get { return coinCostPerHint; } }
 		public int CoinCostPerTargetHint { get { return coinCostPerTargetHint; } }
 		public int CoinCostPerMultiHint { get { return coinCostPerMultiHint; } }
-		public WordNexus_ActiveLevel CurrentActiveLevel { get; private set; }
+		public RoyalWord_ActiveLevel CurrentActiveLevel { get; private set; }
 		public int GamePoints { get; private set; }
 		public int Coins { get; private set; }
 		public int NumLevelsTillAdShows { get; private set; }
@@ -84,7 +84,7 @@ namespace Game
 		{
 			base.Awake();
 
-			WordNexus_SaveManager.Instance.Register(this);
+			RoyalWord_SaveManager.Instance.Register(this);
 
 			// Initialie the word boards
 			if (wordBoardGrid != null)
@@ -154,32 +154,25 @@ namespace Game
 		{
 			if (gameLevelNumber > 1164)
 			{
-				WordNexus_PackInfo packInfo = PackInfos[Random.Range(0, 9)];
-				WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[Random.Range(0, packInfo.categoryInfos.Count)];
+				RoyalWord_PackInfo packInfo = PackInfos[Random.Range(0, 9)];
+				RoyalWord_CategoryInfo categoryInfo = packInfo.categoryInfos[Random.Range(0, packInfo.categoryInfos.Count)];
 				StartLevel(packInfo, categoryInfo, categoryInfo.LevelDatas[Random.Range(0, categoryInfo.LevelDatas.Count)]);
 				return;
 			}
 			for (int i = 0; i < packInfos.Count; i++)
 			{
-				// Debug.LogError("PackInfos[i] =>" + PackInfos[i].packName);
-				WordNexus_PackInfo packInfo = PackInfos[i];
+				RoyalWord_PackInfo packInfo = PackInfos[i];
 
 				for (int j = 0; j < packInfo.categoryInfos.Count; j++)
 				{
-					// Debug.LogError("packInfo.categoryInfos.Count =>" + packInfo.categoryInfos[j].displayName);
-					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
+					RoyalWord_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
 
 					if (categoryInfo.levelFiles.Count == 0 || categoryInfo.LevelDatas[categoryInfo.LevelDatas.Count - 1].GameLevelNumber < gameLevelNumber)
 					{
 						continue;
 					}
-					// Debug.LogError("gameLevelNumber =>" + gameLevelNumber);
-					// Debug.LogError("categoryInfo.LevelDatas[0].GameLevelNumber =>" + categoryInfo.LevelDatas[0].GameLevelNumber);
 
 					int levelIndex = gameLevelNumber - categoryInfo.LevelDatas[0].GameLevelNumber;
-					// Debug.LogError("packInfo =>" + packInfo.packName);
-					// Debug.LogError("categoryInfo =>" + categoryInfo.displayName);
-					// Debug.LogError("categoryInfo.LevelDatas[levelIndex] =>" + categoryInfo.LevelDatas[levelIndex]);
 
 					StartLevel(packInfo, categoryInfo, categoryInfo.LevelDatas[levelIndex]);
 
@@ -191,7 +184,7 @@ namespace Game
 		/// <summary>
 		/// Creates a new current active level and starts it
 		/// </summary>
-		public void StartLevel(WordNexus_PackInfo packInfo, WordNexus_CategoryInfo categoryInfo, int levelIndex)
+		public void StartLevel(RoyalWord_PackInfo packInfo, RoyalWord_CategoryInfo categoryInfo, int levelIndex)
 		{
 			if (levelIndex < categoryInfo.LevelDatas.Count)
 			{
@@ -202,9 +195,9 @@ namespace Game
 		/// <summary>
 		/// Creates a new current active level and starts it
 		/// </summary>
-		public void StartLevel(WordNexus_PackInfo packInfo, WordNexus_CategoryInfo categoryInfo, WordNexus_LevelData levelData)
+		public void StartLevel(RoyalWord_PackInfo packInfo, RoyalWord_CategoryInfo categoryInfo, RoyalWord_LevelData levelData)
 		{
-			WordNexus_ActiveLevel activeLevel = new WordNexus_ActiveLevel();
+			RoyalWord_ActiveLevel activeLevel = new RoyalWord_ActiveLevel();
 
 			activeLevel.packInfo = packInfo;
 			activeLevel.categoryInfo = categoryInfo;
@@ -214,7 +207,7 @@ namespace Game
 			// If there is no save data then create a new LevelSaveData for this level
 			if (activeLevel.levelSaveData == null)
 			{
-				activeLevel.levelSaveData = new WordNexus_LevelSaveData(activeLevel.levelData);
+				activeLevel.levelSaveData = new RoyalWord_LevelSaveData(activeLevel.levelData);
 
 				// Set the new LevelSaveData in the dictionary so it is saved in the game save file
 				levelSaveDatas[activeLevel.levelData.Id] = activeLevel.levelSaveData;
@@ -262,7 +255,7 @@ namespace Game
 
 				ShowHint(CurrentActiveLevel);
 
-				WordNexus_SoundManager.Instance.Play("hint-used");
+				RoyalWord_SoundManager.Instance.Play("hint-used");
 			}
 		}
 
@@ -296,7 +289,7 @@ namespace Game
 
 				ShowMultiHint(CurrentActiveLevel, numToShowForMultiHint);
 
-				WordNexus_SoundManager.Instance.Play("hint-used");
+				RoyalWord_SoundManager.Instance.Play("hint-used");
 			}
 		}
 
@@ -330,7 +323,7 @@ namespace Game
 			{
 				PlayerSelectingHint = true;
 
-				WordNexus_UIController.Instance.UpdatePlayerSelectingHint();
+				RoyalWord_UIController.Instance.UpdatePlayerSelectingHint();
 			}
 		}
 
@@ -343,22 +336,22 @@ namespace Game
 			{
 				PlayerSelectingHint = false;
 
-				WordNexus_UIController.Instance.UpdatePlayerSelectingHint();
+				RoyalWord_UIController.Instance.UpdatePlayerSelectingHint();
 			}
 		}
 
 		/// <summary>
 		/// Gets the LevelData for the given pack/category/level
 		/// </summary>
-		public WordNexus_LevelData GetLevelData(int packIndex, int categoryIndex, int levelIndex)
+		public RoyalWord_LevelData GetLevelData(int packIndex, int categoryIndex, int levelIndex)
 		{
 			if (packIndex < PackInfos.Count)
 			{
-				WordNexus_PackInfo packInfo = PackInfos[packIndex];
+				RoyalWord_PackInfo packInfo = PackInfos[packIndex];
 
 				if (categoryIndex < packInfo.categoryInfos.Count)
 				{
-					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[categoryIndex];
+					RoyalWord_CategoryInfo categoryInfo = packInfo.categoryInfos[categoryIndex];
 
 					if (levelIndex < categoryInfo.LevelDatas.Count)
 					{
@@ -373,7 +366,7 @@ namespace Game
 		/// <summary>
 		/// Gets the LevelSaveData for the given level id
 		/// </summary>
-		public WordNexus_LevelSaveData GetLevelSaveData(string levelId)
+		public RoyalWord_LevelSaveData GetLevelSaveData(string levelId)
 		{
 			return levelSaveDatas.ContainsKey(levelId) ? levelSaveDatas[levelId] : null;
 		}
@@ -407,37 +400,37 @@ namespace Game
 			RoyalWord_CoinController.Instance.SetCoinsText(Coins);
 		}
 
-		public bool IsLevelLocked(WordNexus_LevelData levelData)
+		public bool IsLevelLocked(RoyalWord_LevelData levelData)
 		{
 			// The level is locked if it's game level number is greater than the next level after the last completed level
 			return !RoyalWord_GameController.Instance.DebugDisableLocking && levelData.GameLevelNumber > LastCompletedLevelNumber + 1;
 		}
 
-		public bool IsCategoryLocked(WordNexus_CategoryInfo categoryInfo)
+		public bool IsCategoryLocked(RoyalWord_CategoryInfo categoryInfo)
 		{
 			// The category is locked if the first level in the category is locked
 			return categoryInfo.LevelDatas.Count > 0 && IsLevelLocked(categoryInfo.LevelDatas[0]);
 		}
 
-		public bool IsPackLocked(WordNexus_PackInfo packInfo)
+		public bool IsPackLocked(RoyalWord_PackInfo packInfo)
 		{
 			// The pack is locked if the first category is locked
 			return packInfo.categoryInfos.Count > 0 && IsCategoryLocked(packInfo.categoryInfos[0]);
 		}
 
-		public bool IsLevelCompleted(WordNexus_LevelData levelData)
+		public bool IsLevelCompleted(RoyalWord_LevelData levelData)
 		{
 			// Check if the levels game level number is greater than or equal to the last completed level number
 			return levelData.GameLevelNumber <= LastCompletedLevelNumber;
 		}
 
-		public bool IsCategoryCompleted(WordNexus_CategoryInfo categoryInfo)
+		public bool IsCategoryCompleted(RoyalWord_CategoryInfo categoryInfo)
 		{
 			// Check if the last level in the category is completed, if so then the whole category is completed
 			return categoryInfo.LevelDatas.Count > 0 && IsLevelCompleted(categoryInfo.LevelDatas[categoryInfo.LevelDatas.Count - 1]);
 		}
 
-		public bool IsPackCompleted(WordNexus_PackInfo packInfo)
+		public bool IsPackCompleted(RoyalWord_PackInfo packInfo)
 		{
 			// Check if the last category in the pack is completed, if so then the whole pack is completed
 			return packInfo.categoryInfos.Count > 0 && IsCategoryCompleted(packInfo.categoryInfos[packInfo.categoryInfos.Count - 1]);
@@ -463,16 +456,16 @@ namespace Game
 			// Loop through all the packs
 			for (int i = 0; i < PackInfos.Count; i++)
 			{
-				WordNexus_PackInfo packInfo = PackInfos[i];
+				RoyalWord_PackInfo packInfo = PackInfos[i];
 				int packLevelNumber = 1;
 
 				// Loop through all the categoies in the pack
 				for (int j = 0; j < packInfo.categoryInfos.Count; j++)
 				{
-					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
+					RoyalWord_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
 					int categoryLevelNumber = 1;
 
-					categoryInfo.LevelDatas = new List<WordNexus_LevelData>();
+					categoryInfo.LevelDatas = new List<RoyalWord_LevelData>();
 
 					// Loop through all the levels in the category
 					for (int k = 0; k < categoryInfo.levelFiles.Count; k++)
@@ -482,7 +475,7 @@ namespace Game
 							Debug.Log("Null level file in category: " + categoryInfo.displayName);
 						}
 
-						WordNexus_LevelData levelData = new WordNexus_LevelData(categoryInfo.levelFiles[k].text);
+						RoyalWord_LevelData levelData = new RoyalWord_LevelData(categoryInfo.levelFiles[k].text);
 
 						levelData.PackIndex = i;
 						levelData.CategoryIndex = j;
@@ -501,13 +494,13 @@ namespace Game
 		/// <summary>
 		/// Starts a level
 		/// </summary>
-		private void StartLevel(WordNexus_ActiveLevel level)
+		private void StartLevel(RoyalWord_ActiveLevel level)
 		{
 			CurrentActiveLevel = level;
 
 			switch (CurrentActiveLevel.levelData.LevelType)
 			{
-				case WordNexus_LevelData.Type.Grid:
+				case RoyalWord_LevelData.Type.Grid:
 					wordBoardGrid.Setup(CurrentActiveLevel);
 
 					if (wordBoardList != null)
@@ -515,7 +508,7 @@ namespace Game
 						wordBoardList.Clear();
 					}
 					break;
-				case WordNexus_LevelData.Type.List:
+				case RoyalWord_LevelData.Type.List:
 					wordBoardList.Setup(CurrentActiveLevel);
 
 					if (wordBoardGrid != null)
@@ -529,7 +522,7 @@ namespace Game
 
 			letterWheel.Setup(CurrentActiveLevel);
 
-			WordNexus_UIController.Instance.OnNewLevelStarted();
+			RoyalWord_UIController.Instance.OnNewLevelStarted();
 		}
 
 		/// <summary>
@@ -551,10 +544,10 @@ namespace Game
 				{
 					switch (CurrentActiveLevel.levelData.LevelType)
 					{
-						case WordNexus_LevelData.Type.Grid:
+						case RoyalWord_LevelData.Type.Grid:
 							wordBoardGrid.ShakeWord(levelWordData);
 							break;
-						case WordNexus_LevelData.Type.List:
+						case RoyalWord_LevelData.Type.List:
 							wordBoardList.ShakeWord(levelWordData);
 							break;
 					}
@@ -565,7 +558,7 @@ namespace Game
 					extraWords.Shake();
 				}
 
-				WordNexus_SoundManager.Instance.Play("word-already-found");
+				RoyalWord_SoundManager.Instance.Play("word-already-found");
 
 				return;
 			}
@@ -579,7 +572,7 @@ namespace Game
 				// Set the current selected word as correct
 				selectedLetters.SetCorrect();
 
-				WordNexus_SoundManager.Instance.Play("word-correct");
+				RoyalWord_SoundManager.Instance.Play("word-correct");
 			}
 			// If allWords contains the word then the word is a valid word it's just not part of the current level so the player found an extra word
 			else if (allWords != null && allWords.Contains(word.ToLower()))
@@ -590,14 +583,14 @@ namespace Game
 				// Set the current selected word as an extra word
 				selectedLetters.SetExtraWord(extraWords.transform as RectTransform);
 
-				WordNexus_SoundManager.Instance.Play("word-extra");
+				RoyalWord_SoundManager.Instance.Play("word-extra");
 			}
 			else
 			{
 				// The word is not a valid word so set the selected letters as in-correct
 				selectedLetters.SetWrong();
 
-				WordNexus_SoundManager.Instance.Play("word-invalid");
+				RoyalWord_SoundManager.Instance.Play("word-invalid");
 			}
 		}
 
@@ -612,13 +605,13 @@ namespace Game
 		/// <summary>
 		/// Called when a word for the ActiveLevel has been found
 		/// </summary>
-		private void FoundWord(WordNexus_ActiveLevel level, WordData levelWordData)
+		private void FoundWord(RoyalWord_ActiveLevel level, WordData levelWordData)
 		{
 			// Add the word to the list of found words
 			level.levelSaveData.foundWords.Add(levelWordData.Word);
 
 			// If the level type is grid then check for words that have been revialed because all cells that a letter in them
-			if (level.levelData.LevelType == WordNexus_LevelData.Type.Grid)
+			if (level.levelData.LevelType == RoyalWord_LevelData.Type.Grid)
 			{
 				PlaceWordOnCharacterGrid(level, levelWordData);
 
@@ -634,7 +627,7 @@ namespace Game
 
 			// Award any coins that can be awarded
 			//AwardCoins(level, levelWordData);
-			Debug.LogError("FoundWord");
+			Debug.LogWarning("FoundWord");
 			// Check if the level is complete
 			if (IsBoardComplete(level))
 			{
@@ -645,15 +638,15 @@ namespace Game
 		/// <summary>
 		/// Shows the given word on the correct word board
 		/// </summary>
-		private void ShowWordOnBoard(WordNexus_ActiveLevel level, WordData levelWordData)
+		private void ShowWordOnBoard(RoyalWord_ActiveLevel level, WordData levelWordData)
 		{
 			// Show the word on the WordBoard
 			switch (level.levelData.LevelType)
 			{
-				case WordNexus_LevelData.Type.Grid:
+				case RoyalWord_LevelData.Type.Grid:
 					wordBoardGrid.ShowWord(levelWordData);
 					break;
-				case WordNexus_LevelData.Type.List:
+				case RoyalWord_LevelData.Type.List:
 					wordBoardList.ShowWord(levelWordData);
 					break;
 			}
@@ -662,7 +655,7 @@ namespace Game
 		/// <summary>
 		/// Shows all the given words on the correct word board
 		/// </summary>
-		private void ShowWordsOnBoard(WordNexus_ActiveLevel level, List<WordData> levelWordDatas)
+		private void ShowWordsOnBoard(RoyalWord_ActiveLevel level, List<WordData> levelWordDatas)
 		{
 			for (int i = 0; i < levelWordDatas.Count; i++)
 			{
@@ -673,7 +666,7 @@ namespace Game
 		/// <summary>
 		/// Called when a word has been found that exists in the word file but is not part of the current level
 		/// </summary>
-		private void FoundExtraWord(WordNexus_ActiveLevel level, string word)
+		private void FoundExtraWord(RoyalWord_ActiveLevel level, string word)
 		{
 			level.levelSaveData.extraWords++;
 			level.levelSaveData.foundWords.Add(word);
@@ -684,7 +677,7 @@ namespace Game
 		/// <summary>
 		/// Places the given word on the levels character grid
 		/// </summary>
-		private void PlaceWordOnCharacterGrid(WordNexus_ActiveLevel level, WordData levelWordData)
+		private void PlaceWordOnCharacterGrid(RoyalWord_ActiveLevel level, WordData levelWordData)
 		{
 			for (int i = 0; i < levelWordData.Word.Length; i++)
 			{
@@ -695,7 +688,7 @@ namespace Game
 		/// <summary>
 		/// Places the given letter on the levels character grid
 		/// </summary>
-		private void PlaceLetterOnCharacterGrid(WordNexus_ActiveLevel level, WordData levelWordData, int letterIndex)
+		private void PlaceLetterOnCharacterGrid(RoyalWord_ActiveLevel level, WordData levelWordData, int letterIndex)
 		{
 			int rowIndex = levelWordData.BoardRowStartIndex + (levelWordData.IsVerticalOnBoard ? letterIndex : 0);
 			int colIndex = levelWordData.BoardColStartIndex + (levelWordData.IsVerticalOnBoard ? 0 : letterIndex);
@@ -706,7 +699,7 @@ namespace Game
 		/// <summary>
 		/// Checks if any words that cross the given word are now found
 		/// </summary>
-		private List<WordData> CheckForFoundWords(WordNexus_ActiveLevel level, WordData levelWordData)
+		private List<WordData> CheckForFoundWords(RoyalWord_ActiveLevel level, WordData levelWordData)
 		{
 			List<WordData> newFoundWords = new List<WordData>();
 
@@ -734,7 +727,7 @@ namespace Game
 		/// <summary>
 		/// Checks if the given word has all of its letters on the character grid and if so adds the word to the list of found words
 		/// </summary>
-		private bool CheckIsFoundWord(WordNexus_ActiveLevel level, WordData levelWordData)
+		private bool CheckIsFoundWord(RoyalWord_ActiveLevel level, WordData levelWordData)
 		{
 			for (int i = 0; i < levelWordData.Word.Length; i++)
 			{
@@ -757,7 +750,7 @@ namespace Game
 		/// <summary>
 		/// Returns true if all words have been found
 		/// </summary>
-		private bool IsBoardComplete(WordNexus_ActiveLevel level)
+		private bool IsBoardComplete(RoyalWord_ActiveLevel level)
 		{
 			for (int i = 0; i < level.levelData.Words.Count; i++)
 			{
@@ -773,7 +766,7 @@ namespace Game
 		/// <summary>
 		/// Shows a single letter in a word for the given level
 		/// </summary>
-		private void ShowHint(WordNexus_ActiveLevel level)
+		private void ShowHint(RoyalWord_ActiveLevel level)
 		{
 			WordData hintWordData = null;
 			int hintIndex = int.MaxValue;
@@ -801,7 +794,7 @@ namespace Game
 		/// Returns the character index for the next letter that should be shown as a hint for the given word.
 		/// Returns -1 if there are no letters to show.
 		/// </summary>
-		private int GetHintIndex(WordNexus_ActiveLevel level, WordData levelWordData)
+		private int GetHintIndex(RoyalWord_ActiveLevel level, WordData levelWordData)
 		{
 			// If the word has been found then it should not show any hints
 			if (level.levelSaveData.foundWords.Contains(levelWordData.Word))
@@ -841,7 +834,7 @@ namespace Game
 
 			// If the level is a grid type then check that the next hint index does not already have a letter on it and if it does
 			// get the next index that doesn't have a letter on it
-			if (level.levelData.LevelType == WordNexus_LevelData.Type.Grid)
+			if (level.levelData.LevelType == RoyalWord_LevelData.Type.Grid)
 			{
 				for (int i = hintIndex; i < levelWordData.Word.Length; i++)
 				{
@@ -869,14 +862,14 @@ namespace Game
 		/// <summary>
 		/// Shows a bunch of hints randomly
 		/// </summary>
-		private void ShowMultiHint(WordNexus_ActiveLevel level, int numberOfHints)
+		private void ShowMultiHint(RoyalWord_ActiveLevel level, int numberOfHints)
 		{
 			switch (level.levelData.LevelType)
 			{
-				case WordNexus_LevelData.Type.Grid:
+				case RoyalWord_LevelData.Type.Grid:
 					ShowMultiHintForGrid(level, numberOfHints);
 					break;
-				case WordNexus_LevelData.Type.List:
+				case RoyalWord_LevelData.Type.List:
 					ShowMultiHintForList(level, numberOfHints);
 					break;
 			}
@@ -885,7 +878,7 @@ namespace Game
 		/// <summary>
 		/// Shows a bunch of hints randomly in the level assuming the level is a grid type
 		/// </summary>
-		private void ShowMultiHintForGrid(WordNexus_ActiveLevel level, int numberOfHints)
+		private void ShowMultiHintForGrid(RoyalWord_ActiveLevel level, int numberOfHints)
 		{
 			List<int[]> emptyCells = new List<int[]>();
 
@@ -929,7 +922,7 @@ namespace Game
 		/// <summary>
 		/// Shows a bunch of hints randomly in the level assuming the level is a list type
 		/// </summary>
-		private void ShowMultiHintForList(WordNexus_ActiveLevel level, int numberOfHints)
+		private void ShowMultiHintForList(RoyalWord_ActiveLevel level, int numberOfHints)
 		{
 			List<object[]> unusedHints = new List<object[]>();
 
@@ -996,13 +989,13 @@ namespace Game
 		/// <summary>
 		/// Sets a letter as shown and shows it on the WordBoard
 		/// </summary>
-		private void ShowLetterForHint(WordNexus_ActiveLevel level, WordData levelWordData, int letterIndex)
+		private void ShowLetterForHint(RoyalWord_ActiveLevel level, WordData levelWordData, int letterIndex)
 		{
 			// Set the hint index as used
 			level.levelSaveData.hintIndicesUsed[levelWordData.Word][letterIndex] = true;
 
 			// If the level type is grid then place the hint letter on the character grid and check for completed words
-			if (level.levelData.LevelType == WordNexus_LevelData.Type.Grid)
+			if (level.levelData.LevelType == RoyalWord_LevelData.Type.Grid)
 			{
 				// Place the hint letter on the charachter grid
 				PlaceLetterOnCharacterGrid(level, levelWordData, letterIndex);
@@ -1046,14 +1039,13 @@ namespace Game
 			// Show the hint on the WordBoard
 			switch (level.levelData.LevelType)
 			{
-				case WordNexus_LevelData.Type.Grid:
+				case RoyalWord_LevelData.Type.Grid:
 					wordBoardGrid.ShowLetterForHint(levelWordData, letterIndex);
 					break;
-				case WordNexus_LevelData.Type.List:
+				case RoyalWord_LevelData.Type.List:
 					wordBoardList.ShowLetterForHint(levelWordData, letterIndex);
 					break;
 			}
-			Debug.LogError("ShowLetterForHint");
 			// Check if the level is now complete after placing the hint
 			if (IsBoardComplete(level))
 			{
@@ -1064,11 +1056,11 @@ namespace Game
 		/// <summary>
 		/// Completes the given level
 		/// </summary>
-		private void CompleteLevel(WordNexus_ActiveLevel level)
+		private void CompleteLevel(RoyalWord_ActiveLevel level)
 		{
 			Debug.LogFormat("[GameController] Level {0} complete", level.levelData.GameLevelNumber);
 
-			WordNexus_SoundManager.Instance.Play("completed");
+			RoyalWord_SoundManager.Instance.Play("completed");
 
 			bool wasLevelCompleted = level.levelData.GameLevelNumber <= LastCompletedLevelNumber;
 			int numExtraWordsFound = level.levelSaveData.extraWords;
@@ -1078,19 +1070,19 @@ namespace Game
                 	InAppReview.Instance.OpenPopup();
 			}
 			// Set the last completed level number, make sure it's the max if the player replayed a level
-			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
-			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
+			Debug.LogWarning("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+			Debug.LogWarning("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
 			if (level.levelData.GameLevelNumber < LastCompletedLevelNumber && LastCompletedLevelNumber >= 1164)
 			{
-				Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+				Debug.LogWarning("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 				LastCompletedLevelNumber += 1;
 			}
 			else
 			{
 				LastCompletedLevelNumber = Mathf.Max(LastCompletedLevelNumber, level.levelData.GameLevelNumber);
 			}
-			Debug.LogError("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
-			Debug.LogError("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
+			Debug.LogWarning("level.levelData.GameLevelNumber =>" + level.levelData.GameLevelNumber);
+			Debug.LogWarning("LastCompletedLevelNumber =>" + LastCompletedLevelNumber);
 			// Remove the level save data since it's no longer needed (A new one will be created if the level is re-played)
 			levelSaveDatas.Remove(level.levelData.Id);
 
@@ -1177,7 +1169,7 @@ namespace Game
 			// Wait for the word that was just found to show on the board before showing the complete popup
 			yield return new WaitForSeconds(0.5f);
 
-			WordNexus_Pop_upManager.Instance.Show("level_complete", popupInData, OnLevelCompletePopupClosed);
+			RoyalWord_Pop_upManager.Instance.Show("level_complete", popupInData, OnLevelCompletePopupClosed);
 			if (AdManager.Instance.Winfailads.ToLower() == "true")
 			{
 				if (GoogleAdMob.Instash.InterReady || UnityManager.Instance.UnityInterLoaded || FBAdManager.Instash.FBInterLoaded && AdManager.Instance.Qureka_ads_status.ToLower() == "false")
@@ -1194,7 +1186,7 @@ namespace Game
 		/// <summary>
 		/// Returns the amount of game points that should be awarded for completing the given level
 		/// </summary>
-		private int CalculateGamePointsAwardedForLevel(WordNexus_ActiveLevel level)
+		private int CalculateGamePointsAwardedForLevel(RoyalWord_ActiveLevel level)
 		{
 			// Game points are calculated by multiplying the number of letters level by the sqrt of the level number
 			int numberOfLetters = level.levelData.Letters.Length;
@@ -1208,15 +1200,15 @@ namespace Game
 		/// <summary>
 		/// Checks if the given level is the last level in the game
 		/// </summary>
-		private bool IsLastLevel(WordNexus_LevelData levelData)
+		private bool IsLastLevel(RoyalWord_LevelData levelData)
 		{
 			if (levelData.PackIndex == PackInfos.Count - 1)
 			{
-				List<WordNexus_CategoryInfo> categoryInfos = PackInfos[levelData.PackIndex].categoryInfos;
+				List<RoyalWord_CategoryInfo> categoryInfos = PackInfos[levelData.PackIndex].categoryInfos;
 
 				if (levelData.CategoryIndex == categoryInfos.Count - 1)
 				{
-					List<WordNexus_LevelData> levelDatas = categoryInfos[levelData.CategoryIndex].LevelDatas;
+					List<RoyalWord_LevelData> levelDatas = categoryInfos[levelData.CategoryIndex].LevelDatas;
 
 					if (levelData.LevelIndex == levelDatas.Count - 1)
 					{
@@ -1236,7 +1228,7 @@ namespace Game
 			if (cancelled || outData == null || outData.Length != 1)
 			{
 				// Something went wrong, data is not how we expect it so just go back
-				WordNexus_ScreenManager.Instance.Back();
+				RoyalWord_ScreenManager.Instance.Back();
 
 				return;
 			}
@@ -1246,7 +1238,7 @@ namespace Game
 
 			switch (action)
 			{
-				case WordNexus_LevelCompletePopup.PlayNextAction:
+				case RoyalWord_LevelCompletePopup.PlayNextAction:
 					PlayNextLevel(CurrentActiveLevel);
 					break;
 			}
@@ -1255,26 +1247,26 @@ namespace Game
 		/// <summary>
 		/// Plays the next level
 		/// </summary>
-		private void PlayNextLevel(WordNexus_ActiveLevel level)
+		private void PlayNextLevel(RoyalWord_ActiveLevel level)
 		{
 			if (level.levelData.GameLevelNumber > 1164)
 			{
-				WordNexus_PackInfo packInfo1 = PackInfos[Random.Range(0, 9)];
-				WordNexus_CategoryInfo categoryInfo1 = packInfo1.categoryInfos[Random.Range(0, packInfo1.categoryInfos.Count)];
+				RoyalWord_PackInfo packInfo1 = PackInfos[Random.Range(0, 9)];
+				RoyalWord_CategoryInfo categoryInfo1 = packInfo1.categoryInfos[Random.Range(0, packInfo1.categoryInfos.Count)];
 				StartLevel(packInfo1, categoryInfo1, categoryInfo1.LevelDatas[Random.Range(0, categoryInfo1.LevelDatas.Count)]);
 				return;
 			}
 			// Get the next pack, category, and level index to play
-			WordNexus_PackInfo packInfo;
-			WordNexus_CategoryInfo categoryInfo;
+			RoyalWord_PackInfo packInfo;
+			RoyalWord_CategoryInfo categoryInfo;
 			int levelIndex;
 
 			if (!GetNextLevel(level, out packInfo, out categoryInfo, out levelIndex))
 			{
 				// If GetNextLevel returned false then it could not find the next level because the last level was just completed
-				WordNexus_ScreenManager.Instance.Home();
+				RoyalWord_ScreenManager.Instance.Home();
 
-				WordNexus_UIController.Instance.UpdateUI();
+				RoyalWord_UIController.Instance.UpdateUI();
 
 				return;
 			}
@@ -1286,7 +1278,7 @@ namespace Game
 		/// <summary>
 		/// Gets the level that should be played after the given ActiveLevel
 		/// </summary>
-		private bool GetNextLevel(WordNexus_ActiveLevel level, out WordNexus_PackInfo packInfo, out WordNexus_CategoryInfo categoryInfo, out int levelIndex)
+		private bool GetNextLevel(RoyalWord_ActiveLevel level, out RoyalWord_PackInfo packInfo, out RoyalWord_CategoryInfo categoryInfo, out int levelIndex)
 		{
 			packInfo = level.packInfo;
 			categoryInfo = level.categoryInfo;
@@ -1323,10 +1315,10 @@ namespace Game
 			packInfo = packInfos[packIndex];
 			categoryInfo = packInfo.categoryInfos[categoryIndex];
 
-			Debug.LogError(packIndex);
-			Debug.LogError(packInfos[packIndex].packName);
-			Debug.LogError(categoryIndex);
-			Debug.LogError(packInfo.categoryInfos[categoryIndex].displayName);
+			Debug.LogWarning(packIndex);
+			Debug.LogWarning(packInfos[packIndex].packName);
+			Debug.LogWarning(categoryIndex);
+			Debug.LogWarning(packInfo.categoryInfos[categoryIndex].displayName);
 
 			return true;
 		}
@@ -1341,7 +1333,7 @@ namespace Game
 				return;
 			}
 
-			if (CurrentActiveLevel.levelData.LevelType == WordNexus_LevelData.Type.Grid)
+			if (CurrentActiveLevel.levelData.LevelType == RoyalWord_LevelData.Type.Grid)
 			{
 				// Check if there is a letter shown in the cell
 				bool isLetterShown = (CurrentActiveLevel.levelSaveData.characterGrid[row][col] != ' ');
@@ -1387,7 +1379,7 @@ namespace Game
 			// Show the letter on the grid
 			ShowLetterForHint(CurrentActiveLevel, wordData, letterIndex);
 
-			WordNexus_SoundManager.Instance.Play("hint-used");
+			RoyalWord_SoundManager.Instance.Play("hint-used");
 		}
 
 		/// <summary>
@@ -1395,7 +1387,7 @@ namespace Game
 		/// </summary>
 		private void LoadWordFile()
 		{
-			loadExtraWordsWorker = new WordNexus_LoadExtraWordsWorker();
+			loadExtraWordsWorker = new RoyalWord_LoadExtraWordsWorker();
 
 			loadExtraWordsWorker.wordFileContents = wordFile.text;
 
@@ -1410,10 +1402,10 @@ namespace Game
 			// Get a list of all the level save data jsons
 			List<object> levelJsons = new List<object>();
 
-			foreach (KeyValuePair<string, WordNexus_LevelSaveData> pair in levelSaveDatas)
+			foreach (KeyValuePair<string, RoyalWord_LevelSaveData> pair in levelSaveDatas)
 			{
 				string levelId = pair.Key;
-				WordNexus_LevelSaveData levelSaveData = pair.Value;
+				RoyalWord_LevelSaveData levelSaveData = pair.Value;
 
 				Dictionary<string, object> levelJson = new Dictionary<string, object>();
 
@@ -1441,7 +1433,7 @@ namespace Game
 		/// </summary>
 		private bool LoadSave()
 		{
-			levelSaveDatas = new Dictionary<string, WordNexus_LevelSaveData>();
+			levelSaveDatas = new Dictionary<string, RoyalWord_LevelSaveData>();
 
 			// Changed in 1.4 to use ISaveable instead, if SaveFilePath exists then we load it and delete it so the new save system is used next time
 			if (System.IO.File.Exists(SaveFilePath))
@@ -1454,9 +1446,9 @@ namespace Game
 
 				return true;
 			}
-			else if (WordNexus_SaveManager.Exists())
+			else if (RoyalWord_SaveManager.Exists())
 			{
-				JSONNode json = WordNexus_SaveManager.Instance.LoadSave(this);
+				JSONNode json = RoyalWord_SaveManager.Instance.LoadSave(this);
 
 				if (json == null)
 				{
@@ -1486,7 +1478,7 @@ namespace Game
 			foreach (JSONNode levelJson in json["levels"].AsArray)
 			{
 				string levelId = levelJson["id"].Value;
-				WordNexus_LevelSaveData levelSaveData = new WordNexus_LevelSaveData(levelJson["data"]);
+				RoyalWord_LevelSaveData levelSaveData = new RoyalWord_LevelSaveData(levelJson["data"]);
 
 				// If the save version has changed we need to check a few things.
 				if (saveVersionChanged)
@@ -1521,19 +1513,19 @@ namespace Game
 		/// </summary>
 		private int FindLastCompletedLevelNumber(HashSet<string> completedLevelIds)
 		{
-			WordNexus_LevelData lastCompletedLevelData = null;
+			RoyalWord_LevelData lastCompletedLevelData = null;
 
 			for (int i = 0; i < packInfos.Count; i++)
 			{
-				WordNexus_PackInfo packInfo = PackInfos[i];
+				RoyalWord_PackInfo packInfo = PackInfos[i];
 
 				for (int j = 0; j < packInfo.categoryInfos.Count; j++)
 				{
-					WordNexus_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
+					RoyalWord_CategoryInfo categoryInfo = packInfo.categoryInfos[j];
 
 					for (int k = 0; k < categoryInfo.LevelDatas.Count; k++)
 					{
-						WordNexus_LevelData levelData = categoryInfo.LevelDatas[k];
+						RoyalWord_LevelData levelData = categoryInfo.LevelDatas[k];
 
 						if (completedLevelIds.Contains(levelData.Id))
 						{
@@ -1549,7 +1541,7 @@ namespace Game
 		/// <summary>
 		/// Searches all levels for the givne levelId and returns the pack, category, and level info for that level
 		/// </summary>
-		private bool FindInfos(string levelId, out WordNexus_PackInfo packInfo, out WordNexus_CategoryInfo categoryInfo, out WordNexus_LevelData levelData)
+		private bool FindInfos(string levelId, out RoyalWord_PackInfo packInfo, out RoyalWord_CategoryInfo categoryInfo, out RoyalWord_LevelData levelData)
 		{
 			for (int i = 0; i < PackInfos.Count; i++)
 			{

@@ -37,23 +37,23 @@ public class StatusManager : MonoBehaviour
     {
             Debug.LogError(PlayerPrefs.GetString("replacestring_UPI"+ID));
             
-            WordNexus_WithdrawManager.instance.HistoryScreen.SetActive(true);
+            RoyalWord_WithdrawManager.instance.HistoryScreen.SetActive(true);
             
-            WordNexus_WithdrawManager.instance.Transaction_ID.text = PlayerPrefs.GetString("UpiTransactionId" + ID);
-            WordNexus_WithdrawManager.instance.Amount.text = PlayerPrefs.GetString("UpiTransactionAmount" + ID);
-            WordNexus_WithdrawManager.instance.statusTxt.text = PlayerPrefs.GetString("UpiTransactionStatus" + ID);
-            WordNexus_WithdrawManager.instance.PayBTNHistoryScreen.onClick.RemoveAllListeners();
-            WordNexus_WithdrawManager.instance.PayBTNHistoryScreen.onClick.AddListener(()=>WordNexus_WithdrawManager.instance.Pay_now(ID));
-            WordNexus_WithdrawManager.instance.note_text.text="<b>*Note :</b> "+AdManager.Instance.Histry_Screen_Note;
+            RoyalWord_WithdrawManager.instance.Transaction_ID.text = PlayerPrefs.GetString("UpiTransactionId" + ID);
+            RoyalWord_WithdrawManager.instance.Amount.text = PlayerPrefs.GetString("UpiTransactionAmount" + ID);
+            RoyalWord_WithdrawManager.instance.statusTxt.text = PlayerPrefs.GetString("UpiTransactionStatus" + ID);
+            RoyalWord_WithdrawManager.instance.PayBTNHistoryScreen.onClick.RemoveAllListeners();
+            RoyalWord_WithdrawManager.instance.PayBTNHistoryScreen.onClick.AddListener(()=>RoyalWord_WithdrawManager.instance.Pay_now(ID));
+            RoyalWord_WithdrawManager.instance.note_text.text="<b>*Note :</b> "+AdManager.Instance.Histry_Screen_Note;
             switch (PlayerPrefs.GetString("UpiTransactionStatus" + ID))
             {
                 case "Pending":
-                    WordNexus_WithdrawManager.instance.statusTxt.color = new Color(0.8666667f, 0.6f, 0.2f, 1);
-                    WordNexus_WithdrawManager.instance.descriptionTxt.text = "Awaiting confirmation";
+                    RoyalWord_WithdrawManager.instance.statusTxt.color = new Color(0.8666667f, 0.6f, 0.2f, 1);
+                    RoyalWord_WithdrawManager.instance.descriptionTxt.text = "Awaiting confirmation";
                     break;
                 case "Failed":
-                    WordNexus_WithdrawManager.instance.statusTxt.color = new Color(0.8666667f, 0.2f, 0.2f, 1);
-                    WordNexus_WithdrawManager.instance.descriptionTxt.text = "Your transfer failed since you were not paid the transfer fees for this transaction, and you also missed your rewards since, as we already mentioned";
+                    RoyalWord_WithdrawManager.instance.statusTxt.color = new Color(0.8666667f, 0.2f, 0.2f, 1);
+                    RoyalWord_WithdrawManager.instance.descriptionTxt.text = "Your transfer failed since you were not paid the transfer fees for this transaction, and you also missed your rewards since, as we already mentioned";
                     break;
             }
     }

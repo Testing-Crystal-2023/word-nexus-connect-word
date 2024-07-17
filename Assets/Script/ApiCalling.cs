@@ -32,7 +32,7 @@ public class ApiCalling : MonoBehaviour
 
   void Start()
   {
-    pakageName = Application.identifier + ".ios";
+    pakageName = Application.identifier;
     deviceID = SystemInfo.deviceUniqueIdentifier;
     InvokeRepeating("ani", 0f, 2f);
   }
@@ -43,16 +43,16 @@ public class ApiCalling : MonoBehaviour
   }
   async void ani()
   {
-    if(loading!=null)
+    if (loading != null)
       loading.text = "Loading.";
     await Task.Delay(500);
-    if(loading!=null)
+    if (loading != null)
       loading.text = "Loading..";
     await Task.Delay(500);
-    if(loading!=null)
+    if (loading != null)
       loading.text = "Loading...";
     await Task.Delay(500);
-    if(loading!=null)
+    if (loading != null)
       loading.text = "Loading..";
     await Task.Delay(500);
   }

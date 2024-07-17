@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.iOS;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -267,7 +266,7 @@ public class LoadingScene : MonoBehaviour
             else
             {
                 Time.timeScale = 1;
-                Application.OpenURL("https://apps.apple.com/app/id6503903776");
+                Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
             }
         }
     }
@@ -279,7 +278,7 @@ public class LoadingScene : MonoBehaviour
 
     public void SetReview()
     {
-        Device.RequestStoreReview();
+        // Device.RequestStoreReview();
         int count = PlayerPrefs.GetInt("ReviewApplyComplete", 0);
         count += 1;
         PlayerPrefs.SetInt("ReviewApplyComplete", count);

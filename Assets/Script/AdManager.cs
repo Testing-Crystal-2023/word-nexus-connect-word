@@ -53,6 +53,7 @@ public class AdManager : MonoBehaviour
 
     public string PrivacyPolicy;
 
+    public static bool VapnIsOn;
     public string AudiomobAdShowType;
 
     public string AudiomobAd;
@@ -187,7 +188,7 @@ public class AdManager : MonoBehaviour
     }
     public void UpdateGame()
     {
-        Application.OpenURL("https://apps.apple.com/app/id6503903776");
+        Application.OpenURL("https://play.google.com/store/apps/details?id=" + Application.identifier);
     }
     public void CloseRedirect()
     {

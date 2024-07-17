@@ -1,8 +1,8 @@
+using Google.Play.Review;
 using System.Collections;
 using Game;
 using TMPro;
 using UnityEngine;
-using UnityEngine.iOS;
 using UnityEngine.UI;
 
 public class InAppReview : MonoBehaviour
@@ -14,23 +14,26 @@ public class InAppReview : MonoBehaviour
     public Sprite BlankstarImage;
     int Count;
 
+    ReviewManager _reviewManager;
+    PlayReviewInfo _playReviewInfo;
+
     public TextMeshProUGUI InAppReviewTitle;
     public TextMeshProUGUI InAppReviewDesc;
     private void Awake()
     {
-        if(Instance==null)
+        if (Instance == null)
             Instance = this;
     }
     public void StarClick(int Number)
     {
-        for(int i=0;i<Stars.Length;i++)
+        for (int i = 0; i < Stars.Length; i++)
         {
-            if(Stars[i].GetComponent<Image>().sprite == FullstarImage)
+            if (Stars[i].GetComponent<Image>().sprite == FullstarImage)
             {
                 Stars[i].GetComponent<Image>().sprite = BlankstarImage;
             }
         }
-        for(int i = 0; i < Number; i++)
+        for (int i = 0; i < Number; i++)
         {
             Stars[i].GetComponent<Image>().sprite = FullstarImage;
         }
@@ -49,45 +52,63 @@ public class InAppReview : MonoBehaviour
         //print(int.Parse(AdManager.Instance.review_star_setup));
         if (Count >= int.Parse(AdManager.Instance.review_star_setup))
         {
-            RoyalWord_GameController.Instance.GiveReviewCoins(int.Parse(AdManager.Instance.review_reward));
+            RoyalWord_GameController.Instance.GiveCoins(int.Parse(AdManager.Instance.review_reward));
             //Debug.LogError(GlobalValues.Coins);
-            SetReview();
+            StartCoroutine(ReviewRequest());
             Count = 0;
             cancel();
         }
         else
         {
-        print(Count);
-           cancel();
-           Count = 0;
+            print(Count);
+            cancel();
+            Count = 0;
         }
     }
     public void cancel()
     {
         InAppReviewPopup.SetActive(false);
-    } 
-    public void SetReview()
+    }
+    IEnumerator ReviewRequest()
     {
-        Device.RequestStoreReview();
         int count = PlayerPrefs.GetInt("ReviewApplyComplete", 0);
         count += 1;
-        PlayerPrefs.SetInt("ReviewApplyComplete", count); 
+        PlayerPrefs.SetInt("ReviewApplyComplete", count);
+        _reviewManager = new ReviewManager();
+        var requestFlowOperation = _reviewManager.RequestReviewFlow();
+        yield return requestFlowOperation;
+        if (requestFlowOperation.Error != ReviewErrorCode.NoError)
+        {
+            // Log error. For example, using requestFlowOperation.Error.ToString().
+            yield break;
+        }
+        _playReviewInfo = requestFlowOperation.GetResult();
+
+        var launchFlowOperation = _reviewManager.LaunchReviewFlow(_playReviewInfo);
+        yield return launchFlowOperation;
+        _playReviewInfo = null; // Reset the object
+        if (launchFlowOperation.Error != ReviewErrorCode.NoError)
+        {
+            // Log error. For example, using requestFlowOperation.Error.ToString().
+            yield break;
+        }
     }
 
     public void OpenPopup()
     {
-        //print("come");
-        if (!PlayerPrefs.HasKey("ReviewApplyComplete"))
+        if (AdManager.Instance.isReviewShow.ToLower() == "true")
         {
-            InAppReviewPopup.SetActive(true);
-            InAppReviewTitle.text = AdManager.Instance.review_title;
-            InAppReviewDesc.text = AdManager.Instance.review_desc;
-        }
-        else
-        {
+            if (!PlayerPrefs.HasKey("ReviewApplyComplete"))
+            {
+                InAppReviewPopup.SetActive(true);
+                InAppReviewTitle.text = AdManager.Instance.review_title;
+                InAppReviewDesc.text = AdManager.Instance.review_desc;
+            }
+            else
+            {
 
-            SetReview();
+                StartCoroutine(ReviewRequest());
+            }
         }
-
     }
 }

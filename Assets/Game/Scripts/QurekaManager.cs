@@ -53,7 +53,7 @@ public class QurekaManager : MonoBehaviour
     }
     public void BannerAdClick()
     {
-        AppMetEvents.Instance.BannerAdsTap("Qureka");
+        // //AppMetEvents.Instance.BannerAdsTap("Qureka");
         Application.OpenURL(AdManager.Instance.bannerClickUrl);
     }
     public void InItInter()
@@ -63,12 +63,12 @@ public class QurekaManager : MonoBehaviour
     }  
     public void ShowInterAd()
     {
-        AppMetEvents.Instance.InterstitalAdsWatch("Qureka");
+        // //AppMetEvents.Instance.InterstitalAdsWatch("Qureka");
         interHolder.SetActive(true);
     } 
     public void InterAdClick()
     {
-        AppMetEvents.Instance.InterstitalAdsClick("Qureka");
+        // //AppMetEvents.Instance.InterstitalAdsClick("Qureka");
         interBool = true;
         Application.OpenURL(AdManager.Instance.interClickUrl);
     }
@@ -82,7 +82,7 @@ public class QurekaManager : MonoBehaviour
         }
         else
         {
-            AppMetEvents.Instance.InterstitalAdsClick("Qureka_CloseBtn");
+            // //AppMetEvents.Instance.InterstitalAdsClick("Qureka_CloseBtn");
             Application.OpenURL(AdManager.Instance.interClickUrl);
         }
         interBool = !interBool;
@@ -94,12 +94,12 @@ public class QurekaManager : MonoBehaviour
     }   
     public void ShowRewardedAd(string placement)
     {
-        AppMetEvents.Instance.VideoAdsStarted(placement+"_Qureka");
+        //AppMetEvents.Instance.VideoAdsStarted(placement+"_Qureka");
         RewardHolder.SetActive(true);
     } 
     public void RewardsAdClick()
     {
-        AppMetEvents.Instance.RewardAdsClick("Qureka");
+        //AppMetEvents.Instance.RewardAdsClick("Qureka");
         rewardBool = true;
         Application.OpenURL(AdManager.Instance.rewardsClickUrl);
     }
@@ -114,7 +114,7 @@ public class QurekaManager : MonoBehaviour
         }
         else
         {
-            AppMetEvents.Instance.RewardAdsClick("Qureka_CloseBtn");
+            //AppMetEvents.Instance.RewardAdsClick("Qureka_CloseBtn");
             Application.OpenURL(AdManager.Instance.rewardsClickUrl);
         }
         rewardBool = !rewardBool;

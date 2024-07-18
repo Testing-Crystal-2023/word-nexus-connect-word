@@ -218,7 +218,7 @@ public class RoyalWord_WalletManager : MonoBehaviour
     {
         if (AdManager.Instance.WalletShow.ToLower() == "true" && AdManager.Instance.Crypto_Wallet_Show.ToLower() == "true")
         {
-            AppMetEvents.Instance.ButtonEvent("WalletClick");
+            //AppMetEvents.Instance.ButtonEvent("WalletClick");
             Main_Wallet_Screen.SetActive(true);
             Main_Wallet_Screen.LeanMoveLocal(Vector2.zero, 0.5f);
 

@@ -39,15 +39,15 @@ public class NewNotificationManager : MonoBehaviour
             var channel = notificationIntentData.Channel;
             var notification = notificationIntentData.Notification;
 
-            if (channel == transactionChannel && !AppMetEvents.Instance.isOpenByTransNoti)
+            if (channel == transactionChannel )//AppMetEvents.Instance.isOpenByTransNoti)
             {
-                AppMetEvents.Instance.isOpenByTransNoti = true;
-                AppMetEvents.Instance.NotificationOpen("Transaction");
+                //AppMetEvents.Instance.isOpenByTransNoti = true;
+                //AppMetEvents.Instance.NotificationOpen("Transaction");
             }
-            else if(channel == dailyRewardsChannel && !AppMetEvents.Instance.isOpenByDailyNoti)
+            else if(channel == dailyRewardsChannel) //&& !//AppMetEvents.Instance.isOpenByDailyNoti)
             {
-                AppMetEvents.Instance.isOpenByDailyNoti = true;
-                AppMetEvents.Instance.NotificationOpen("Daily Rewards");
+                //AppMetEvents.Instance.isOpenByDailyNoti = true;
+                //AppMetEvents.Instance.NotificationOpen("Daily Rewards");
             }
         }
 

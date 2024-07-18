@@ -55,12 +55,12 @@ namespace Game
 			{
 				AdManager.Instance.coinReward = true;
 				AdManager.Instance.Reward("rt");
-				AppMetEvents.Instance.VideoAdsStarted("WinPanel_Multicoin_X-Reward_AdWatch");
+				//AppMetEvents.Instance.VideoAdsStarted("WinPanel_Multicoin_X-Reward_AdWatch");
 			}
 			else if (AdManager.Instance.Qureka_ads_status.ToLower() == "true" && AdManager.Instance.PreLoad.ToLower() == "false" && AdManager.Instance.showaAd.ToLower() == "false")
 			{
 				AdManager.Instance.coinReward = true;
-				AppMetEvents.Instance.VideoAdsStarted("WinPanel_Multicoin_X-Reward_AdWatch");
+				//AppMetEvents.Instance.VideoAdsStarted("WinPanel_Multicoin_X-Reward_AdWatch");
 				QurekaManager.Instance.ShowRewardedAd("WinPanel_Multicoin_X-Reward_AdWatch");
 			}
 			else
